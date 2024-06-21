@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<h1>{{titre}}</h1>
+{% endblock %}
+{% block body %}
+	<h1>{{titre}}</h1>
+	{{ form_start(form) }}
+	{{ form_row(form.titre) }}
+	{{form_row(form.sous_titre)}}
+	{{form_row(form.etat)}}
+	{{form_row(form.slug)}}
+	{{form_row(form.ordre)}}
+	{{form_row(form.created_at)}}
+	{{form_row(form.updated_at)}}
+	<button type="submit" class="btn-envoyer">Envoyer</button>
+	{{ form_end(form) }}
+{% endblock %}

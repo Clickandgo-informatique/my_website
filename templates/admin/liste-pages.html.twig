@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+	<p>Liste des pages</p>
+{% endblock %}
+{% block body %}
+	<button type="button" class="btn-creer-page">
+		<a href="{{path('pages_creer')}}">Créer une page</a>
+	</button>
+	<h1>Liste des pages</h1>
+	{% if listePages is defined and listePages is not null %}
+
+		<table>
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Sous titre</th>
+					<th>Etat</th>
+					<th>Créée le</th>
+					<th>Modifiée le</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for page in listePages %}
+					<tr>
+						<td>{{page.titre}}</td>
+						<td>{{page.soustitre}}</td>
+						<td>{{page.etat}}</td>
+						<td>{{page.createdat|date("d-m-Y")}}</td>
+						<td>{{page.updatedat|date("d-m-Y")}}</td>
+						<td>
+							<a href="{{path('pages_modifier',{id:page.id})}}">Modifier</a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<p>Aucune donnée à afficher.</p>
+			{% endif %}
+		</tbody>
+
+	</table>
+{% endblock %}
