@@ -3,17 +3,18 @@
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\SlugTrait;
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\PagesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PagesRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Pages
 {
-    use CreatedAtTrait,UpdatedAtTrait,SlugTrait;
+    use CreatedAtTrait, UpdatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -31,16 +32,40 @@ class Pages
     #[ORM\Column(length: 50)]
     private ?string $etat = null;
 
+    #[Gedmo\Slug(fields: ["titre"])]
+    #[ORM\Column(type: 'string', length: 255)]
+
+    private $slug;
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
     /**
      * @var Collection<int, Galleries>
      */
-    #[ORM\OneToMany(targetEntity: Galleries::class, mappedBy: 'page')]
-    private Collection $galleries;
+    #[ORM\OneToMany(targetEntity: Galeries::class, mappedBy: 'page')]
+    private Collection $galeries;
 
-    public function __construct(){
-        $this->created_at=new \DateTimeImmutable();
-        $this->updated_at=new \DateTimeImmutable();
-        $this->galleries = new ArrayCollection();               
+    /**
+     * @var Collection<int, SectionsPages>
+     */
+    #[ORM\OneToMany(targetEntity: SectionsPages::class, mappedBy: 'page')]
+    private Collection $sectionsPages;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+        $this->galeries = new ArrayCollection();
+        $this->sectionsPages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,29 +122,59 @@ class Pages
     }
 
     /**
-     * @return Collection<int, Galleries>
+     * @return Collection<int, Galeries>
      */
-    public function getGalleries(): Collection
+    public function getGaleries(): Collection
     {
-        return $this->galleries;
+        return $this->galeries;
     }
 
-    public function addGallery(Galleries $gallery): static
+    public function addGalerie(Galeries $galerie): static
     {
-        if (!$this->galleries->contains($gallery)) {
-            $this->galleries->add($gallery);
-            $gallery->setPage($this);
+        if (!$this->galeries->contains($galerie)) {
+            $this->galeries->add($galerie);
+            $galerie->setPage($this);
         }
 
         return $this;
     }
 
-    public function removeGallery(Galleries $gallery): static
+    public function removegalerie(Galeries $galerie): static
     {
-        if ($this->galleries->removeElement($gallery)) {
+        if ($this->galeries->removeElement($galerie)) {
             // set the owning side to null (unless already changed)
-            if ($gallery->getPage() === $this) {
-                $gallery->setPage(null);
+            if ($galerie->getPage() === $this) {
+                $galerie->setPage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SectionsPages>
+     */
+    public function getSectionsPages(): Collection
+    {
+        return $this->sectionsPages;
+    }
+
+    public function addSectionsPage(SectionsPages $sectionsPage): static
+    {
+        if (!$this->sectionsPages->contains($sectionsPage)) {
+            $this->sectionsPages->add($sectionsPage);
+            $sectionsPage->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSectionsPage(SectionsPages $sectionsPage): static
+    {
+        if ($this->sectionsPages->removeElement($sectionsPage)) {
+            // set the owning side to null (unless already changed)
+            if ($sectionsPage->getPage() === $this) {
+                $sectionsPage->setPage(null);
             }
         }
 

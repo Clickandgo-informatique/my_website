@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{titre}}
+{% endblock %}
+{% block body %}
+<h1 class="titre">{{titre}}</h1>
+{{ form_start(form) }}
+{{ form_row(form.titre) }}
+{{form_row(form.contenu)}}
+{# {{form_row(form.created_at)}}
+{{form_row(form.updated_at)}} #}
+<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
+{{ form_end(form) }}
+{% endblock %}

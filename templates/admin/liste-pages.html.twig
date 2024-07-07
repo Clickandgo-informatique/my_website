@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block header %}
-	<p>Liste des pages</p>
+{% block title %}
+	Liste des pages
 {% endblock %}
 {% block body %}
 	<button type="button" class="btn-creer-page">
 		<a href="{{path('pages_creer')}}">Créer une page</a>
 	</button>
-	<h1>Liste des pages</h1>
+	<h1 class="titre">Liste des pages</h1>
 	{% if listePages is defined and listePages is not null %}
 
 		<table>
@@ -25,10 +25,10 @@
 						<td>{{page.titre}}</td>
 						<td>{{page.soustitre}}</td>
 						<td>{{page.etat}}</td>
-						<td>{{page.createdat|date("d-m-Y")}}</td>
-						<td>{{page.updatedat|date("d-m-Y")}}</td>
+						<td>{{page.createdat|date('d-m-Y H:i:s')}}</td>
+						<td>{{page.updatedat|date('d-m-Y H:i:s')}}</td>
 						<td>
-							<a href="{{path('pages_modifier',{id:page.id})}}">Modifier</a>
+							<a href="{{path('pages_modifier',{'id':page.id})}}">Modifier</a>
 						</td>
 					</tr>
 				{% endfor %}

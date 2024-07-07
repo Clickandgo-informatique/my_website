@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block TITLE %}
+	Liste des images
+{% endblock %}
+{% block body %}
+	<table>
+		<tbody>
+			{% for img in listeImages %}
+				<tr>
+					<td><img src="{{asset('/uploads/' ~ img.name)}}" alt="{{img.name}}" width="50"></td>
+					<td>{{img.name}}</td>
+				</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

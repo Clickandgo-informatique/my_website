@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PagesController extends AbstractController
 {
 
-    #[Route('liste', 'liste')]
+    #[Route('liste-pages', 'liste_pages')]
     public function listePages(PagesRepository $pagesRepo): Response
     {
         $listePages = $pagesRepo->findBy([], ['created_at' => 'desc']);
@@ -28,6 +28,8 @@ class PagesController extends AbstractController
     public function modifier(PagesRepository $pagesRepo, $id, Request $request, EntityManagerInterface $em): Response
     {
         $page = $pagesRepo->find($id);
+        $pageId = $id;
+        // dd($pageId);
         $titre = "Modifier une page";
         $form = $this->createForm(PagesType::class, $page, ['method' => 'POST']);
         $form->handleRequest($request);
@@ -37,7 +39,7 @@ class PagesController extends AbstractController
             $em->flush();
         }
 
-        return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre]);
+        return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId]);
     }
     #[Route('creer', 'creer')]
     public function creer(Request $request, EntityManagerInterface $em): Response
@@ -52,7 +54,7 @@ class PagesController extends AbstractController
             $em->persist($page);
             $em->flush();
 
-            $this->addFlash('message',"La nouvelle page a été créée avec succès.");
+            $this->addFlash('message', "La nouvelle page a été créée avec succès.");
             return $this->redirectToRoute('pages_liste');
         }
 

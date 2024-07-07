@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+	<p>Liste des sections de pages</p>
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Liste des sections de pages</h1>
+	{% if (listeSections is defined) and (listeSections is not null) %}
+
+		<table>
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Page</th>
+					<th>Créée le</th>
+					<th>Modifiée le</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for section in listeSections %}
+					<tr>
+						<td>{{section.titre}}</td>
+						<td>{{section.page.titre}}</td>
+						<td>{{section.createdat|date("d-m-Y")}}</td>
+						<td>{{section.updatedat|date("d-m-Y")}}</td>
+						<td>
+							<a href="{{path('pages_modifier_section',{id:section.id})}}">Modifier</a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<p>Aucune donnée à afficher.</p>
+			{% endif %}
+		</tbody>
+	</table>
+	<button class="btn btn-go-back centered" type="button">
+		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
+	</button>
+{% endblock %}

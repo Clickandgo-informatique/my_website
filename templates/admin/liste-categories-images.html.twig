@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block  title %}
+	Liste des catégories d'images
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Liste des catégories d'images</h1>
+	<button type="button" class="btn btn-creer">
+		<a href="{{path("creer_categorie_images")}}">Créer une catégorie</a>
+	</button>
+	{% if (liste is defined) and (liste is not null) %}
+		<table>
+			<tbody>
+				{% for cat in liste %}
+					<tr>
+						<td>{{cat.nom}}</td>
+            <td><a href="{{path('modifier_categorie_images',{id:cat.id})}}">Modifier</a></td>
+            <td><a href="{{path('supprimer_categorie_images',{id:cat.id})}}">Supprimer</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		{% else %}
+			<tr>
+				<td>Aucune catégorie d'images à afficher.</td>
+			</tr>
+		</table>
+	{% endif %}
+
+{% endblock %}

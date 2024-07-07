@@ -10,7 +10,7 @@ class PagesFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $page = new Pages();
             $page->setTitre("Titre de la page n° " . $i + 1)
                 ->setSousTitre("Sous-titre de la page n° " . $i + 1)

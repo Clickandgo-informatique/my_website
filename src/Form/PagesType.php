@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Pages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,18 +16,19 @@ class PagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre',TextType::class)
-            ->add('sous_titre',TextType::class)
-            ->add('ordre',IntegerType::class)
-            ->add('etat',ChoiceType::class,['choices'=>['Publiée'=>'Publiée','Brouillon'=>'Brouillon','Archivée'=>'Archivée']])
-            ->add('created_at', DateType::class, [
-                'widget' => 'single_text',
-            ])
-            ->add('updated_at', DateType::class, [
-                'widget' => 'single_text',
-            ])
-            ->add('slug',TextType::class)
-        ;
+            ->add('titre', TextType::class)
+            ->add('sous_titre', TextType::class)
+            ->add('ordre', IntegerType::class)
+            ->add('etat', ChoiceType::class, ['choices' => ['Publiée' => 'Publiée', 'Brouillon' => 'Brouillon', 'Archivée' => 'Archivée']])
+            // ->add('created_at', DateTimeType::class, [
+            //     'widget' => 'single_text', 'label' => 'Créée le','required'=>false,
+            //     'attr' => ['class' => 'muted', 'disabled' => true]
+            // ])
+            // ->add('updated_at', DateTimeType::class, [
+            //     'widget' => 'single_text', 'label' => 'Modifiée le','required'=>false,
+            //     'attr' => ['class' => 'muted', 'disabled' => true]
+            // ])
+            ->add('slug', TextType::class,['required'=>false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

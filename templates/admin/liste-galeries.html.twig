@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Liste des galeries d'images
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Liste des galeries</h1>
+	<button type="button" class="btn centered btn-supprimer"><a href="{{path('galeries_creer_galerie')}}">Créer une galerie</a></button>
+	{% if (liste is defined) and (liste is not null)%}
+		<table>
+			<tbody>
+				{% for gal in liste %}
+					<tr>
+						<td>{{gal.titre}}</td>
+						<td>{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</td>
+						<td>{{gal.type}}</td>
+						<td>
+							<a href="{{path('galeries_modifier_galerie',{id:gal.id})}}">Modifier</a>
+							<a href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>Il n'existe encore aucune galerie dans la base.</p>
+	{% endif %}
+{% endblock %}

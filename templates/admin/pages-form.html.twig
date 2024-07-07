@@ -1,18 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	<h1>{{titre}}</h1>
+	{{titre}}
 {% endblock %}
 {% block body %}
-	<h1>{{titre}}</h1>
+{{dump(form)}}
+	<div class="section-boutons-horizontale">
+		<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
+		<button type="button" class="btn btn-creer-section">
+			<a href="{{path('pages_creer_section',{pageId:pageId})}}">Créer section</a>
+		</button>
+		<button type="button" class="btn btn-creer-galerie">
+			<a href="#"></a>Créer galerie</button>
+	</div>
+	<h1 class="titre">{{titre}}</h1>
 	{{ form_start(form) }}
-	{{ form_row(form.titre) }}
+	{{form_row(form.titre)}}
 	{{form_row(form.sous_titre)}}
 	{{form_row(form.etat)}}
 	{{form_row(form.slug)}}
 	{{form_row(form.ordre)}}
-	{{form_row(form.created_at)}}
-	{{form_row(form.updated_at)}}
-	<button type="submit" class="btn-envoyer">Envoyer</button>
+	{# {{form_row(form.created_at)}}
+		{{form_row(form.updated_at)}} #}
+	{# Sections de la page #}
+		{# {% for section in form.SectionsPages %}		
+			{{ form_row(section.titre) }}		
+		{% endfor %} #}
 	{{ form_end(form) }}
+
+	<button type="button" class="btn btn-go-back">
+		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
+	</button>
 {% endblock %}
