@@ -113,7 +113,7 @@ class GaleriesController extends AbstractController
     public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em): Response
     {
         $request->enableHttpMethodParameterOverride();
-        dd($request->request->all());
+        dd($request->request->getString('_token'));
         $data = json_decode($request->getContent(), true);
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
             $nom = $image->getName();

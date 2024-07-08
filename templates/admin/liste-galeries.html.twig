@@ -3,20 +3,34 @@
 	Liste des galeries d'images
 {% endblock %}
 {% block body %}
-	<h1 class="titre">Liste des galeries</h1>
-	<button type="button" class="btn centered btn-supprimer"><a href="{{path('galeries_creer_galerie')}}">Créer une galerie</a></button>
+
+	<button type="button" class="btn centered btn-creer">
+		<a href="{{path('galeries_creer_galerie')}}"><i class="fa-solid fa-photo-film"></i>Créer une galerie</a>
+	</button>
 	{% if (liste is defined) and (liste is not null)%}
 		<table>
+			<thead>
+				<tr>
+					<th>Actions</th>
+					<th>Liste des galeries</th>
+					<th>Etat</th>
+					<th>Type</th>
+				</tr>
+			</thead>
 			<tbody>
 				{% for gal in liste %}
 					<tr>
+						<td class="td-btn-actions">
+							<a class="btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
+								<i class="fa-regular fa-pen-to-square"></i>
+							</a>
+							<a class="btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
+								<i class="fa-regular fa-trash-can"></i>
+							</a>
+						</td>
 						<td>{{gal.titre}}</td>
 						<td>{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</td>
 						<td>{{gal.type}}</td>
-						<td>
-							<a href="{{path('galeries_modifier_galerie',{id:gal.id})}}">Modifier</a>
-							<a href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">Supprimer</a>
-						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
