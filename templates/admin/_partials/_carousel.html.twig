@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	{% block stylesheets %}
+		<link rel="stylesheet" href="/assets/css/carousel.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	{% endblock %}
+
+	<main>
+		<h1>Diaporama</h1>
+		<div class="diapo" data-speed="5000" data-transition="1500">
+			<div class="elements">
+				<div class="element">
+					<img src="{{asset('uploads/46db71aa10c8a5220bc0933c920de45c.jpg')}}" alt="image">
+					<div class="caption">
+						<h2>Image</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, aut?</p>
+					</div>
+				</div>
+				<div class="element">
+					<img src="{{asset('uploads/30c99c9b1f6886142327f29214f19f65.jpg')}}" alt="image">
+					<div class="caption">
+						<h2>Image</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, aut?</p>
+					</div>
+				</div>
+				<div class="element">
+					<img src="{{asset('uploads/5a119ef9e70f77187d91473f34fd0736.jpg')}}" alt="image">
+					<div class="caption">
+						<h2>Image</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, aut?</p>
+					</div>
+				</div>
+			</div>
+			{# Flèches #}
+			<i id="nav-gauche" class="fa-solid fa-angle-left"></i>
+			<i id="nav-droite" class="fa-solid fa-angle-right"></i>
+		</div>
+	</main>
+	{% block javascripts %}
+		<script src="{{asset('assets/js/carousel.js')}}" type="module" defer></script>
+	{% endblock %}
+{% endblock %}
