@@ -36,12 +36,12 @@
 		<span class="centered success">{{galerie.images|length}}
 			images enregistrées.</span>
 	{% endif %}
-	<div class="galerie" style="background-color:{{galerie.primarybackgroundcolor}}"></div>
+	<div class="container-galerie" style="background-color:{{galerie.primarybackgroundcolor}}"></div>
 
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
-	<script src="{{asset('assets/js/images.js')}}" type="text/javascript"></script>
-	<script src="{{asset('assets/js/galeries.js')}}" type="text/javascript"></script>
+	<script src="{{asset('assets/js/images.js')}}" type="module" defer></script>
+	<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
 {% endblock %}

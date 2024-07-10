@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Galeries;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -22,7 +23,12 @@ class GaleriesType extends AbstractType
     {
         $builder            
             ->add('titre', TextType::class, ['constraints' => [new Assert\NotBlank(message: "Le titre de la galerie d'images est obligatoire")]])
-            ->add('type', TextType::class)
+            ->add('type', ChoiceType::class,[
+                'choices'=>[
+                    'galerie'=>'galerie',
+                    'carousel'=>'carousel'
+                ]
+            ])
             ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée"])
             // ->add('created_at', DateTimeType::class, ['required'=>false,'label' => 'Créée le','attr'=>['class'=>'muted',"disabled"=>true]])
             ->add('images', FileType::class, [

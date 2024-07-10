@@ -73,10 +73,11 @@ class GaleriesController extends AbstractController
 
         $titre = "Modifier une galerie d'images";
         $form = $this->createForm(GaleriesType::class, $galerie);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             //Traitement des images
             $images = $form->get('images')->getData();
 
@@ -109,7 +110,7 @@ class GaleriesController extends AbstractController
         }
     }
 
-    #[Route('supprimer-image/{id}', 'supprimer_image',methods:['GET','DELETE'])]
+    #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
     public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em): Response
     {
         $request->enableHttpMethodParameterOverride();
@@ -128,10 +129,10 @@ class GaleriesController extends AbstractController
     }
 
     //Affichage ajax des images dans la galerie en création
-    #[Route('afficher-images', 'afficher_images')]
+    #[Route('afficher-galerie-images', 'afficher_galerie_images')]
     public function afficherImages(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session): Response
     {
-        //Récupération de l'Id de la galerie en cours
+        //Récupération de l'Id de la galerie en cours      
         $galerieId = $session->get('galerieId');
         $galerie = $galeriesRepo->find($galerieId);
 
@@ -139,6 +140,20 @@ class GaleriesController extends AbstractController
         $images = $ImagesRepo->findBy(['galerie' => $galerie]);
 
         return new JsonResponse(['content' => $this->renderView('admin/_partials/_galerie.html.twig', ['images' => $images])]);
+        // }
+    }
+    //Affichage ajax des images dans la galerie en création
+    #[Route('afficher-carousel-images', 'afficher_carousel_images')]
+    public function afficherCarousel(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session): Response
+    {
+        //Récupération de l'Id de la galerie en cours      
+        $galerieId = $session->get('galerieId');
+        $galerie = $galeriesRepo->find($galerieId);
+
+        // if ($request->isXmlHttpRequest()) {
+        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+
+        return new JsonResponse(['content' => $this->renderView('admin/_partials/_carousel.html.twig', ['images' => $images])]);
         // }
     }
 }
