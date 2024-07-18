@@ -1,0 +1,31 @@
+<aside id="sidebar" class="sidebar">
+	<a href="#" class="btn-close">&times;</a>
+	<div class="sidebar-menu">
+		<div class="sidebar-title">
+			<i class="fa-regular fa-file-lines"></i>Pages</div>
+		<div class="sidebar-links">
+			<a class="sidebar-link" href="{{path('pages_liste_pages')}}">
+				<i class="fa-regular fa-rectangle-list"></i>Liste des pages</a>
+			<a class="sidebar-link" href="{{path('pages_creer_page')}}">
+				<i class="fa-solid fa-file-circle-plus"></i>Créer une page</a>
+		</div>
+	</div>
+	<div class="sidebar-menu">
+		<div class="sidebar-title">
+			<i class="fa-solid fa-photo-film"></i>Galeries</div>
+		<div class="sidebar-links">
+			<a class="sidebar-link" href="{{path('galeries_liste_galeries')}}">
+				<i class="fa-regular fa-rectangle-list"></i>Liste des galeries</a>
+			<a class="sidebar-link" href="{{path('galeries_creer_galerie')}}">
+				<i class="fa-solid fa-file-circle-plus"></i>Créer une galerie</a>
+		</div>
+	</div>
+
+	{# bouton pour ouvrir et fermer la sidebar #}
+	{# <div class="sidebar-button"></div> #}
+
+</aside>
+<span class="btn-open">&#9776;</span>
+{% block javascripts %}
+	<script src="{{asset('assets/js/sidebar.js')}}" type="module" defer></script>
+{% endblock %}

@@ -4,11 +4,11 @@
 	{{titre}}
 {% endblock %}
 {% block body %}
-{{dump(form)}}
+
 	<div class="section-boutons-horizontale">
 		<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
 		<button type="button" class="btn btn-creer-section">
-			<a href="{{path('pages_creer_section',{pageId:pageId})}}">Créer section</a>
+			<a href="{{path('pages_creer_section')}}">Créer section</a>
 		</button>
 		<button type="button" class="btn btn-creer-galerie">
 			<a href="#"></a>Créer galerie</button>
@@ -26,9 +26,6 @@
 		{# {% for section in form.SectionsPages %}		
 			{{ form_row(section.titre) }}		
 		{% endfor %} #}
+		{{ form_rest(form) }}
 	{{ form_end(form) }}
-
-	<button type="button" class="btn btn-go-back">
-		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
-	</button>
 {% endblock %}

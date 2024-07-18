@@ -44,7 +44,7 @@ class SectionsPagesController extends AbstractController
 
         return $this->render('admin/sections-pages-form.html.twig', ['form' => $form, 'titre' => $titre]);
     }
-    #[Route('creer-section/{pageId}', 'creer_section')]
+    #[Route('creer-section/{pageId}', 'creer_section',defaults:['pageId'=>null])]
     public function creer(Request $request, EntityManagerInterface $em, $pageId, PagesRepository $pagesRepo): Response
     {
 

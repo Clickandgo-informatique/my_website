@@ -3,15 +3,14 @@
 	Liste des pages
 {% endblock %}
 {% block body %}
-	<button type="button" class="btn-creer-page">
-		<a href="{{path('pages_creer')}}">Créer une page</a>
-	</button>
+
 	<h1 class="titre">Liste des pages</h1>
 	{% if listePages is defined and listePages is not null %}
 
 		<table>
 			<thead>
 				<tr>
+					<th></th>
 					<th>Titre</th>
 					<th>Sous titre</th>
 					<th>Etat</th>
@@ -22,20 +21,19 @@
 			<tbody>
 				{% for page in listePages %}
 					<tr>
+						<td>
+							<a href="{{path('pages_modifier_page',{'id':page.id})}}">Modifier</a>
+						</td>
 						<td>{{page.titre}}</td>
 						<td>{{page.soustitre}}</td>
 						<td>{{page.etat}}</td>
 						<td>{{page.createdat|date('d-m-Y H:i:s')}}</td>
 						<td>{{page.updatedat|date('d-m-Y H:i:s')}}</td>
-						<td>
-							<a href="{{path('pages_modifier',{'id':page.id})}}">Modifier</a>
-						</td>
 					</tr>
 				{% endfor %}
 			{% else %}
 				<p>Aucune donnée à afficher.</p>
 			{% endif %}
 		</tbody>
-
 	</table>
 {% endblock %}

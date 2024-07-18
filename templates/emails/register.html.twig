@@ -1,0 +1,6 @@
+<h1>Activation d'un nouveau compte sur My_Website</h1>
+<p>Bonjour
+	{{user.nickname}}</p>
+<p>Pour activer votre compte veuillez cliquer sur le lien ci-dessous :</p>
+<p><a href="{{absolute_url(path('verify_user',{token:token}))}}">Lien d'activation</a></p>
+<p>Merci</p>

@@ -19,12 +19,11 @@ class PagesController extends AbstractController
     public function listePages(PagesRepository $pagesRepo): Response
     {
         $listePages = $pagesRepo->findBy([], ['created_at' => 'desc']);
-
-        dump($listePages);
+       
         return $this->render('admin/liste-pages.html.twig', ['listePages' => $listePages]);
     }
 
-    #[Route('modifier/{id}', 'modifier')]
+    #[Route('modifier-page/{id}', 'modifier_page')]
     public function modifier(PagesRepository $pagesRepo, $id, Request $request, EntityManagerInterface $em): Response
     {
         $page = $pagesRepo->find($id);
@@ -41,7 +40,7 @@ class PagesController extends AbstractController
 
         return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId]);
     }
-    #[Route('creer', 'creer')]
+    #[Route('creer-page', 'creer_page')]
     public function creer(Request $request, EntityManagerInterface $em): Response
     {
         $page = new Pages();

@@ -62,7 +62,7 @@ class ImagesCategoriesController extends AbstractController
         return $this->render('admin/creer-categorie-images.html.twig', ['form' => $form, "titre" => $titre]);
     }
     #[Route('admin/categories-images/supprimer-categorie/{id}', 'supprimer_categorie_images')]
-    public function supprimer(EntityManagerInterface $em, Request $request, $id, ImagesCategoriesRepository $repo)
+    public function supprimer(EntityManagerInterface $em, $id, ImagesCategoriesRepository $repo)
     {
         $categorie = $repo->find($id);
         $titre = "Supprimer une catégorie d'images";

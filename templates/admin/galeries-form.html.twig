@@ -3,9 +3,6 @@
 	{{titre}}
 {% endblock %}
 {% block body %}
-	<button type="button" class="btn centered btn-go-back">
-		<a href="{{path('galeries_liste_galeries')}}">Revenir à la liste des galeries</a>
-	</button>
 
 	<h1 class="titre">{{titre}}</h1>
 	{{ form_start(form) }}
@@ -16,7 +13,7 @@
 	{{ form_row(form.images) }}
 	{# {{ form_row(form.created_at)}} #}
 
-	{# galerie d'images #}
+	{# paramètres galerie d'images #}
 		<div class="parametres-galerie"> {{ form_row(form.primary_background_color) }}
 		{{form_row(form.gallery_width)}}
 		{{form_row(form.gallery_gap)}}
@@ -36,12 +33,24 @@
 		<span class="centered success">{{galerie.images|length}}
 			images enregistrées.</span>
 	{% endif %}
-	<div class="container-galerie" style="background-color:{{galerie.primarybackgroundcolor}}"></div>
 
-	{{ form_rest(form) }}
+	{# {{ form_rest(form) }} #}
+	<div class="container-galerie" style="background-color:{{galerie.primarybackgroundcolor}}"></div>
 	{{ form_end(form) }}
-{% endblock %}
-{% block javascripts %}
-	<script src="{{asset('assets/js/images.js')}}" type="module" defer></script>
-	<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
+	{# Modale lightbox #}
+	<div id="modale-lightbox" class="modal">
+		<span class="btn-close-modal-lightbox">&times;</span>
+		<div class="modal-content">
+			<img src="" alt="">
+			<div class="numerotation"></div>
+		</div>
+		{# Flèches #}
+		<i id="lightbox-nav-gauche" class="fa-solid fa-angle-left"></i>
+		<i id="lightbox-nav-droite" class="fa-solid fa-angle-right"></i>
+	</div>
+	{% block javascripts %}
+		<script src="{{asset('assets/js/images.js')}}" type="module" defer></script>
+		<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
+		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
+	{% endblock %}
 {% endblock %}

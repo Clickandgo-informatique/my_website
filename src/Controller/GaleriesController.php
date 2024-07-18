@@ -60,7 +60,7 @@ class GaleriesController extends AbstractController
             // return $this->redirectToRoute('galeries_liste_galeries');
         }
 
-        return $this->render('admin/galeries-form.html.twig', ['form' => $form->createView(), 'titre' => $titre, 'galerie' => $galerie]);
+        return $this->render('admin/galeries-form.html.twig', ['form' => $form, 'titre' => $titre, 'galerie' => $galerie]);
     }
 
     #[Route('modifier/{id}', 'modifier_galerie', methods: ['GET', 'POST'])]
@@ -95,14 +95,14 @@ class GaleriesController extends AbstractController
             $this->addFlash('success', 'La nouvelle galerie d\'images a été actualisée dans la base.');
         }
 
-        return $this->render('admin/galeries-form.html.twig', ['form' => $form->createView(), 'titre' => $titre, 'galerie' => $galerie]);
+        return $this->render('admin/galeries-form.html.twig', ['form' => $form, 'titre' => $titre, 'galerie' => $galerie]);
     }
 
-    #[Route('supprimer/{id}', 'supprimer_galerie', methods: ['DELETE'])]
+    #[Route('supprimer-galerie/{id}', 'supprimer_galerie', methods: ['DELETE'])]
     public function supprimer(Request $request, Galeries $galerie, EntityManagerInterface $em, $id): Response
     {
         $request->enableHttpMethodParameterOverride();
-        if ($this->isCsrfTokenValid('delete' . $galerie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $galerie->getId($id), $request->request->get('_token'))) {
             $em->remove($galerie);
             $em->flush();
 
@@ -113,9 +113,10 @@ class GaleriesController extends AbstractController
     #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
     public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em): Response
     {
+        dd($request);
         $request->enableHttpMethodParameterOverride();
-        dd($request->request->getString('_token'));
         $data = json_decode($request->getContent(), true);
+      
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
             $nom = $image->getName();
             unlink($this->getParameter('images_directory') . '/' . $nom);
@@ -139,7 +140,7 @@ class GaleriesController extends AbstractController
         // if ($request->isXmlHttpRequest()) {
         $images = $ImagesRepo->findBy(['galerie' => $galerie]);
 
-        return new JsonResponse(['content' => $this->renderView('admin/_partials/_galerie.html.twig', ['images' => $images])]);
+        return new JsonResponse(['content' => $this->renderView('_partials/_galerie.html.twig', ['images' => $images])]);
         // }
     }
     //Affichage ajax des images dans la galerie en création
@@ -153,7 +154,7 @@ class GaleriesController extends AbstractController
         // if ($request->isXmlHttpRequest()) {
         $images = $ImagesRepo->findBy(['galerie' => $galerie]);
 
-        return new JsonResponse(['content' => $this->renderView('admin/_partials/_carousel.html.twig', ['images' => $images])]);
+        return new JsonResponse(['content' => $this->renderView('_partials/_carousel.html.twig', ['images' => $images])]);
         // }
     }
 }
