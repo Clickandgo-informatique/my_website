@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{# {% macro niceForm(form) %}
+	<div class="card">
+		<div class="row">
+			{{form_row(form.titre)}}
+		</div>
+		<div class="row">
+			{{form_row(form.contenu)}}
+		</div>
+	</div>
+{% endmacro niceForm%}
+{% import _self as formMacros %} #}
 {% block title %}
 	{{titre}}
 {% endblock %}
 {% block body %}
 
-	<div class="section-boutons-horizontale">
-		<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
-		<button type="button" class="btn btn-creer-section">
-			<a href="{{path('pages_creer_section')}}">Créer section</a>
-		</button>
-		<button type="button" class="btn btn-creer-galerie">
-			<a href="#"></a>Créer galerie</button>
-	</div>
 	<h1 class="titre">{{titre}}</h1>
 	{{ form_start(form) }}
 	{{form_row(form.titre)}}
@@ -20,12 +23,21 @@
 	{{form_row(form.etat)}}
 	{{form_row(form.slug)}}
 	{{form_row(form.ordre)}}
-	{# {{form_row(form.created_at)}}
-		{{form_row(form.updated_at)}} #}
 	{# Sections de la page #}
-		{# {% for section in form.SectionsPages %}		
-			{{ form_row(section.titre) }}		
-		{% endfor %} #}
-		{{ form_rest(form) }}
+	{% if (form.sectionsPages|length >0) %}
+		<h3>
+			Liste des sections de page :
+		</h3>
+	{% endif %}
+	<ul class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.sectionsPages.vars.prototype)|e('html_attr') }}">
+		{% set counter = ( counter | default(0) ) + 1 %}
+
+	</ul>
+	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">Ajouter section</button>
+	<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
 	{{ form_end(form) }}
+
+	{% block javascripts %}
+		<script type="module" src="{{asset('assets/js/sections-pages.js')}}" defer></script>
+	{% endblock %}
 {% endblock %}

@@ -28,7 +28,7 @@ class PagesController extends AbstractController
     {
         $page = $pagesRepo->find($id);
         $pageId = $id;
-        // dd($pageId);
+    
         $titre = "Modifier une page";
         $form = $this->createForm(PagesType::class, $page, ['method' => 'POST']);
         $form->handleRequest($request);
@@ -36,6 +36,8 @@ class PagesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($page);
             $em->flush();
+
+            $this->addFlash('success','La page a été sauvegardée avec succès dans la base.');
         }
 
         return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId]);

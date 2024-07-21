@@ -1,0 +1,44 @@
+.diapo {
+  position: relative;
+  overflow: hidden;
+  width: 400px;
+  margin: auto;
+}
+.elements {
+  display: flex;
+}
+.element {
+  flex: 1 0 100%;
+  position: relative;
+}
+.element > img {
+  width: 100%;
+}
+.caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+#nav-gauche,
+#nav-droite {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 4rem;
+  cursor: pointer;
+  opacity: 0.5;
+  border: 1px solid darkgray;
+  background-color: black;
+  padding: 5px;
+}
+#nav-droite {
+  right: 0;
+}

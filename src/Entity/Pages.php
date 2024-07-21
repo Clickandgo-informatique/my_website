@@ -57,7 +57,7 @@ class Pages
     /**
      * @var Collection<int, SectionsPages>
      */
-    #[ORM\OneToMany(targetEntity: SectionsPages::class, mappedBy: 'page')]
+    #[ORM\OneToMany(targetEntity: SectionsPages::class, mappedBy: 'page',cascade:['persist'])]
     private Collection $sectionsPages;
 
     public function __construct()

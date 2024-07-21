@@ -1,0 +1,47 @@
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 95%;
+}
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #ddd;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #06724a;
+  color: white;
+}
+.td-btn-actions{
+  width:fit-content;
+  display:flex;
+  justify-content: center;
+}
+.btn-action{
+  padding:7px;
+  margin: 5px;
+  border-radius: 3px;
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  border:1px solid lightgray;
+}
+
+.btn-supprimer{
+  padding: 5px;
+  color: red;
+}
+.btn-modifier{
+  padding: 5px;
+  color: blue;
+  
+}

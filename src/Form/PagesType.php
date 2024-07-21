@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Pages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,7 +29,14 @@ class PagesType extends AbstractType
             //     'widget' => 'single_text', 'label' => 'Modifiée le','required'=>false,
             //     'attr' => ['class' => 'muted', 'disabled' => true]
             // ])
-            ->add('slug', TextType::class,['required'=>false]);
+            ->add('slug', TextType::class, ['required' => false])
+            ->add('sectionsPages', CollectionType::class, [
+                'entry_type' => SectionsPagesType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

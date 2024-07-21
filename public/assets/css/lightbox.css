@@ -1,0 +1,89 @@
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: black;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+  overflow: auto;
+  animation: lightboxIn 0.5s;
+  transition: opacity 0.5s;
+}
+.modal.fadeOut {
+  opacity: 0;
+}
+.modal-content {
+  width: 90%;
+  margin: auto;
+  max-width: 1200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.modal.show {
+  display: initial;
+}
+.modal-content img {
+  width: 100%;
+  animation: lightboxIn 0.5s;
+}
+.btn-close-modal-lightbox {
+  color: white;
+  font-size: 2rem;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 22;
+}
+#lightbox-nav-gauche,
+#lightbox-nav-droite {
+  font-size: 40px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  padding: 5px;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+#lightbox-nav-gauche {
+  left: 10px;
+}
+#lightbox-nav-droite {
+  right: 10px;
+}
+#lightbox-nav-gauche:hover,
+#lightbox-nav-droite:hover {
+  transform: scale(110%);
+  opacity: 1;
+}
+.numerotation {
+  font-size: 5rem;
+  color: rgb(255, 255, 255);
+  z-index: 20;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #4b4b4b;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
