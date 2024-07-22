@@ -1,5 +1,4 @@
-window.onload = () => {
-  console.log("coucou");
+  console.log("Mode carousel");
   let compteur = 0;
   let timer, elements, slides, slideWidth, speed, transition;
 
@@ -69,4 +68,4 @@ window.onload = () => {
   function startTimer() {
     timer = setInterval(slideNext, speed);
   }
-};
+

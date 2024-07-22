@@ -1,5 +1,3 @@
-export const parameters=()=>{
-
 //Changer la largeur de la galerie
 const inputGalleryWidth = document.querySelector("#galeries_gallery_width");
 inputGalleryWidth.addEventListener("change", () => {
@@ -75,4 +73,4 @@ inputImageShadow.addEventListener("change", () => {
     "--images-shadow",
     `${imgShadow}px ${imgShadow}px ${imgShadow}px darkgray`
   );
-});}
+});

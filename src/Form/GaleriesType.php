@@ -25,8 +25,8 @@ class GaleriesType extends AbstractType
             ->add('titre', TextType::class, ['constraints' => [new Assert\NotBlank(message: "Le titre de la galerie d'images est obligatoire")]])
             ->add('type', ChoiceType::class,[
                 'choices'=>[
-                    'galerie'=>'galerie',
-                    'carousel'=>'carousel'
+                    'Galerie'=>'galerie',
+                    'Carousel'=>'carousel'
                 ]
             ])
             ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée"])
@@ -44,7 +44,9 @@ class GaleriesType extends AbstractType
             ->add('gallery_gap', NumberType::class, ['mapped' => false, 'label' => "Espacement", 'html5' => true, 'attr' => ["min" => 5, "max" => 50, "default" => 5, "step" => 1, "value" => 5, 'class' => 'input-galerie']])
             ->add('images_border_radius', NumberType::class, ['mapped' => false, 'label' => "Arrondis coins", 'html5' => true, 'attr' => ["min" => 0, "max" => 100, "default" => 5, "value" => 5, 'class' => 'input-galerie']])
             ->add('images_border_width', NumberType::class, ['mapped' => false, 'label' => "Epaisseur bordure", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']])
-            ->add('images_shadow', NumberType::class, ['mapped' => false, 'label' => "Epaisseur ombre", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']]);
+            ->add('images_shadow', NumberType::class, ['mapped' => false, 'label' => "Epaisseur ombre", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']])
+            ->add('carousel_speed',NumberType::class,['mapped' => false, 'label' => "Vitesse défilement", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
+            ->add('carousel_transition',NumberType::class,['mapped' => false, 'label' => "Vitesse transition", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

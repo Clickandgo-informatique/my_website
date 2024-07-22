@@ -14,14 +14,21 @@
 	{# {{ form_row(form.created_at)}} #}
 
 	{# paramètres galerie d'images #}
-		<div class="parametres-galerie"> {{ form_row(form.primary_background_color) }}
-		{{form_row(form.gallery_width)}}
-		{{form_row(form.gallery_gap)}}
-		{{form_row(form.gallery_max_columns)}}
-		{{form_row(form.gallery_height)}}
-		{{ form_row(form.images_border_radius) }}
-		{{form_row(form.images_border_width)}}
-		{{form_row(form.images_shadow)}}
+		<div class="parametres-galerie"> 
+		<div class="inputs-galerie">
+			{{ form_row(form.primary_background_color) }}
+			{{form_row(form.gallery_width)}}
+			{{form_row(form.gallery_gap)}}
+			{{form_row(form.gallery_max_columns)}}
+			{{form_row(form.gallery_height)}}
+			{{ form_row(form.images_border_radius) }}
+			{{form_row(form.images_border_width)}}
+			{{form_row(form.images_shadow)}}
+		</div>
+		<div class="inputs-carousel">
+			{{ form_row(form.carousel_speed) }}
+			{{ form_row(form.carousel_transition) }}
+		</div>
 	</div>
 	<button class="btn btn-enregistrer" type="submit">Enregistrer</button>
 
@@ -35,22 +42,16 @@
 	{% endif %}
 
 	{# {{ form_rest(form) }} #}
-	<div class="container-galerie" style="background-color:{{galerie.primarybackgroundcolor}}"></div>
+	<div class="container-galerie"></div>
 	{{ form_end(form) }}
-	{# Modale lightbox #}
-	<div id="modale-lightbox" class="modal">
-		<span class="btn-close-modal-lightbox">&times;</span>
-		<div class="modal-content">
-			<img src="" alt="">
-			<div class="numerotation"></div>
-		</div>
-		{# Flèches #}
-		<i id="lightbox-nav-gauche" class="fa-solid fa-angle-left"></i>
-		<i id="lightbox-nav-droite" class="fa-solid fa-angle-right"></i>
-	</div>
+
+	{# Lightbox images #}
+	{{ include('_partials/_lightbox.html.twig') }}
+
 	{% block javascripts %}
 		<script src="{{asset('assets/js/images.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
-		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>	
+		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
+		<script src="{{asset('assets/js/galeries-parameters.js')}}" type="module" defer></script>
 	{% endblock %}
 {% endblock %}

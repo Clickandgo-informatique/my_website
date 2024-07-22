@@ -1,20 +1,24 @@
 import { lightbox } from "./lightbox.js";
-import { parameters } from "./galeries-parameters.js";
 
-window.onload=()=>{
+console.log("Mode galerie");
 //Afficher les images dans la galerie active
 const galerie = document.querySelector(".container-galerie");
-
 const selectTypeGalerie = document.querySelector("#galeries_type");
+const inputsGalerie = document.querySelector(".inputs-galerie");
+const inputsCarousel = document.querySelector(".inputs-carousel");
 
 const afficherGalerie = () => {
   let url = "";
   switch (selectTypeGalerie.value) {
     case "galerie":
       url = "/admin/galeries/afficher-galerie-images";
+      inputsCarousel.style.display = "none";
+      inputsGalerie.style.display = "block";
       break;
     case "carousel":
       url = "/admin/galeries/afficher-carousel-images";
+      inputsCarousel.style.display = "block";
+      inputsGalerie.style.display = "none";
       break;
     default:
       return false;
@@ -33,16 +37,16 @@ const afficherGalerie = () => {
       galerie.innerHTML = "";
       galerie.insertAdjacentHTML("afterbegin", data.content);
 
+      //création du link js carousel
+      if (selectTypeGalerie.value == "carousel") {
+        const linkjs = document.createElement("script");
+        linkjs.src = "/assets/js/carousel.js";
+        linkjs.type = "module";
+        linkjs.defer = true;
+        document.body.appendChild(linkjs);
+      }
       const imagesLinks = document.querySelectorAll(".imageLink");
       lightbox(imagesLinks);
-
-      //création du link js carousel
-      const linkjs = document.createElement("script");
-      linkjs.src = "/assets/js/carousel.js";
-      linkjs.type = "module";
-      // linkjs.async = true;
-      linkjs.defer = true;
-      document.body.appendChild(linkjs);
     } else {
       alert("Erreur: la requête au serveur n'a rien retourné.");
     }
@@ -51,4 +55,3 @@ const afficherGalerie = () => {
 };
 afficherGalerie();
 selectTypeGalerie.addEventListener("change", afficherGalerie);
-}
