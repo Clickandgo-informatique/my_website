@@ -87,11 +87,15 @@
 }
 .input-galerie,.input-carousel {
   font-size: 0.7rem;
-  width: 50px;
+  /* width: 50px; */
+margin: 2px;
   border: 1px solid lightgray;
   text-align: center;
-  display:none;
 }
+.input-carousel div label,.input-galerie div label{
+  margin-right: 15px;
+}
+
 .input-galerie:hover {
   box-shadow: 1px 1px 1px black;
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Pages;
 use App\Entity\SectionsPages;
 use App\Form\SectionsPagesType;
 use App\Repository\PagesRepository;

@@ -24,16 +24,25 @@
 	{{form_row(form.slug)}}
 	{{form_row(form.ordre)}}
 	{# Sections de la page #}
+	<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
+	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">Ajouter section</button>
 	{% if (form.sectionsPages|length >0) %}
 		<h3>
 			Liste des sections de page :
 		</h3>
 	{% endif %}
-	<ul class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.sectionsPages.vars.prototype)|e('html_attr') }}">
-		{% set counter = ( counter | default(0) ) + 1 %}
+	<div class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.sectionsPages.vars.prototype)|e('html_attr') }}">
+		{% for section in form.sectionsPages %}
+			{% set counter = ( counter | default(0) ) + 1 %}
+			<div class="sectionPage">
+				<span class="sectionNum">Section
+					{{counter}}</span>
+				{{ form_row(section.titre) }}
+				{{ form_row(section.contenu) }}
+			</div>
 
-	</ul>
-	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">Ajouter section</button>
+		{% endfor %}
+	</div>
 	<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
 	{{ form_end(form) }}
 

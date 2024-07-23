@@ -1,10 +1,12 @@
 const btnAddItem = document.querySelector(".btnAddItem");
+const listeSections = document.querySelectorAll(".sectionPage");
 
 const addFormToCollection = (e) => {
   const collectionHolder = document.querySelector(
     "." + e.currentTarget.dataset.collectionHolderClass
   );
-  const item = document.createElement("li");
+  const item = document.createElement("div");
+  item.className = "sectionPage";
 
   item.innerHTML = collectionHolder.dataset.prototype.replace(
     /__name__/g,
@@ -12,7 +14,7 @@ const addFormToCollection = (e) => {
   );
   collectionHolder.appendChild(item);
 
-  //Ajout bouton de suppression
+  //Ajout bouton de suppression sur chaque section
   addRemoveItemBtn(item);
 
   //Incrémentation
@@ -24,13 +26,18 @@ btnAddItem.addEventListener("click", addFormToCollection);
 //Fonction ajout d'un bouton de suppression
 const addRemoveItemBtn = (item) => {
   const btnRemoveItem = document.createElement("button");
-  btnRemoveItem.innerText = "X";
+  btnRemoveItem.textContent = "x";
   btnRemoveItem.type = "button";
-  btnRemoveItem.className = "btnRemoveItem";
-  item.append(btnRemoveItem);
+  btnRemoveItem.className = "btn btnRemoveItem";
+  item.appendChild(btnRemoveItem);
 
   btnRemoveItem.addEventListener("click", (e) => {
     e.preventDefault();
     item.remove();
   });
 };
+//Ajout d'un bouton de suppression sur chaque item créé préalablement
+console.log(listeSections);
+listeSections.forEach((el) => {
+  addRemoveItemBtn(el);
+});

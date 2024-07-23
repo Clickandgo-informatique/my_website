@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ImagesCategoriesRepository;
+use App\Repository\CategoriesImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: ImagesCategoriesRepository::class)]
+#[ORM\Entity(repositoryClass: CategoriesImagesRepository::class)]
 #[UniqueEntity(fields: ['nom'], message: "Ce nom de catégorie d'images est déjà présent dans la base.")]
-class ImagesCategories
+class CategoriesImages
 {
  
     #[ORM\Id]

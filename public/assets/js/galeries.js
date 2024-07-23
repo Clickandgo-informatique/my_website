@@ -11,14 +11,10 @@ const afficherGalerie = () => {
   let url = "";
   switch (selectTypeGalerie.value) {
     case "galerie":
-      url = "/admin/galeries/afficher-galerie-images";
-      inputsCarousel.style.display = "none";
-      inputsGalerie.style.display = "block";
+      url = "/admin/galeries/afficher-galerie-images";   
       break;
     case "carousel":
-      url = "/admin/galeries/afficher-carousel-images";
-      inputsCarousel.style.display = "block";
-      inputsGalerie.style.display = "none";
+      url = "/admin/galeries/afficher-carousel-images";    
       break;
     default:
       return false;
@@ -39,11 +35,17 @@ const afficherGalerie = () => {
 
       //création du link js carousel
       if (selectTypeGalerie.value == "carousel") {
+    
         const linkjs = document.createElement("script");
         linkjs.src = "/assets/js/carousel.js";
         linkjs.type = "module";
         linkjs.defer = true;
         document.body.appendChild(linkjs);
+        inputsCarousel.style.display = "block";
+        inputsGalerie.style.display = "none";
+      }else{
+        inputsCarousel.style.display = "none";
+        inputsGalerie.style.display = "block";
       }
       const imagesLinks = document.querySelectorAll(".imageLink");
       lightbox(imagesLinks);

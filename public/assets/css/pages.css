@@ -5,20 +5,33 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  flex-direction: row;
-  background: red;
+  flex-direction: column;
+}
+.sectionsPages div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+}
+.sectionsPages div label {
+  text-align: left;
+  padding: 5px;
 }
 .sectionPage {
-  background-color: #f8f8f8;
+  background-color: lightgoldenrodyellow;
   border: 1px solid lightgray;
   padding: 15px;
   margin-bottom: 5px;
   width: 100%;
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 .sectionPage label {
-  width: fit-content;
+  color: blue;
+  text-align: left;
+  display: block;
+  width: 100%;
 }
 .sectionPage input,
 textarea {
@@ -27,9 +40,20 @@ textarea {
 }
 #pages_sectionsPages {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-#pages_sectionsPages div{
+#pages_sectionsPages div {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+.btnRemoveItem {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: bolder;
+  padding: 0;
+  margin: 0;
+  top: 5px;
+  right: 5px;
 }
