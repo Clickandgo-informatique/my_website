@@ -1,12 +1,25 @@
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  width: 95%;
+  width: 97%;
+  font-size: 0.8rem;
+  overflow-y: scroll;
+}
+thead {
+  position: sticky;
+  box-shadow: 2px 5px 8px darkgray;
+}
+tbody{
+  overflow-y: scroll;
 }
 td,
-th {
-  border: 1px solid #ddd;
-  padding: 8px;
+th,
+caption {
+  border: 1px solid rgb(228, 228, 228);
+  padding: 0.8rem;
+}
+tr {
+  background-color: #fff;
 }
 tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -21,27 +34,61 @@ th {
   background-color: #06724a;
   color: white;
 }
-.td-btn-actions{
-  width:fit-content;
-  display:flex;
+.td-btn-actions {
+  width: fit-content;
+  display: flex;
   justify-content: center;
 }
-.btn-action{
-  padding:7px;
+.btn-action {
+  padding: 7px;
   margin: 5px;
   border-radius: 3px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-content: center;
-  border:1px solid lightgray;
+  border: 1px solid lightgray;
 }
 
-.btn-supprimer{
+.btn-supprimer {
   padding: 5px;
   color: red;
 }
-.btn-modifier{
+.btn-modifier {
   padding: 5px;
   color: blue;
-  
+}
+@media (max-width: 650px) {
+  th {
+    display: none;
+  }
+  tr {
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 2px 5px 8px darkgray;
+  }
+  tr:hover {
+    transform: scale(105%);
+    transition: 0.3s;
+    background-color: blanchedalmond;
+  }
+  td {
+    display: grid;
+    grid-template-columns: 15ch auto;
+    padding: 0.5rem 1rem;
+  }
+  td:first-child {
+    padding-top: 1.5rem;
+    border: none;
+  }
+  td:last-child {
+    padding-bottom: 1.5rem;
+    border: none;
+  }
+
+  td::before {
+    color: darkblue;
+    content: attr(data-cell);
+    text-transform: capitalize;
+  }
 }

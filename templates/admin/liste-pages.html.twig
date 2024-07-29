@@ -6,34 +6,35 @@
 
 	<h1 class="titre">Liste des pages</h1>
 	{% if listePages is defined and listePages is not null %}
-
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th>Titre</th>
-					<th>Sous titre</th>
-					<th>Etat</th>
-					<th>Créée le</th>
-					<th>Modifiée le</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for page in listePages %}
+	
+			<table>
+				<thead>
 					<tr>
-						<td>
-							<a href="{{path('pages_modifier_page',{'id':page.id})}}">Modifier</a>
-						</td>
-						<td>{{page.titre}}</td>
-						<td>{{page.soustitre}}</td>
-						<td>{{page.etat}}</td>
-						<td>{{page.createdat|date('d-m-Y H:i:s')}}</td>
-						<td>{{page.updatedat|date('d-m-Y H:i:s')}}</td>
+						<th></th>
+						<th>Titre</th>
+						<th>Sous titre</th>
+						<th>Etat</th>
+						<th>Créée le</th>
+						<th>Modifiée le</th>
 					</tr>
-				{% endfor %}
-			{% else %}
-				<p>Aucune donnée à afficher.</p>
-			{% endif %}
-		</tbody>
-	</table>
+				</thead>
+				<tbody>
+					{% for page in listePages %}
+						<tr>
+							<td>
+								<a class="btn btn-modifier right"href="{{path('pages_modifier_page',{'id':page.id})}}"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
+							</td>
+							<td data-cell="Titre : ">{{page.titre}}</td>
+							<td data-cell="Sous-titre : ">{{page.soustitre}}</td>
+							<td data-cell="Etat : ">{{page.etat}}</td>
+							<td class="text-align-right"data-cell="Créée le : ">{{page.createdat|date('d-m-Y à H:i')}}</td>
+							<td class="text-align-right"data-cell="Modifiée le : ">{{page.updatedat|date('d-m-Y à H:i')}}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<p>Aucune donnée à afficher.</p>
+				{% endif %}
+			</tbody>
+		</table>
+	
 {% endblock %}

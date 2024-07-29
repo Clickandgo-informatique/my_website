@@ -25,31 +25,29 @@ class PagesController extends AbstractController
     }
 
     #[Route('modifier-page/{id}', 'modifier_page')]
-    public function modifier(Pages $existingpage, PagesRepository $pagesRepo, $id, Request $request, EntityManagerInterface $em): Response
+    public function modifier(Pages $pages, PagesRepository $pagesRepo, $id, Request $request, EntityManagerInterface $em): Response
     {
         $sections = new ArrayCollection();
-        foreach ($existingpage->getSectionsPages() as $section) {
+        foreach ($pages->getSectionsPages() as $section) {
             $sections->add($section);
         }
-       
-        $page = $pagesRepo->find($id);
+        //    dd($sections);
+        $currentpage = $pagesRepo->find($id);
         $pageId = $id;
 
         $titre = "Modifier une page";
-        $form = $this->createForm(PagesType::class, $page, ['method' => 'POST']);
+        $form = $this->createForm(PagesType::class, $currentpage, ['method' => 'POST']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //traitement des sections de pages en cours de suppression
+            foreach ($sections as $section) {
+                if (false === $pages->getSectionsPages()->contains($section)) {
+                    $em->remove($section);                    
+                }
+            }
 
-            //traitement des sections de pages supprimées
-            // foreach ($sections as $section) {
-            //     if (false === $page->getSectionsPages()->contains($section)) {
-            //         $section->getPage()->removeElement($page);
-            //         $em->remove($section);
-            //     }
-            // }
-        
-            $em->persist($page);
+            $em->persist($currentpage);
             $em->flush();
 
             $this->addFlash('success', 'La page a été sauvegardée avec succès dans la base.');

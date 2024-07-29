@@ -22,7 +22,7 @@ body {
   height: 100%;
   flex-direction: column;
   transition: margin-left 0.5s;
-  /* padding: 20px; */
+ background-color: #f6f6f6;
 }
 a {
   text-decoration: none;
@@ -33,12 +33,15 @@ ul {
 .btn {
   padding: 5px 8px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #ffffff;
   color: darkblue;
   border: 1px solid darkgray;
   margin: 10px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
 }
 .btn a {
   text-decoration: none;
@@ -54,6 +57,10 @@ ul {
   display: block;
   margin: 10px auto;
   text-align: center;
+}
+.right{
+  display:block;
+  margin-left: auto;
 }
 .muted {
   background-color: #fcfcfc;
@@ -72,6 +79,9 @@ ul {
 .success {
   color: darkgreen;
   font-size: 0.7rem;
+}
+.text-align-right{
+  text-align: right;
 }
 
 @media screen and (max-height: 450px) {

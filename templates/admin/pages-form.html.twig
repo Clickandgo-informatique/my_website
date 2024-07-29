@@ -1,22 +1,15 @@
 {% extends 'base.html.twig' %}
-
-{# {% macro niceForm(form) %}
-	<div class="card">
-		<div class="row">
-			{{form_row(form.titre)}}
-		</div>
-		<div class="row">
-			{{form_row(form.contenu)}}
-		</div>
-	</div>
-{% endmacro niceForm%}
-{% import _self as formMacros %} #}
 {% block title %}
 	{{titre}}
 {% endblock %}
 {% block body %}
 
+	<button type="button" class="btn centered">
+		<i class="fa-solid fa-arrow-left"></i>
+		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
+	</button>
 	<h1 class="titre">{{titre}}</h1>
+
 	{{ form_start(form) }}
 	{{form_row(form.titre)}}
 	{{form_row(form.sous_titre)}}
@@ -24,8 +17,8 @@
 	{{form_row(form.slug)}}
 	{{form_row(form.ordre)}}
 	{# Sections de la page #}
-	<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
-	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">Ajouter section</button>
+	<button type="submit" class="btn btn-enregistrer">
+		<i class="fa-solid fa-download"></i>Enregistrer</button>
 	{% if (form.sectionsPages|length >0) %}
 		<h3>
 			Liste des sections de page :
@@ -35,17 +28,24 @@
 		{% for section in form.sectionsPages %}
 			{% set counter = ( counter | default(0) ) + 1 %}
 			<div class="sectionPage">
-				<span class="sectionNum">Section
-					{{counter}}</span>
+				<div class="entete-section">
+					<p class="sectionNum"></p>
+				</div>
 				{{ form_row(section.titre) }}
 				{{ form_row(section.contenu) }}
 			</div>
-
 		{% endfor %}
 	</div>
-	<button type="submit" class="btn btn-enregistrer">Enregistrer</button>
-	{{ form_end(form) }}
+	<button type="submit" class="btn btn-enregistrer">
+		<i class="fa-solid fa-download"></i>Enregistrer</button>
+	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">
+		<i class="fa-solid fa-plus"></i>Ajouter section</button>
 
+	{{ form_end(form) }}
+	<button type="button" class="btn centered">
+		<i class="fa-solid fa-arrow-left"></i>
+		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
+	</button>
 	{% block javascripts %}
 		<script type="module" src="{{asset('assets/js/sections-pages.js')}}" defer></script>
 	{% endblock %}
