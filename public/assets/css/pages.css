@@ -1,16 +1,15 @@
-.sectionsPages { 
+.sectionsPages {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
 }
 .sectionsPages div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 98%;
 }
 .sectionsPages div label {
   text-align: left;
@@ -18,16 +17,21 @@
 }
 .sectionPage {
   border: 1px solid lightgray;
-  padding:  0 10px 0 10px; 
+  padding: 0 10px 0 10px;
   margin-bottom: 15px;
   width: 100%;
   border-radius: 5px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   position: relative;
-  display:flex;
+  display: flex;
+  background-color: #fff;
+}
+.sectionPage:hover {
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+  transform: scale(105%);
+  border: 1px solid black;
 }
 .sectionPage label {
-  color: blue;
   text-align: left;
   display: block;
   width: 100%;
@@ -35,7 +39,6 @@
 .sectionPage input,
 textarea {
   width: 100%;
-  color: blue;
 }
 #pages_sectionsPages {
   width: 100%;
@@ -48,7 +51,7 @@ textarea {
   width: 100%;
 }
 .btnRemoveItem {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 3px;
@@ -61,11 +64,22 @@ textarea {
   width: 100%;
   height: 30px;
   margin: 5px;
-  padding: 5px ;
+  padding: 5px;
 }
 
 .sectionNum {
   text-align: left;
-  width: 100%;
+  width: 98%;
   margin: 5px;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+#boutons-galerie {
+  display: flex;
+  flex-direction: row;
+  width: 98%; 
+  justify-content:center;
+  align-items: center;
 }

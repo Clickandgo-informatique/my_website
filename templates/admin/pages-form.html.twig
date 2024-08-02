@@ -1,7 +1,29 @@
 {% extends 'base.html.twig' %}
+
+{% macro niceForm(form) %}
+	<div class="section-page">
+		<div class="entete-section">
+			<p class="sectionNum"></p>
+		</div>
+		{{form_row(form.titre)}}
+		{{form_row(form.contenu)}}
+		<div id="boutons-galerie">
+			{{form_row(form.galerie)}}
+			<a href="{{path('galeries_creer_galerie')}}" class="btn">
+				<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
+			<a href="#" class="btn">
+				<i class="fa-regular fa-folder-open"></i>Voir galerie</a>
+		</div>
+		<button type="submit" class="btn btn-enregistrer">
+			<i class="fa-solid fa-download"></i>Enregistrer la section</button>
+	</div>
+{% endmacro niceForm %}
+{% import _self as formMacros %}
+
 {% block title %}
 	{{titre}}
 {% endblock %}
+
 {% block body %}
 
 	<button type="button" class="btn centered">
@@ -24,15 +46,12 @@
 			Liste des sections de page :
 		</h3>
 	{% endif %}
-	<div class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.sectionsPages.vars.prototype)|e('html_attr') }}">
+	<div class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{formMacros.niceForm(form.sectionsPages.vars.prototype)|e('html_attr') }}">
 		{% for section in form.sectionsPages %}
 			{% set counter = ( counter | default(0) ) + 1 %}
 			<div class="sectionPage">
-				<div class="entete-section">
-					<p class="sectionNum"></p>
-				</div>
-				{{ form_row(section.titre) }}
-				{{ form_row(section.contenu) }}
+				{{formMacros.niceForm(section)}}
+				<div class="container-galerie"></div>
 			</div>
 		{% endfor %}
 	</div>

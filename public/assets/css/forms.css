@@ -11,9 +11,7 @@ form div {
   align-items: center;
 }
 
-/* .row{
-  background-color: red;
-} */
+
 /* .card{
   display:flex;
   flex-direction: column;
@@ -27,6 +25,7 @@ textarea {
   padding: 5px;
   margin: 5px;
   width: 100%;
+  background-color: #fff;
 }
 input[type="datetime-local"] {
   text-align: right;

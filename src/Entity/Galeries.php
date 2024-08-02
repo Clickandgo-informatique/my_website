@@ -8,7 +8,9 @@ use App\Repository\GaleriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\AST\Functions\LengthFunction;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Length;
 
 #[ORM\Entity(repositoryClass: GaleriesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -51,6 +53,10 @@ class Galeries
         $this->updated_at = new \DateTimeImmutable;
         $this->images = new ArrayCollection();
         // $this->is_active = false;
+    }
+    public function getDetailsGalerie(): string
+    {
+        return $this->getTitre() . ' - type : [' . $this->getType() . '] - images : ' . count($this->images);
     }
     public function getId(): ?int
     {

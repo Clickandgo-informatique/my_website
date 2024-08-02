@@ -2,6 +2,7 @@ const btnAddItem = document.querySelector(".btnAddItem");
 const listeSections = document.querySelectorAll(".sectionPage");
 const enteteSection = document.querySelector(".entete-section");
 const sectionNum = document.querySelectorAll(".sectionNum");
+
 let compteur = 1;
 
 const compterSections = () => {
@@ -28,17 +29,18 @@ const addFormToCollection = (e) => {
   addRemoveItemBtn(item);
   //Incrémentation
   collectionHolder.dataset.index++;
+  compterSections();
 };
-
 
 btnAddItem.addEventListener("click", addFormToCollection);
 
 //Fonction ajout d'un bouton de suppression
 const addRemoveItemBtn = (item) => {
   const btnRemoveItem = document.createElement("button");
-  btnRemoveItem.textContent = "x";
+  // btnRemoveItem.textContent = "x";
   btnRemoveItem.type = "button";
   btnRemoveItem.className = "btn btnRemoveItem";
+  btnRemoveItem.innerHTML = `<i class="fa-regular fa-trash-can"></i>Supprimer section`;
   item.appendChild(btnRemoveItem);
 
   btnRemoveItem.addEventListener("click", (e) => {

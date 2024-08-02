@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Galeries;
 use App\Entity\SectionsPages;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,9 +16,10 @@ class SectionsPagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
-        $builder         
+        $builder
             ->add('titre', TextType::class, ['attr' => ['id' => 'inputTitre']])
-            ->add('contenu', TextareaType::class, ['attr' => ['id' => 'inputContenu']]);
+            ->add('contenu', TextareaType::class, ['attr' => ['id' => 'inputContenu']])
+            ->add('galerie', EntityType::class, ['class' => Galeries::class,'required' => false, 'empty_data' => null, 'placeholder' => '-- Choisissez une galerie --', 'choice_label' => 'getDetailsGalerie', 'label' => 'Galerie', 'attr' => ['class' => 'select-galerie']]);
         // ->add('created_at', DateTimeType::class, [
         //     'widget' => 'single_text',
         //     'label' => 'Créée le',
@@ -29,6 +32,7 @@ class SectionsPagesType extends AbstractType
         //     'input' => 'datetime_immutable',
         //     'attr' => ['class' => 'muted', 'disabled' => true]
         // ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

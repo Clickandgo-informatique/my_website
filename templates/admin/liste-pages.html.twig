@@ -22,7 +22,7 @@
 					{% for page in listePages %}
 						<tr>
 							<td>
-								<a class="btn btn-modifier right"href="{{path('pages_modifier_page',{'id':page.id})}}"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
+								<a class="btn btn-modifier"href="{{path('pages_modifier_page',{'id':page.id})}}"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
 							</td>
 							<td data-cell="Titre : ">{{page.titre}}</td>
 							<td data-cell="Sous-titre : ">{{page.soustitre}}</td>

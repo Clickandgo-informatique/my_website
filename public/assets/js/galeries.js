@@ -9,6 +9,7 @@ const inputsCarousel = document.querySelector(".inputs-carousel");
 
 const afficherGalerie = () => {
   let url = "";
+  if(selectTypeGalerie){
   switch (selectTypeGalerie.value) {
     case "galerie":
       url = "/admin/galeries/afficher-galerie-images";   
@@ -19,7 +20,7 @@ const afficherGalerie = () => {
     default:
       return false;
   }
-
+  }
   async function afficherImages() {
     const response = await fetch(url, {
       methods: "GET",

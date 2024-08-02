@@ -8,6 +8,7 @@ use App\Repository\SectionsPagesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Unique;
 
 #[ORM\Entity(repositoryClass: SectionsPagesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -30,11 +31,14 @@ class SectionsPages
     #[ORM\JoinColumn(nullable: false)]
     private ?Pages $page = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Galeries $galerie = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
-    }   
+    }
 
     public function getId(): ?int
     {
@@ -73,6 +77,18 @@ class SectionsPages
     public function setPage(?Pages $page): static
     {
         $this->page = $page;
+
+        return $this;
+    }
+
+    public function getGalerie(): ?Galeries
+    {
+        return $this->galerie;
+    }
+
+    public function setGalerie(?Galeries $galerie): static
+    {
+        $this->galerie = $galerie;
 
         return $this;
     }

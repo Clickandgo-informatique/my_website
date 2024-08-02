@@ -22,7 +22,6 @@ body {
   height: 100%;
   flex-direction: column;
   transition: margin-left 0.5s;
- background-color: #f6f6f6;
 }
 a {
   text-decoration: none;
@@ -42,6 +41,7 @@ ul {
   display: inline-block;
   text-align: center;
   width: fit-content;
+  font-size: 0.8rem;
 }
 .btn a {
   text-decoration: none;
