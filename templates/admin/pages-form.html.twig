@@ -11,11 +11,15 @@
 			{{form_row(form.galerie)}}
 			<a href="{{path('galeries_creer_galerie')}}" class="btn">
 				<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
-			<a href="#" class="btn">
+			<a href="" class="btn btn-ouvrir-galerie">
 				<i class="fa-regular fa-folder-open"></i>Voir galerie</a>
 		</div>
-		<button type="submit" class="btn btn-enregistrer">
-			<i class="fa-solid fa-download"></i>Enregistrer la section</button>
+		<div class="pied-section">
+			<button type="submit" class="btn btn-enregistrer">
+				<i class="fa-solid fa-download"></i>Enregistrer la section</button>
+			<button type="button" class="btn btnRemoveItem">
+				<i class="fa-solid fa-trash-can"></i>Supprimer la section</button>
+		</div>
 	</div>
 {% endmacro niceForm %}
 {% import _self as formMacros %}

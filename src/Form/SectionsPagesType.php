@@ -19,7 +19,7 @@ class SectionsPagesType extends AbstractType
         $builder
             ->add('titre', TextType::class, ['attr' => ['id' => 'inputTitre']])
             ->add('contenu', TextareaType::class, ['attr' => ['id' => 'inputContenu']])
-            ->add('galerie', EntityType::class, ['class' => Galeries::class,'required' => false, 'empty_data' => null, 'placeholder' => '-- Choisissez une galerie --', 'choice_label' => 'getDetailsGalerie', 'label' => 'Galerie', 'attr' => ['class' => 'select-galerie']]);
+            ->add('galerie', EntityType::class, ['class' => Galeries::class,'required' => false,'empty_data' => null, 'placeholder' => '-- Choisissez une galerie --', 'choice_label' => 'getDetailsGalerie', 'label' => 'Galerie', 'attr' => ['class' => 'select-galeries']]);
         // ->add('created_at', DateTimeType::class, [
         //     'widget' => 'single_text',
         //     'label' => 'Créée le',

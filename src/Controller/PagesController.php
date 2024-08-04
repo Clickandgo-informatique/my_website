@@ -30,16 +30,16 @@ class PagesController extends AbstractController
         $sections = new ArrayCollection();
         foreach ($pages->getSectionsPages() as $section) {
             $sections->add($section);
-        }
-        //    dd($sections);
+        }       
         $currentpage = $pagesRepo->find($id);
         $pageId = $id;
 
         $titre = "Modifier une page";
         $form = $this->createForm(PagesType::class, $currentpage, ['method' => 'POST']);
-        $form->handleRequest($request);
+        $form->handleRequest($request);        
 
         if ($form->isSubmitted() && $form->isValid()) {
+          
             //traitement des sections de pages en cours de suppression
             foreach ($sections as $section) {
                 if (false === $pages->getSectionsPages()->contains($section)) {

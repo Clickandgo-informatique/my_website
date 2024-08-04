@@ -63,7 +63,7 @@ class GaleriesController extends AbstractController
         return $this->render('admin/galeries-form.html.twig', ['form' => $form, 'titre' => $titre, 'galerie' => $galerie]);
     }
 
-    #[Route('modifier/{id}', 'modifier_galerie', methods: ['GET', 'POST'])]
+    #[Route('modifier-galerie/{id}', 'modifier_galerie', methods: ['GET', 'POST'])]
     public function modifier(PictureService $pictureService, EntityManagerInterface $em, GaleriesRepository $galeriesRepo, Request $request, $id, SessionInterface $session): Response
     {
         $galerie = $galeriesRepo->find($id);
@@ -143,7 +143,7 @@ class GaleriesController extends AbstractController
         return new JsonResponse(['content' => $this->renderView('_partials/_galerie.html.twig', ['images' => $images])]);
         // }
     }
-    //Affichage ajax des images dans la galerie en création
+    //Affichage ajax des images dans la galerie en création (carousel)
     #[Route('afficher-carousel-images', 'afficher_carousel_images')]
     public function afficherCarousel(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session): Response
     {

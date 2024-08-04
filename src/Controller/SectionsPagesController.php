@@ -25,46 +25,45 @@ class SectionsPagesController extends AbstractController
         return $this->render('admin/liste-sections-pages.html.twig', ['listeSections' => $listeSections]);
     }
 
-    #[Route('modifier-section/{id}', 'modifier_section')]
-    public function modifier(SectionsPagesRepository $sectionsPagesRepo, $id, Request $request, EntityManagerInterface $em): Response
-    {
-        $section = $sectionsPagesRepo->find($id);
-        $titre = "Modifier une section de page";
-        $form = $this->createForm(SectionsPagesType::class, $section, ['method' => 'POST']);
-        $form->handleRequest($request);
+    // #[Route('modifier-section/{id}', 'modifier_section')]
+    // public function modifier(SectionsPagesRepository $sectionsPagesRepo, $id, Request $request, EntityManagerInterface $em): Response
+    // {
+    //     $section = $sectionsPagesRepo->find($id);
+    //     $titre = "Modifier une section de page";
+    //     $form = $this->createForm(SectionsPagesType::class, $section, ['method' => 'POST']);
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $em->persist($section);
+    //         $em->flush();            
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($section);
-            $em->flush();
+    //         $this->addFlash('success', 'La section de page a été modifiée avec succès dans la base.');
+    //         return $this->redirectToRoute('pages_liste_sections');
+    //     }
 
-            $this->addFlash('success', 'La section de page a été modifiée avec succès dans la base.');
-            return $this->redirectToRoute('pages_liste_sections');
-        }
+    //     return $this->render('admin/sections-pages-form.html.twig', ['form' => $form, 'titre' => $titre]);
+    // }
+    // #[Route('creer-section/{pageId}', 'creer_section', defaults: ['pageId' => null])]
+    // public function creer(Request $request, EntityManagerInterface $em, $pageId, PagesRepository $pagesRepo): Response
+    // {
 
-        return $this->render('admin/sections-pages-form.html.twig', ['form' => $form, 'titre' => $titre]);
-    }
-    #[Route('creer-section/{pageId}', 'creer_section',defaults:['pageId'=>null])]
-    public function creer(Request $request, EntityManagerInterface $em, $pageId, PagesRepository $pagesRepo): Response
-    {
+    //     $section = new SectionsPages();
+    //     $page = $pagesRepo->find($pageId);
 
-        $section = new SectionsPages();
-        $page = $pagesRepo->find($pageId);
+    //     $titre = "Créer une section de page";
+    //     $form = $this->createForm(SectionsPagesType::class, $section, ['method' => 'POST']);
+    //     $form->handleRequest($request);
 
-        $titre = "Créer une section de page";
-        $form = $this->createForm(SectionsPagesType::class, $section, ['method' => 'POST']);
-        $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    //         $section->setPage($page);
 
-            $section->setPage($page);
+    //         $em->persist($section);
+    //         $em->flush();
 
-            $em->persist($section);
-            $em->flush();
+    //         $this->addFlash('message', "La nouvelle section de page a été créée avec succès.");
+    //         return $this->redirectToRoute('pages_liste_sections', ['pageId' => $pageId]);
+    //     }
 
-            $this->addFlash('message', "La nouvelle section de page a été créée avec succès.");
-            return $this->redirectToRoute('pages_liste_sections', ['pageId' => $pageId]);
-        }
-
-        return $this->render('admin/sections-pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId]);
-    }
+    //     return $this->render('admin/sections-pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId]);
+    // }
 }

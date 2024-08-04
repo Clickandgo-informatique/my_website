@@ -1,8 +1,12 @@
 const btnAddItem = document.querySelector(".btnAddItem");
+const btnRemoveItem = document.querySelectorAll(".btnRemoveItem");
 const listeSections = document.querySelectorAll(".sectionPage");
 const enteteSection = document.querySelector(".entete-section");
 const sectionNum = document.querySelectorAll(".sectionNum");
-
+const piedSection = document.querySelectorAll(".pied-section");
+const btnOuvrirGalerie = document.querySelectorAll(".btn-ouvrir-galerie");
+const selectGaleries = document.querySelectorAll(".select-galeries");
+console.log(selectGaleries);
 let compteur = 1;
 
 const compterSections = () => {
@@ -17,6 +21,7 @@ const addFormToCollection = (e) => {
   const collectionHolder = document.querySelector(
     "." + e.currentTarget.dataset.collectionHolderClass
   );
+  //Création de la section de page
   const item = document.createElement("div");
   item.className = "sectionPage";
   item.innerHTML = collectionHolder.dataset.prototype.replace(
@@ -25,34 +30,49 @@ const addFormToCollection = (e) => {
   );
   collectionHolder.appendChild(item);
 
-  //Ajout bouton de suppression sur chaque section
-  addRemoveItemBtn(item);
   //Incrémentation
   collectionHolder.dataset.index++;
-  compterSections();
+  // compterSections();
+  console.log(item);
 };
-
 btnAddItem.addEventListener("click", addFormToCollection);
 
-//Fonction ajout d'un bouton de suppression
-const addRemoveItemBtn = (item) => {
-  const btnRemoveItem = document.createElement("button");
-  // btnRemoveItem.textContent = "x";
-  btnRemoveItem.type = "button";
-  btnRemoveItem.className = "btn btnRemoveItem";
-  btnRemoveItem.innerHTML = `<i class="fa-regular fa-trash-can"></i>Supprimer section`;
-  item.appendChild(btnRemoveItem);
-
-  btnRemoveItem.addEventListener("click", (e) => {
+//Bouton suppression d'une section de page (item)
+btnRemoveItem.forEach((el) => {
+  el.addEventListener("click", (e) => {
     e.preventDefault();
-    item.remove();
-    // compterSections();
+    const sectionPage = document.querySelector(".sectionPage");
+    sectionPage.remove();
+    compterSections();
   });
-};
+});
+let galerieId = "";
+//Bouton pour ouvrir la galerie selectionnée
+btnOuvrirGalerie.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    //Selection du champ select des galeries actif
+    const selectGalerie = document.querySelector(".select-galeries");
+    console.log(selectGalerie.value);
+    if (selectGalerie.value !== "") {
+      //Création du href du bouton pour ouvrir la page de galerie
+      btn.setAttribute(
+        "href",
+        "/admin/galeries/modifier-galerie/" + selectGalerie.value
+      );
+    } else {
+      e.preventDefault();
+      alert("Veuillez sélectionner une galerie dans la liste.");
+    }
+  });
+});
+
+//Valeur du select de galeries
+selectGaleries.forEach((el) => {
+  el.addEventListener("change", (e) => {
+    galerieId = e.target.value;
+    return galerieId;
+  });
+});
 
 //Ouverture de la page
-//Ajout d'un bouton de suppression sur chaque item créé préalablement
-listeSections.forEach((el) => {
-  addRemoveItemBtn(el);
-});
 compterSections();

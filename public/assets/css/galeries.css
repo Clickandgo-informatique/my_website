@@ -19,6 +19,7 @@
   grid-auto-rows: 1fr;
   justify-items: center;
   justify-content: center;
+  place-items: center;
   overflow: scroll;
   padding: 25px;
   border: 1px solid lightgray;
@@ -60,7 +61,6 @@
   font-size: 2.5rem;
   font-weight: bold;
   text-decoration: none;
-  top: 10px;
   right: 15px;
   z-index: 3;
 }
@@ -85,14 +85,16 @@
 .parametres-galerie div {
   padding: 5px;
 }
-.input-galerie,.input-carousel {
+.input-galerie,
+.input-carousel {
   font-size: 0.7rem;
   /* width: 50px; */
-margin: 2px;
+  margin: 2px;
   border: 1px solid lightgray;
   text-align: center;
 }
-.input-carousel div label,.input-galerie div label{
+.input-carousel div label,
+.input-galerie div label {
   margin-right: 15px;
 }
 

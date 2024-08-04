@@ -56,7 +56,7 @@ class Galeries
     }
     public function getDetailsGalerie(): string
     {
-        return $this->getTitre() . ' - type : [' . $this->getType() . '] - images : ' . count($this->images);
+        return $this->getTitre() . ' [ type : '. $this->getType() . '] - images : ' . count($this->images);
     }
     public function getId(): ?int
     {
