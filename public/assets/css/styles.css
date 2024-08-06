@@ -58,8 +58,8 @@ ul {
   margin: 10px auto;
   text-align: center;
 }
-.right{
-  display:block;
+.right {
+  display: block;
   margin-left: auto;
 }
 .muted {
@@ -80,10 +80,16 @@ ul {
   color: darkgreen;
   font-size: 0.7rem;
 }
-.text-align-right{
+.text-align-right {
   text-align: right;
 }
-
+.boutons-horizontale {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;

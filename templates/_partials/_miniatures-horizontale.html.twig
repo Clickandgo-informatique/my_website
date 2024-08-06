@@ -1,0 +1,5 @@
+{% block body %}
+	{% for image in images %}
+       <img src="{{asset('uploads/images/mini/300x300-'~image.name)}}" alt="image"> 
+    {% endfor %}
+{% endblock %}

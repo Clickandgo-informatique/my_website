@@ -2,7 +2,7 @@
 	<div class="elements">
 		{% for image in images %}
 			<div class="element">
-				<img src="{{asset('uploads/images/'~image.name)}}" alt="image">
+				<img src="{{asset('uploads/images/'~image.name)}}" alt="image" class="image-link">
 				<div class="caption">
 					<h2>Image</h2>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, aut?</p>
@@ -13,4 +13,6 @@
 	{# Flèches #}
 	<i id="nav-gauche" class="fa-solid fa-angle-left"></i>
 	<i id="nav-droite" class="fa-solid fa-angle-right"></i>
+	{# Lightbox images #}
+	{{ include('_partials/_lightbox.html.twig') }}
 </div>

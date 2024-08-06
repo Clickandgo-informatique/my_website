@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
-
 {% macro niceForm(form) %}
+
 	<div class="section-page">
 		<div class="entete-section">
 			<p class="sectionNum"></p>
@@ -13,6 +13,11 @@
 				<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
 			<a href="" class="btn btn-ouvrir-galerie">
 				<i class="fa-regular fa-folder-open"></i>Voir galerie</a>
+		</div>
+		<div class="container-miniatures">
+			{# {% for image in form.galerie.images %}
+				<img src="{{asset('uploads/images/mini/300x300-'~image.name)}}" alt="image">
+			{% endfor %} #}
 		</div>
 		<div class="pied-section">
 			<button type="submit" class="btn btn-enregistrer">
@@ -29,7 +34,7 @@
 {% endblock %}
 
 {% block body %}
-
+{{dump(form)}}
 	<button type="button" class="btn centered">
 		<i class="fa-solid fa-arrow-left"></i>
 		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
@@ -55,7 +60,6 @@
 			{% set counter = ( counter | default(0) ) + 1 %}
 			<div class="sectionPage">
 				{{formMacros.niceForm(section)}}
-				<div class="container-galerie"></div>
 			</div>
 		{% endfor %}
 	</div>

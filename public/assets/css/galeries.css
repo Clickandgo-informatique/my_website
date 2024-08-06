@@ -132,3 +132,21 @@
 .imageLink {
   cursor: zoom-in;
 }
+.section-page div.container-miniatures {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 98%;
+  overflow-y: auto;
+  justify-content: start;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+.container-miniatures img {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px darkgray;
+}

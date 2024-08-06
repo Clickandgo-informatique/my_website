@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Visionneuse galeries
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Visionneuse galeries</h1>
+	<div class="boutons-horizontale centered">
+		<select name="selectGaleries" id="selectGaleries" style="width:fit-content;margin:auto;">
+			<option value="">-- Choisissez une galerie --</option>
+			{% for galerie in listeGaleries %}
+				<option value={{galerie.id}}>{{galerie.titre}}
+					|&nbsp;{{galerie.images|length}}
+					images
+																						| type :
+					{{galerie.type}}
+					|
+					{{galerie.createdat|date('d-m-Y à H:i')}}</option>
+			{% endfor %}
+		</select>
+		<a href="" class="btn btn-ouvrir-galerie">
+			<i class="fa-regular fa-pen-to-square"></i>Editer</a>
+	</div>
+	<div class="container-galerie"></div>
+	{% block javascripts %}
+		<script type="module" src="{{asset('assets/js/visionneuse-galeries.js')}}" defer></script>
+	{% endblock %}
+	{# Lightbox images #}
+	{{ include('_partials/_lightbox.html.twig') }}
+{% endblock %}

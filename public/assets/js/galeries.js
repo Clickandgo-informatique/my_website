@@ -7,19 +7,21 @@ const selectTypeGalerie = document.querySelector("#galeries_type");
 const inputsGalerie = document.querySelector(".inputs-galerie");
 const inputsCarousel = document.querySelector(".inputs-carousel");
 
+//Mode d'affichage de la galerie (carousel ou simple)
 const afficherGalerie = () => {
   let url = "";
-  if(selectTypeGalerie){
-  switch (selectTypeGalerie.value) {
-    case "galerie":
-      url = "/admin/galeries/afficher-galerie-images";   
-      break;
-    case "carousel":
-      url = "/admin/galeries/afficher-carousel-images";    
-      break;
-    default:
-      return false;
-  }
+  if (selectTypeGalerie !==null) {
+    
+    switch (selectTypeGalerie.value) {
+      case "galerie":
+        url = "/admin/galeries/afficher-galerie-images";
+        break;
+      case "carousel":
+        url = "/admin/galeries/afficher-carousel-images";
+        break;
+      default:
+        return false;
+    }
   }
   async function afficherImages() {
     const response = await fetch(url, {
@@ -36,7 +38,6 @@ const afficherGalerie = () => {
 
       //création du link js carousel
       if (selectTypeGalerie.value == "carousel") {
-    
         const linkjs = document.createElement("script");
         linkjs.src = "/assets/js/carousel.js";
         linkjs.type = "module";
@@ -44,7 +45,7 @@ const afficherGalerie = () => {
         document.body.appendChild(linkjs);
         inputsCarousel.style.display = "block";
         inputsGalerie.style.display = "none";
-      }else{
+      } else {
         inputsCarousel.style.display = "none";
         inputsGalerie.style.display = "block";
       }
@@ -57,4 +58,5 @@ const afficherGalerie = () => {
   afficherImages();
 };
 afficherGalerie();
-selectTypeGalerie.addEventListener("change", afficherGalerie);
+
+

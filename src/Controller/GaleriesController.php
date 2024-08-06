@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Galeries;
 use App\Entity\Images;
+use App\Entity\SectionsPages;
 use App\Form\GaleriesType;
+use App\Form\SectionsPagesType;
 use App\Repository\GaleriesRepository;
 use App\Repository\ImagesRepository;
 use App\Service\PictureService;
@@ -54,7 +56,6 @@ class GaleriesController extends AbstractController
 
             //Enregistrement de l'id de galerie pour requête Ajax
             $session->set('galerieId', $galerie->getId());
-
 
             $this->addFlash('success', 'La nouvelle galerie d\'images a été créée dans la base.');
             // return $this->redirectToRoute('galeries_liste_galeries');
@@ -113,10 +114,10 @@ class GaleriesController extends AbstractController
     #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
     public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em): Response
     {
-        dd($request);
+
         $request->enableHttpMethodParameterOverride();
         $data = json_decode($request->getContent(), true);
-      
+
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
             $nom = $image->getName();
             unlink($this->getParameter('images_directory') . '/' . $nom);
@@ -155,6 +156,48 @@ class GaleriesController extends AbstractController
         $images = $ImagesRepo->findBy(['galerie' => $galerie]);
 
         return new JsonResponse(['content' => $this->renderView('_partials/_carousel.html.twig', ['images' => $images])]);
+        // }
+    }
+    //Affichage ajax des miniatures d'images en horizontal)
+    #[Route('afficher-miniatures-horizontale/{galerieId}', 'afficher_miniatures_horizontale')]
+    public function afficherMiniatures(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, $galerieId): Response
+    {
+        //Récupération de l'Id de la galerie en cours       
+
+        $galerie = $galeriesRepo->find($galerieId);
+
+        // if ($request->isXmlHttpRequest()) {
+        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+
+        return new JsonResponse(['content' => $this->renderView('_partials/_miniatures-horizontale.html.twig', ['images' => $images])]);
+        // }
+    }
+    //Affichage des galeries par select
+    #[Route('visionneuse-galeries', 'visionneuse_galeries')]
+    public function visionneuseGaleries(GaleriesRepository $galeriesRepo): Response
+    {
+        $listeGaleries = $galeriesRepo->findBy([], ['titre' => 'ASC']);
+
+        return $this->render('admin/visionneuse-galeries.html.twig', ['listeGaleries' => $listeGaleries]);
+        // }
+    }
+    #[Route('afficher-galerie-visionneuse/{galerieId}', 'afficher_galerie_visionneuse')]
+    public function afficherGalerieVisionneuse(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, $galerieId): Response
+    {
+        //Récupération de l'Id de la galerie en cours       
+
+        $galerie = $galeriesRepo->find($galerieId);
+        $typeGalerie = $galerie->getType();
+
+        // if ($request->isXmlHttpRequest()) {
+        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+        if ($typeGalerie === "galerie") {
+            return new JsonResponse(['content' => $this->renderView('_partials/_galerie.html.twig', ['images' => $images])]);
+        }
+        if ($typeGalerie === "carousel") {
+            return new JsonResponse(['content' => $this->renderView('_partials/_carousel.html.twig', ['images' => $images])]);
+        }
+
         // }
     }
 }
