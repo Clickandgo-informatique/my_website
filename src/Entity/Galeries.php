@@ -7,6 +7,7 @@ use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\GaleriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Query\AST\Functions\LengthFunction;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -46,6 +47,9 @@ class Galeries
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $primary_title_color = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -161,6 +165,18 @@ class Galeries
     public function setPrimaryTitleColor(?string $primary_title_color): static
     {
         $this->primary_title_color = $primary_title_color;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

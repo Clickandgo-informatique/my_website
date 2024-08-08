@@ -160,10 +160,9 @@ class GaleriesController extends AbstractController
     }
     //Affichage ajax des miniatures d'images en horizontal)
     #[Route('afficher-miniatures-horizontale/{galerieId}', 'afficher_miniatures_horizontale')]
-    public function afficherMiniatures(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, $galerieId): Response
+    public function afficherMiniatures(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, int $galerieId): Response
     {
-        //Récupération de l'Id de la galerie en cours       
-
+        //Récupération de l'Id de la galerie en cours 
         $galerie = $galeriesRepo->find($galerieId);
 
         // if ($request->isXmlHttpRequest()) {

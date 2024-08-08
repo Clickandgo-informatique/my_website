@@ -1,46 +1,43 @@
 {% extends 'base.html.twig' %}
-{% macro niceForm(form) %}
-
-	<div class="section-page">
-		<div class="entete-section">
-			<p class="sectionNum"></p>
-		</div>
-		{{form_row(form.titre)}}
-		{{form_row(form.contenu)}}
-		<div id="boutons-galerie">
-			{{form_row(form.galerie)}}
-			<a href="{{path('galeries_creer_galerie')}}" class="btn">
-				<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
-			<a href="" class="btn btn-ouvrir-galerie">
-				<i class="fa-regular fa-folder-open"></i>Voir galerie</a>
-		</div>
-		<div class="container-miniatures">
-			{# {% for image in form.galerie.images %}
-				<img src="{{asset('uploads/images/mini/300x300-'~image.name)}}" alt="image">
-			{% endfor %} #}
-		</div>
-		<div class="pied-section">
-			<button type="submit" class="btn btn-enregistrer">
-				<i class="fa-solid fa-download"></i>Enregistrer la section</button>
-			<button type="button" class="btn btnRemoveItem">
-				<i class="fa-solid fa-trash-can"></i>Supprimer la section</button>
-		</div>
-	</div>
-{% endmacro niceForm %}
-{% import _self as formMacros %}
-
 {% block title %}
 	{{titre}}
 {% endblock %}
 
 {% block body %}
-{{dump(form)}}
+	{% block macros %}
+		{% macro niceForm(form) %}
+			<div class="section-page">
+				<div class="entete-section">
+					<p class="sectionNum"></p>
+				</div>
+				{{form_row(form.titre)}}
+				{{form_row(form.contenu)}}
+				<div class="boutons-galerie">
+					{{form_row(form.galerie)}}
+					<a href="{{path('galeries_creer_galerie')}}" class="btn">
+						<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
+					<a href="" class="btn btn-ouvrir-galerie">
+						<i class="fa-regular fa-folder-open"></i>Voir galerie</a>
+				</div>
+				<div class="container-miniatures"></div>
+				<div class="pied-section">
+					<button type="submit" class="btn btn-enregistrer">
+						<i class="fa-solid fa-download"></i>Enregistrer la section</button>
+					<button type="button" class="btn btnRemoveItem">
+						<i class="fa-solid fa-trash-can"></i>Supprimer la section</button>
+				</div>
+			</div>
+		{% endmacro niceForm %}
+	{% endblock %}
+	{% import _self as formMacros %}
+
+
 	<button type="button" class="btn centered">
 		<i class="fa-solid fa-arrow-left"></i>
 		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
 	</button>
 	<h1 class="titre">{{titre}}</h1>
-
+	<a href="{{path('pages_previsualiser_page')}}" class="btn btn-previsualiser-page">Prévisualiser la page</a>
 	{{ form_start(form) }}
 	{{form_row(form.titre)}}
 	{{form_row(form.sous_titre)}}
@@ -57,10 +54,7 @@
 	{% endif %}
 	<div class="sectionsPages" data-index="{{ form.sectionsPages|length > 0 ? form.sectionsPages|last.vars.name + 1 : 0 }}" data-prototype="{{formMacros.niceForm(form.sectionsPages.vars.prototype)|e('html_attr') }}">
 		{% for section in form.sectionsPages %}
-			{% set counter = ( counter | default(0) ) + 1 %}
-			<div class="sectionPage">
-				{{formMacros.niceForm(section)}}
-			</div>
+			{{formMacros.niceForm(section)}}
 		{% endfor %}
 	</div>
 	<button type="submit" class="btn btn-enregistrer">

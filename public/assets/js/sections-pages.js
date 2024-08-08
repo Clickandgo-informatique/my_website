@@ -47,7 +47,7 @@ btnRemoveItem.forEach((el) => {
   });
 });
 //Affichage horizontal des miniatures de la galerie au changement du select
-async function afficherMiniatures(galerieId) {
+async function afficherMiniatures(galerieId, containerMiniatures) {
   const response = await fetch(
     `/admin/galeries/afficher-miniatures-horizontale/${galerieId}`,
     {
@@ -59,39 +59,44 @@ async function afficherMiniatures(galerieId) {
     }
   );
   const data = await response.json();
-  const containerMiniatures = document.querySelector(".container-miniatures");
+  //Afficher les miniatures dans la section active :
   containerMiniatures.innerHTML = "";
   containerMiniatures.insertAdjacentHTML("afterbegin", data.content);
 }
 //Bouton pour ouvrir la galerie selectionnée
 btnOuvrirGalerie.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log(e.target.closest(".select-galeries"));
     // //Selection du champ select des galeries actif
-    // let selectGalerie = document.querySelector(".select-galeries");
-    // console.log(selectGalerie.value)
-    // if (selectGalerie.value !== "") {
-    //   //Création du href du bouton pour ouvrir la page de galerie
-    //   btn.setAttribute(
-    //     "href",
-    //     "/admin/galeries/modifier-galerie/" + selectGalerie.value
-    //   );
-    // } else {
-    //   e.preventDefault();
-    //   alert("Veuillez sélectionner une galerie dans la liste.");
-    // }
+    let selectGalerie = document.querySelector(".select-galeries");
+    console.log("valeur select galerie : ", selectGalerie.value);
+    if (selectGalerie.value !== "") {
+      //Création du href du bouton pour ouvrir la page de galerie
+      btn.setAttribute(
+        "href",
+        "/admin/galeries/modifier-galerie/" + selectGalerie.value
+      );
+    } else {
+      e.preventDefault();
+      alert("Veuillez sélectionner une galerie dans la liste.");
+    }
   });
 });
 
-//Afficher miniatures après choix du select de galeries
+//Afficher miniatures après choix du select de galeries dans la section active
 selectGaleries.forEach((el) => {
   el.addEventListener("change", (e) => {
-    galerieId = e.target.value;
-    afficherMiniatures(galerieId);
-    return galerieId;
+    if (e.currentTarget.value !== "") {
+      galerieId = e.currentTarget.value;
+      //Recherche de la div de galerie correspondant à la section active
+      const containerMiniatures = e.currentTarget
+        .closest(".section-page")
+        .querySelector(".container-miniatures");
+      afficherMiniatures(galerieId, containerMiniatures);
+      return { galerieId: galerieId, containerMiniatures: containerMiniatures };
+    }
   });
 });
 
 //Ouverture de la page
 compterSections();
+

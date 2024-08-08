@@ -63,8 +63,7 @@ class Pages
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
-        $this->updated_at = new \DateTimeImmutable();
-        $this->galeries = new ArrayCollection();
+        $this->updated_at = new \DateTimeImmutable();       
         $this->sectionsPages = new ArrayCollection();
     }
 
@@ -117,36 +116,6 @@ class Pages
     public function setEtat(string $etat): static
     {
         $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Galeries>
-     */
-    public function getGaleries(): Collection
-    {
-        return $this->galeries;
-    }
-
-    public function addGalerie(Galeries $galerie): static
-    {
-        if (!$this->galeries->contains($galerie)) {
-            $this->galeries->add($galerie);
-            $galerie->setPage($this);
-        }
-
-        return $this;
-    }
-
-    public function removegalerie(Galeries $galerie): static
-    {
-        if ($this->galeries->removeElement($galerie)) {
-            // set the owning side to null (unless already changed)
-            if ($galerie->getPage() === $this) {
-                $galerie->setPage(null);
-            }
-        }
 
         return $this;
     }
