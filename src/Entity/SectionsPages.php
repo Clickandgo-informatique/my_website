@@ -9,7 +9,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 #[ORM\Entity(repositoryClass: SectionsPagesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['titre', 'page'], message: 'Cette page dispose déjà d\'une section avec ce titre, veuillez choisir un autre titre.')]

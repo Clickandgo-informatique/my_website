@@ -9,12 +9,26 @@
 	<h1>{{ form_row(form.titre) }}</h1>
 	{{ form_errors(form.titre) }}
 	{{ form_row(form.type) }}
+	{{ form_row(form.description) }}
 	{{ form_row(form.is_active) }}
 	{{ form_row(form.images) }}
 	{# {{ form_row(form.created_at)}} #}
 
 	{# paramètres galerie d'images #}
-		<div class="parametres-galerie"> 
+		<button class="btn btn-enregistrer" type="submit"> Enregistrer</button>
+
+	<h2 class="titre centered">Galerie d'images</h2>
+	<span class="images-count">
+		{% if galerie.images|length ==0 %}
+			<span class="centered alert">Il n'existe encore aucune image dans cette galerie (pensez à sauvegarder pour rafraichir la galerie.)</span>
+		{% else %}
+			<span class="centered success">{{galerie.images|length}}
+				images enregistrées.</span>
+		{% endif %}
+	</span>
+	<div class="toggler-slide-up-down centered">
+		<i class="fa-solid fa-sliders"></i>Options galerie</div>
+	<div class="parametres-galerie">
 		<div class="inputs-galerie">
 			{{ form_row(form.primary_background_color) }}
 			{{form_row(form.gallery_width)}}
@@ -30,16 +44,6 @@
 			{{ form_row(form.carousel_transition) }}
 		</div>
 	</div>
-	<button class="btn btn-enregistrer" type="submit">Enregistrer</button>
-
-	<h2 class="titre centered">Galerie d'images</h2>
-
-	{% if galerie.images|length ==0 %}
-		<span class="centered alert">Il n'existe encore aucune image dans cette galerie (pensez à sauvegarder pour rafraichir la galerie.)</span>
-	{% else %}
-		<span class="centered success">{{galerie.images|length}}
-			images enregistrées.</span>
-	{% endif %}
 
 	{# {{ form_rest(form) }} #}
 	<div class="container-galerie"></div>

@@ -1,0 +1,35 @@
+.nav {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: beige;
+  padding: 0 15px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkgreen;
+}
+.links-pages,
+.links-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.links-pages a,
+.links-login a,
+.user-pages-links a {
+  text-decoration: none;
+  margin: 0 10px;
+  color: white;
+}
+.links-pages a:hover,
+.links-login a:hover {
+  text-decoration: underline;
+  transform: scale(105%);
+}
+.user-pages-links {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}

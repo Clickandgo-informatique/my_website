@@ -1,6 +1,7 @@
 const btnAddItem = document.querySelector(".btnAddItem");
 const btnRemoveItem = document.querySelectorAll(".btnRemoveItem");
-const listeSections = document.querySelectorAll(".sectionPage");
+const listeSections = document.querySelectorAll(".section-page");
+console.log(listeSections);
 const enteteSection = document.querySelector(".entete-section");
 const sectionNum = document.querySelectorAll(".sectionNum");
 const piedSection = document.querySelectorAll(".pied-section");
@@ -41,7 +42,7 @@ btnAddItem.addEventListener("click", addFormToCollection);
 btnRemoveItem.forEach((el) => {
   el.addEventListener("click", (e) => {
     e.preventDefault();
-    const sectionPage = document.querySelector(".sectionPage");
+    const sectionPage = document.querySelector(".section-page");
     sectionPage.remove();
     compterSections();
   });
@@ -99,4 +100,14 @@ selectGaleries.forEach((el) => {
 
 //Ouverture de la page
 compterSections();
-
+//Affichage de toutes les galeries appartenant aux sections de page
+const getMiniatures = () => {
+  listeSections.forEach((el) => {
+    let galerieId = el.querySelector(".select-galeries").value;
+    if (galerieId) {
+      let containerMiniatures = el.querySelector(".container-miniatures");
+      afficherMiniatures(galerieId, containerMiniatures);
+    }
+  });
+};
+getMiniatures();

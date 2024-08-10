@@ -15,6 +15,7 @@
 	<body>
 		{{ include('_partials/_sidebar.html.twig') }}
 		<main id="main">
+			{{include('_partials/_nav.html.twig')}}
 			{% for messages in app.flashes %}
 				{% for message in messages %}
 					<p>{{message|raw}}</p>

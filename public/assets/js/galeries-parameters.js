@@ -74,3 +74,10 @@ inputImageShadow.addEventListener("change", () => {
     `${imgShadow}px ${imgShadow}px ${imgShadow}px darkgray`
   );
 });
+
+//Slide-up paramètres galeries
+const toggler = document.querySelector(".toggler-slide-up-down");
+const containerParametres = document.querySelector(".parametres-galerie");
+toggler.addEventListener("click", () => {
+  containerParametres.classList.toggle("slide-up-down");
+});

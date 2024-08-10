@@ -5,6 +5,8 @@
 @import "sidebar.css";
 @import "lightbox.css";
 @import "pages.css";
+@import "nav.css";
+@import "sortable-list.css";
 
 body {
   background-color: #fff;
@@ -14,6 +16,7 @@ body {
   color: rgb(32, 32, 32);
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 #main {
   display: flex;

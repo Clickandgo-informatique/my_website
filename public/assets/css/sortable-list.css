@@ -1,0 +1,43 @@
+.sortable-list {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid lightgray; */
+  padding: 10px;
+  background-color: #fafafa;
+  width: 80%;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border: 1px solid rgb(251, 251, 251);
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: move;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px darkgray;
+  align-items: center;
+}
+.details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item.dragging {
+  opacity: 0.8;
+  background-color:lightgray;
+}
+.item.dragging :where(.details, i) {
+  opacity: 0;
+
+}
+.grabber {
+  color: darkgray;
+  font-size: 1.2rem;
+}
+.col {
+  margin-left: 10px;
+}
