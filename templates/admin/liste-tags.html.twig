@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Liste des tags (étiquettes)
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Liste des tags (étiquettes)</h1>
+	{% if listeTags|length>0 %}
+		<div class="container-tags">
+			{% for tag in listeTags %}
+				<div class="tag">
+                <a href="#" class="btn btn-ouvrir-tag"><i class="fa-regular fa-folder-open"></i></a>
+					<div class="miniature-tag" style="background-color:{{tag.couleur}}">
+						<i class="{{tag.icone}}"></i>
+						<span class="titre-tag">{{tag.titre}}</span>
+					</div>
+					<span class="parent-tag">{{tag.parent}}</span>
+					<a href="#" class="btn btn-supprimer-tag">&times;</a>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		Aucun tag (étiquette) n'a encore été enregistré dans la base
+	{% endif %}
+{% endblock %}

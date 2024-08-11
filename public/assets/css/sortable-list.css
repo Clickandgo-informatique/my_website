@@ -3,8 +3,7 @@
   flex-direction: column;
   /* border: 1px solid lightgray; */
   padding: 10px;
-  background-color: #fafafa;
-  width: 80%;
+  /* width: 80%; */
   justify-content: center;
   margin: 0 auto;
   border-radius: 5px;
@@ -14,12 +13,14 @@
   flex-direction: row;
   background-color: #fff;
   border: 1px solid rgb(251, 251, 251);
-  padding: 10px;
-  margin-bottom: 5px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
   cursor: move;
   border-radius: 5px;
-  box-shadow: 1px 1px 2px darkgray;
+  box-shadow: 3px 2px 4px darkgray;
   align-items: center;
+  font-size: 0.9rem;
+  max-width: 600px;
 }
 .details {
   display: flex;
@@ -28,11 +29,10 @@
 }
 .item.dragging {
   opacity: 0.8;
-  background-color:lightgray;
+  background-color: lightgray;
 }
 .item.dragging :where(.details, i) {
   opacity: 0;
-
 }
 .grabber {
   color: darkgray;

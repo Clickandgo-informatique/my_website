@@ -1,0 +1,39 @@
+.container-tags {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: fit-content;
+  margin:10px auto;
+}
+
+.tag {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+  background-color: white;
+  border-radius: 5px;
+  width: 350px;
+  border: 1px solid lightgray;  /* box-shadow: 1px 1px 1px darkgray; */
+  padding: 5px;
+}
+.miniature-tag {
+  display: flex;
+  padding: 6px; 
+  width: 150px;
+  margin-bottom: 3px;
+  font-size: 0.8rem;
+  justify-content: start;
+  align-items: center;
+  /* opacity:0.8; */
+  border-radius: 25px;  
+}
+.miniature-tag i {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+}
+.titre-tag {
+  color: white;
+}
