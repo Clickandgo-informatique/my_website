@@ -12,6 +12,7 @@
 	{{ form_row(form.description) }}
 	{{ form_row(form.is_active) }}
 	{{ form_row(form.images) }}
+	{{ form_row(form.tags) }}
 	{# {{ form_row(form.created_at)}} #}
 
 	{# paramètres galerie d'images #}
@@ -46,7 +47,10 @@
 	</div>
 
 	{# {{ form_rest(form) }} #}
-	<div class="container-galerie"></div>
+	{# {{include('_partials/_multi-select-tags.html.twig')}} #}
+	{{ include('admin/importer-images-form.html.twig') }}
+
+	<div class="container-galerie" data-id={{galerie.id}}></div>
 	{{ form_end(form) }}
 
 	{# Lightbox images #}

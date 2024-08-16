@@ -3,37 +3,28 @@
 	Liste des galeries d'images
 {% endblock %}
 {% block body %}
-
+<h1 class="titre">Liste des galeries</h1>
 	{% if (liste is defined) and (liste is not null)%}
-		<table>
-			<thead>
-				<tr>
-					<th>Actions</th>
-					<th>Images</th>
-					<th>Liste des galeries</th>
-					<th>Etat</th>
-					<th>Type</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for gal in liste %}
-					<tr>
-						<td class="td-btn-actions">
-							<a class="btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
+		<ul class="list liste-galeries">
+			{% for gal in liste %}
+				<li class="item">
+				
+						<div class="btn-actions-horizontale">
+							<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
 								<i class="fa-regular fa-pen-to-square"></i>
 							</a>
-							<a class="btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
+							<a class="btn btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
 								<i class="fa-regular fa-trash-can"></i>
 							</a>
-						</td>
-						<td>{{gal.images|length}}</td>
-						<td>{{gal.titre}}</td>
-						<td>{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</td>
-						<td>{{gal.type}}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+						</div>
+						<div class="col"><i class="fa-regular fa-images"></i>{{gal.images|length}}</div>
+						<div class="col">{{gal.titre}}</div>
+						<div class="col">{{gal.type}}</div>
+						<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div>
+					
+				</li>
+			{% endfor %}
+		</ul>
 	{% else %}
 		<p>Il n'existe encore aucune galerie dans la base.</p>
 	{% endif %}

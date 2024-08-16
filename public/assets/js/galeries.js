@@ -27,7 +27,7 @@ const afficherGalerie = () => {
     const response = await fetch(url, {
       methods: "GET",
       headers: {
-        // "X-Requested-With": "XMLHttpRequest",
+        "X-Requested-With": "XMLHttpRequest",
         "Content-Type": "application/json",
       },
     });
@@ -45,7 +45,9 @@ const afficherGalerie = () => {
         document.body.appendChild(linkjs);
         inputsCarousel.style.display = "block";
         inputsGalerie.style.display = "none";
+
       } else {
+        
         inputsCarousel.style.display = "none";
         inputsGalerie.style.display = "block";
       }

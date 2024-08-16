@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TagsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagsRepository::class)]
@@ -24,6 +26,17 @@ class Tags
 
     #[ORM\Column(length: 255)]
     private ?string $parent = null;
+
+    /**
+     * @var Collection<int, Galeries>
+     */
+    #[ORM\ManyToMany(targetEntity: Galeries::class, inversedBy: 'tags')]
+    private Collection $galerie;
+
+    public function __construct()
+    {
+        $this->galerie = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,30 @@ class Tags
     public function setParent(string $parent): static
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Galeries>
+     */
+    public function getGalerie(): Collection
+    {
+        return $this->galerie;
+    }
+
+    public function addGalerie(Galeries $galerie): static
+    {
+        if (!$this->galerie->contains($galerie)) {
+            $this->galerie->add($galerie);
+        }
+
+        return $this;
+    }
+
+    public function removeGalerie(Galeries $galerie): static
+    {
+        $this->galerie->removeElement($galerie);
 
         return $this;
     }

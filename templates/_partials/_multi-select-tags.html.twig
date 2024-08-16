@@ -1,0 +1,53 @@
+<div class="container-tags">
+
+	<div class="custom-select open">
+		<div class="select-box">
+			<input type="text" class="tags_input" name="tags" hidden/>
+			<div class="selected-options">
+				{# <span class="tag">Blanc
+					<span class="remove-tag">&times;</span>
+				</span>
+				<span class="tag">Bleu
+					<span class="remove-tag">&times;</span>
+				</span>
+				<span class="tag">Jaune
+					<span class="remove-tag">&times;</span>
+				</span>
+				<span class="tag">Violet
+					<span class="remove-tag">&times;</span>
+				</span>
+				<span class="tag">Noir
+					<span class="remove-tag">&times;</span>
+				</span>
+				<span class="tag">Marron
+					<span class="remove-tag">&times;</span>
+				</span> #}
+			</div>
+			<div class="arrow-down">
+				<i class="fa fa-angle-down"></i>
+			</div>
+		</div>
+		<div class="options">
+			<div class="option-search-tags">
+				<input type="text" class="search-tags" placeholder="Rechercher..."/>
+				<button type="button" class="clear">
+					<i class="fa fa-close"></i>
+				</button>
+			</div>
+			<div class="option all-tags" data-value="All">Tout sélectionner</div>
+
+			{% if tags|length>0 %}
+				{% for tag in tags %}
+					<div class="option active" data-value="{{tag.titre}}">{{tag.titre}}</div>
+				{% endfor %}
+			{% endif %}
+
+			<div class="no-result-message" style="display:none;">Aucun résultat</div>
+		</div>
+		<span class="tag_error_msg_error">Ce champ est obligatoire</span>
+	</div>
+	<input type="button" value="Submit" class="btn_submit"/>
+</div>
+{% block javascripts %}
+	<script type="module" src="{{asset('assets/js/multi-select-tags.js')}}" defer></script>
+{% endblock %}

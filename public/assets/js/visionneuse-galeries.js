@@ -20,7 +20,7 @@ async function afficherGalerie(galerieId) {
     {
       methods: "GET",
       headers: {
-        // "X-Requested-With": "XMLHttpRequest",
+        "X-Requested-With": "XMLHttpRequest",
         "Content-Type": "application/json",
       },
     }
@@ -32,7 +32,11 @@ async function afficherGalerie(galerieId) {
     const imagesLinks = document.querySelectorAll(".imageLink");
     lightbox(imagesLinks);
   } else {
-    error;
+    galerie.innerHTML = "";
+    galerie.insertAdjacentHTML(
+      "afterbegin",
+      "Il n'existe encore aucune image pour cette galerie."
+    );
   }
   //Bouton ouverture de galerie
   btnOuvrirGalerie.addEventListener("click", (e) => {

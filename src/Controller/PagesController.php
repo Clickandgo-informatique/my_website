@@ -8,6 +8,7 @@ use App\Repository\PagesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -54,7 +55,7 @@ class PagesController extends AbstractController
             $this->addFlash('success', 'La page a été sauvegardée avec succès dans la base.');
         }
 
-        return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId,'page'=>$currentpage]);
+        return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId, 'page' => $currentpage]);
     }
     #[Route('creer-page', 'creer_page')]
     public function creer(Request $request, EntityManagerInterface $em, SessionInterface $session): Response
@@ -83,7 +84,18 @@ class PagesController extends AbstractController
     {
         $pageId = $session->get('pageId');
         $page = $pagesRepo->find($pageId);
-        
+
         return $this->render('admin/previsualiser-page.html.twig', ['page' => $page]);
+    }
+
+    #[Route('afficher-links-pages-publiees', 'afficher_links_pages_publiees')]
+    public function afficherLinksPagesPubliees(PagesRepository $pagesRepo, Request $request): Response
+    {
+        $pages = $pagesRepo->findBy(['etat' => 'publiee'], ['ordre' => 'ASC']);
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(['pages' => $pages]);
+        }else{
+            return $this->render('_partials/_links-pages-publiees.html.twig', ['pages' => $pages]);
+        }
     }
 }

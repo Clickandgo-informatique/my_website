@@ -1,6 +1,6 @@
 const btnClose = document.querySelector(".btn-close");
 const btnOpen = document.querySelector(".btn-open");
-const main = document.querySelector("#main");
+const main = document.querySelector("main");
 const sidebar = document.querySelector(".sidebar");
 
 btnClose.addEventListener("click", closeNav);

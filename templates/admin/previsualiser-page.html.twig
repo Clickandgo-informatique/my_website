@@ -2,44 +2,46 @@
 {% block title %}
 	Prévisualiser la page active
 {% endblock %}
-{% block body %}
+{% block body %}	
+		{{ render(path('pages_afficher_links_pages_publiees')) }}
 
-	<a class="etat-page right">Etat actuel de la page :
-		{{page.etat}}</a>
-	<h1 class="titre">Prévisualisation de la page</h1>
-	<h1 class="titre">{{page.titre}}</h1>
-	<h2 class="sous-titre centered">{{page.soustitre}}</h2>
+		<a class="etat-page right">Etat actuel de la page :
+			{{page.etat}}</a>
+		<h1 class="titre">Prévisualisation de la page</h1>
+		<h1 class="titre">{{page.titre}}</h1>
+		<h2 class="sous-titre centered">{{page.soustitre}}</h2>
 
-	{# Affichage des sections de page #}
-	{% if page.sectionsPages|length >0 %}
-		{% for section in page.sectionsPages %}
-			<section>
-				<div class="section">
-					<div class="titre-section">{{section.titre}}</div>
-					<div class="contenu-section">{{section.contenu}}</div>
-				</div>
-				{% if section.galerie %}
-					<div class="titre-galerie">{{section.galerie.titre}}</div>
-					<div class="description-galerie">{{section.galerie.description}}</div>
-					<div class="container-galerie">
-						<div class="galerie">
-							{% if section.galerie.images|length>0 %}
-								{% for image in section.galerie.images %}
-									<div class="miniature">
-										<a class="imageLink" href="{{asset('uploads/images/'~image.name)}}" alt="{{image.name}}">
-											<img src="{{asset('uploads/images/mini/300x300-'~image.name)}}" alt="{{image.name}}">
-										</a>
-									</div>
-								{% endfor %}
-							{% else %}
-								<p class="text-centered">Cette galerie ne contient encore aucune image</p>
-							{% endif %}
-						</div>
+		{# Affichage des sections de page #}
+		{% if page.sectionsPages|length >0 %}
+			{% for section in page.sectionsPages %}
+				<section>
+					<div class="section">
+						<div class="titre-section">{{section.titre}}</div>
+						<div class="contenu-section">{{section.contenu}}</div>
 					</div>
-				{% endif %}
-			</section>
-		{% endfor %}
-	{% else %}
-		<p>Cette page ne contient encore aucune section.</p>
-	{% endif %}
+					{% if section.galerie %}
+						<div class="titre-galerie">{{section.galerie.titre}}</div>
+						<div class="description-galerie">{{section.galerie.description}}</div>
+						<div class="container-galerie">
+							<div class="galerie">
+								{% if section.galerie.images|length>0 %}
+									{% for image in section.galerie.images %}
+										<div class="miniature">
+											<a class="imageLink" href="{{asset('uploads/images/'~image.name)}}" alt="{{image.name}}">
+												<img src="{{asset('uploads/images/mini/300x300-'~image.name)}}" alt="{{image.name}}">
+											</a>
+										</div>
+									{% endfor %}
+								{% else %}
+									<p class="text-centered">Cette galerie ne contient encore aucune image</p>
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}
+				</section>
+			{% endfor %}
+		{% else %}
+			<p>Cette page ne contient encore aucune section.</p>
+		{% endif %}
+	
 {% endblock %}

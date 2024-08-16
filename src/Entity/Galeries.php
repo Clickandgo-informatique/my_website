@@ -51,12 +51,19 @@ class Galeries
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    /**
+     * @var Collection<int, Tags>
+     */
+    #[ORM\ManyToMany(targetEntity: Tags::class, mappedBy: 'galerie')]
+    private Collection $tags;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable;
         $this->updated_at = new \DateTimeImmutable;
         $this->images = new ArrayCollection();
         // $this->is_active = false;
+        $this->tags = new ArrayCollection();
     }
     public function getDetailsGalerie(): string
     {
@@ -177,6 +184,33 @@ class Galeries
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tags>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+            $tag->addGalerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): static
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removeGalerie($this);
+        }
 
         return $this;
     }

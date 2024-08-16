@@ -10,11 +10,12 @@ class PagesFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $tblEtats = ['publiee', 'privee'];
         for ($i = 0; $i < 10; $i++) {
             $page = new Pages();
             $page->setTitre("Titre de la page n° " . $i + 1)
                 ->setSousTitre("Sous-titre de la page n° " . $i + 1)
-                ->setEtat("publiee")
+                ->setEtat($tblEtats[array_rand($tblEtats)])
                 ->setOrdre($i + 1)
                 ->setSlug($page->getTitre());
             $this->setReference("Page numéro " . $i, $page);

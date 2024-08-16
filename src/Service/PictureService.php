@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureService
@@ -74,7 +75,7 @@ class PictureService
         imagecopyresampled($resized_picture, $picture_source, 0, 0, $src_x, $src_y, $width, $height, $squareSize, $squareSize);
 
         $path = $this->params->get('images_directory') . $folder;
-      
+
         //On crée le dossier de destination 
         if (!file_exists($path . '/mini/')) {
             mkdir($path . '/mini/', 0755, true);

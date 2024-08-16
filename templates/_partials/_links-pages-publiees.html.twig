@@ -1,0 +1,11 @@
+{% if pages|length>0 %}
+	<div class="liste-pages-publiees">
+		{% for page in pages %}
+			<ul class="links-pages-publiees">
+				<li class="link-page-publiee">
+					<a href="#">{{page.titre}}</a>
+				</li>
+			</ul>
+		{% endfor %}
+	</div>
+{% endif %}
