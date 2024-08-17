@@ -20,6 +20,15 @@ class Images
     #[ORM\JoinColumn(nullable: false)]
     private ?Galeries $galerie = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $width = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $height = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $size = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +54,42 @@ class Images
     public function setGalerie(?Galeries $galerie): static
     {
         $this->galerie = $galerie;
+
+        return $this;
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(?int $width): static
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(?int $height): static
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(?int $size): static
+    {
+        $this->size = $size;
 
         return $this;
     }

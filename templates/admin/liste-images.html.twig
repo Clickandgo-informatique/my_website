@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
-{% block TITLE %}
+{% block title %}
 	Liste des images
 {% endblock %}
 {% block body %}
 	{% if listeImages|length>0 %}
-	<ul class="list">
-		
-		{% for img in listeImages %}
-			<li class="item">
-				<div class="btn-actions-horizontale">
-					<a href="#" class="btn btn-action btn-modifier">
-						<i class="fa-regular fa-pen-to-square"></i>
-					</a>
-					<a href="#" class="btn btn-action btn-supprimer">
-						<i class="fa-regular fa-trash-can"></i>
-					</a>
-				</div>
-				<div class="col miniature-image"><img src="{{asset('/uploads/images/mini/300x300-' ~ img.name)}}" alt="{{img.name}}" width="100"></div>
-				<div class="col nom-image">{{img.name}}</div>
-				<div class="col">{{img.galerie.titre}}</div>
-			</li>
-		{% endfor %}
-	</ul>
+		<ul class="list">
+
+			{% for img in listeImages %}
+				<li class="item">
+					<div class="col miniature-image"><img src="{{asset('/uploads/images/mini/300x300-' ~ img.name)}}" alt="{{img.name}}" width="100"></div>
+					<div class="btn-actions-horizontale">
+						<a href="#" class="btn btn-action btn-modifier">
+							<i class="fa-regular fa-pen-to-square"></i>
+						</a>
+						<a href="#" class="btn btn-action btn-supprimer">
+							<i class="fa-regular fa-trash-can"></i>
+						</a>
+					</div>
+					<div class="col nom-image">{{img.name}}</div>
+					<div class="col">{{img.galerie.titre}}</div>
+				</li>
+			{% endfor %}
+		</ul>
 	{% else %}
-	<p>Il n'existe encore aucune image.</p>
+		<p>Il n'existe encore aucune image.</p>
 	{% endif %}
 {% endblock %}

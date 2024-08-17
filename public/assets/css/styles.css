@@ -9,9 +9,11 @@
 @import "lists.css";
 @import "tags.css";
 @import "multi-select-tags.css";
+@import "footer.css";
 
 :root {
   --primary-background-color: rgb(0, 138, 117);
+  --secondary-background-color: rgb(0, 165, 141);
 }
 
 * {

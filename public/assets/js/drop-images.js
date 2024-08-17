@@ -25,7 +25,7 @@ const handleDrop = (e) => {
   const dataTransfer = e.dataTransfer;
   const files = dataTransfer.files;
   const listeImages = [...files];
-  console.log(listeImages);
+  console.log("liste images :",listeImages);
 
   //Affichage des détails des images en tableau en cours d'importation
   const tableauDetails = document.querySelector(".tableau-details-images");
@@ -61,7 +61,7 @@ const handleDrop = (e) => {
         body: JSON.stringify({ listeImages, galerieId }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("postData : ",data);
     } catch (error) {
       console.error("Errors : ", error);
     }

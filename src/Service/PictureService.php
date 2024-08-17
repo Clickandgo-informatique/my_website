@@ -4,7 +4,6 @@ namespace App\Service;
 
 use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureService
@@ -16,14 +15,14 @@ class PictureService
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250)
-    {
+    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250) {
+        
         //On donne un nouveau nom à l'image
         $fichier = md5(uniqid(rand(), true)) . '.webp';
 
         //On récupère les infos de l'image
         $picture_infos = getimagesize($picture);
-
+     
         if ($picture_infos === false) {
             throw new Exception('Format d\'image incorrect.');
         }
@@ -85,7 +84,6 @@ class PictureService
         imagewebp($resized_picture, $path . '/mini/' . $width . 'x' . $height . '-' . $fichier);
 
         $picture->move($path . '/', $fichier);
-
         return $fichier;
     }
 
@@ -109,4 +107,23 @@ class PictureService
         }
         return false;
     }
+    // public function getImageWidth(UploadedFile $picture)
+    // {
+    //     //On récupère les infos de l'image
+    //     $picture_infos = getimagesize($picture);
+    //     dd($picture);
+    //     $image_width = $picture_infos[0];
+
+    //     return $image_width;
+    // }
+    // public function getImageHeight(UploadedFile $picture)
+    // {
+    //     dd($picture);
+    //     //On récupère les infos de l'image
+    //     $picture_infos = getimagesize($picture);    
+
+    //     $image_height = $picture_infos[1];
+
+    //     return $image_height;
+    // }
 }

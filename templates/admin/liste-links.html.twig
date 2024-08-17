@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Gestion des links
+{% endblock %}
+{% block body %}
+	<h1 class="titre"><i class="fa-solid fa-link"></i>Gestion des links</h1>
+	<a href="{{path('links_creer_link')}}" class="btn btn-creer-link centered"><i class="fa-solid fa-circle-plus"></i>Créer un link</a>
+	<div class="selectLinks">
+		<ul class="list">
+			{% for link in links %}
+				<li class="item">
+					<a class="btn btn-action btn-modifier" href="{{path('links_modifier_link',{id:link.id})}}">
+						<i class="fa-regular fa-pen-to-square"></i>
+					</a>
+					<a class="btn btn-action btn-supprimer" href="{{path('links_supprimer_link',{id:link.id})}}">
+						<i class="fa-regular fa-trash-can"></i>
+					</a>
+					<div class="col">{{link.parent}}</div>
+					<div class="col">
+						{{link.groupe.titre}}</div>
+					<div class="col"><i class={{link.icone}}></i>{{link.titre}}</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

@@ -89,14 +89,20 @@ class GaleriesController extends AbstractController
             //Traitement des images    
 
             $images = $form->get('images')->getData();
-            // dd($images);
 
             foreach ($images as $img) {
+
+                $picture_infos = getimagesize($img);
+               
                 $folder = 'images';
                 $fichier = $pictureService->add($img, $folder, 300, 300);
 
                 $img = new Images();
                 $img->setName($fichier);
+                $img->setWidth($picture_infos[0]);
+                $img->setHeight($picture_infos[1]);
+                // $img->setSize($img->getSize());
+
                 $galerie->addImage($img);
             }
             $em->persist($galerie);
@@ -209,17 +215,17 @@ class GaleriesController extends AbstractController
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
     }
-    
+
     #[Route('importer-images', 'importer_images', methods: ['POST'])]
     public function importerImages(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $postData = json_decode($request->getContent(), FALSE);
-            //dd($postData);
+            $postData = json_decode($request->getContent(),false);
+            dd($postData);
             $galerie = $postData->galerieId;
             // dd($galerie);
-            $listeImages = $postData->files;
-            //dd($listeImages);
+            $listeImages = $postData->listeImages;
+            dd($listeImages);
             foreach ($listeImages as $image) {
                 $image = new UploadedFile("", $image, $image->name, $image->type);
                 $folder = 'images';

@@ -3,12 +3,15 @@
 	Liste des galeries d'images
 {% endblock %}
 {% block body %}
-<h1 class="titre">Liste des galeries</h1>
+	<h1 class="titre">Liste des galeries</h1>
 	{% if (liste is defined) and (liste is not null)%}
 		<ul class="list liste-galeries">
 			{% for gal in liste %}
-				<li class="item">
-				
+				{% set counter = ( counter | default(0) ) + 1 %}
+				<div class="ordered-list-row">
+					<span class="ordre-liste">{{counter}}</span>
+					<li class="item">
+
 						<div class="btn-actions-horizontale">
 							<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
 								<i class="fa-regular fa-pen-to-square"></i>
@@ -17,12 +20,15 @@
 								<i class="fa-regular fa-trash-can"></i>
 							</a>
 						</div>
-						<div class="col"><i class="fa-regular fa-images"></i>{{gal.images|length}}</div>
+						<div class="col">
+							<i class="fa-regular fa-images"></i>
+							{{gal.images|length}}</div>
 						<div class="col">{{gal.titre}}</div>
 						<div class="col">{{gal.type}}</div>
 						<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div>
-					
-				</li>
+
+					</li>
+				</div>
 			{% endfor %}
 		</ul>
 	{% else %}

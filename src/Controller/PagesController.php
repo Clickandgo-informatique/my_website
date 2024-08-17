@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Pages;
 use App\Form\PagesType;
+use App\Repository\GroupesLinksRepository;
+use App\Repository\LinksRepository;
 use App\Repository\PagesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -94,8 +96,16 @@ class PagesController extends AbstractController
         $pages = $pagesRepo->findBy(['etat' => 'publiee'], ['ordre' => 'ASC']);
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['pages' => $pages]);
-        }else{
+        } else {
             return $this->render('_partials/_links-pages-publiees.html.twig', ['pages' => $pages]);
         }
+    }
+
+    #[Route('afficher-links-footer', 'afficher_links_footer')]
+    public function afficherLinksFooter(LinksRepository $linksRepo, GroupesLinksRepository $groupesLinksRepo): Response
+    {
+        $links = $linksRepo->findBy(['parent' => 'footer']);
+        $groupesLinks = $groupesLinksRepo->findBy([], ['titre' => 'ASC']);
+        return $this->render('_partials/_footer.html.twig', ['links' => $links,'groupesLinks'=>$groupesLinks]);
     }
 }

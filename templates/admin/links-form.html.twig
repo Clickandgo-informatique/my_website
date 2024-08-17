@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Gestion des links
+{% endblock %}
+{% block body %}
+	<a class="btn centered" href="{{path('links_liste_links')}}">
+		<i class="fa-solid fa-arrow-left"></i>Revenir à la liste de links</a>
+	<h1 class="titre">Gestion des links</h1>
+
+	{{ form_start(form) }}
+	<strong>{{ form_row(form.titre) }}</strong>
+	{{ form_row(form.icone) }}
+	{{ form_row(form.parent) }}
+	{{ form_row(form.path) }}
+	{{ form_row(form.groupe) }}
+	<button class="btn btn-enregistrer centered" type="submit">
+		<i class="fa-solid fa-download"></i>Enregistrer</button>
+	{{ form_end(form) }}
+{% endblock %}

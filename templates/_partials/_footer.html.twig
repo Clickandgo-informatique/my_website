@@ -1,0 +1,19 @@
+<footer>
+<div class="container-groupes-links">
+	{% if groupesLinks|length>0 %}
+		{% for groupe in groupesLinks %}
+			<div class="groupe-links">
+				<div class="titre-groupe">{{groupe.titre}}</div>
+				<ul class="links-footer">
+					{% for link in groupe.links %}
+						<li class="link">
+							<a href="{{link.path}}" class="link-footer">
+								<i class="icone-link-footer">{{link.icone}}</i>
+								{{link.titre}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endfor %}
+	{% endif %}</div>
+</footer>

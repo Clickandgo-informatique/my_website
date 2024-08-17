@@ -1,0 +1,28 @@
+footer {
+  min-height: 150px;
+  background-color: var(--primary-background-color);
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 20px 40px;
+}
+.titre-groupe {
+  padding: 5px;
+  margin: 5px;
+  color: white;
+}
+.groupe-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.link {
+  margin-left: 10px;
+}
+.container-groupes-links {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+}

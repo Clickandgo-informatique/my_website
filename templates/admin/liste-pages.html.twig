@@ -6,51 +6,53 @@
 
 	<h1 class="titre">Liste des pages</h1>
 	{# {% if listePages is defined and listePages is not null %}
-										{# {% set counter =1 %} #}
+																	{# {% set counter =1 %} #}
 	{#<table>
-											<thead>
-												<tr>
-													<th></th>
-													<th></th>
-													<th>Ordre</th>
-													<th>Titre</th>
-													<th>Sous titre</th>
-													<th>Etat</th>
-													<th>Créée le</th>
-													<th>Modifiée le</th>
-													<th>Id</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for page in listePages %}
-													<tr draggable="true">
-														<td>
-															<i class="fa-solid fa-grip-vertical grabber"></i>
-														</td>
-														<td>
-															<a class="btn btn-modifier" href="{{path('pages_modifier_page',{'id':page.id})}}">
-																<i class="fa-regular fa-pen-to-square"></i>Modifier</a>
-														</td>
-														<td></td>
-														<td data-cell="Titre : ">{{page.titre}}</td>
-														<td data-cell="Sous-titre : ">{{page.soustitre}}</td>
-														<td data-cell="Etat : ">{{page.etat}}</td>
-														<td class="text-align-right" data-cell="Créée le : ">{{page.createdat|date('d-m-Y à H:i')}}</td>
-														<td class="text-align-right" data-cell="Modifiée le : ">{{page.updatedat|date('d-m-Y à H:i')}}</td>
-														<td class="text-align-right" data-cell="Id page : ">{{page.id}}</td>
-													</tr>
-													{% set counter=counter +1 %}
-												{% endfor %}
-											{% else %}
-												<p>Aucune donnée à afficher.</p>
-											{% endif %}
-										</tbody>
-									</table> #}
+																		<thead>
+																			<tr>
+																				<th></th>
+																				<th></th>
+																				<th>Ordre</th>
+																				<th>Titre</th>
+																				<th>Sous titre</th>
+																				<th>Etat</th>
+																				<th>Créée le</th>
+																				<th>Modifiée le</th>
+																				<th>Id</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			{% for page in listePages %}
+																				<tr draggable="true">
+																					<td>
+																						<i class="fa-solid fa-grip-vertical grabber"></i>
+																					</td>
+																					<td>
+																						<a class="btn btn-modifier" href="{{path('pages_modifier_page',{'id':page.id})}}">
+																							<i class="fa-regular fa-pen-to-square"></i>Modifier</a>
+																					</td>
+																					<td></td>
+																					<td data-cell="Titre : ">{{page.titre}}</td>
+																					<td data-cell="Sous-titre : ">{{page.soustitre}}</td>
+																					<td data-cell="Etat : ">{{page.etat}}</td>
+																					<td class="text-align-right" data-cell="Créée le : ">{{page.createdat|date('d-m-Y à H:i')}}</td>
+																					<td class="text-align-right" data-cell="Modifiée le : ">{{page.updatedat|date('d-m-Y à H:i')}}</td>
+																					<td class="text-align-right" data-cell="Id page : ">{{page.id}}</td>
+																				</tr>
+																				{% set counter=counter +1 %}
+																			{% endfor %}
+																		{% else %}
+																			<p>Aucune donnée à afficher.</p>
+																		{% endif %}
+																	</tbody>
+																</table> #}
 	{% if listePages is defined and listePages is not null %}
+
 		<ul class="list sortable-list">
 			{% for page in listePages %}
+				{% set counter = ( counter | default(0) ) + 1 %}
 				<li class="item sortable-item" draggable="true" data-id="{{page.id}}" data-position={{page.ordre}}>
-
+					<span class="numerotation-item">{{counter}}</span>
 					<i class="fa-solid fa-grip-vertical grabber"></i>
 					<a class="btn btn-action btn-modifier" href="{{path('pages_modifier_page',{'id':page.id})}}">
 						<i class="fa-regular fa-pen-to-square"></i>
@@ -59,8 +61,11 @@
 					<div class="col sous-titre-page">{{page.soustitre}}</div>
 					<div class="col nombre-sections-page">Sections :
 						{{page.sectionsPages|length}}</div>
-					<div class="col etat-page">état : {{page.etat}}</div>
+					<div class="col etat-page">état :
+						{{page.etat}}</div>
 				</li>
+
+
 			{% endfor %}
 		</ul>
 	{% else %}
