@@ -1,19 +1,19 @@
 //Activer/desactiver une page en tant que page d'accueil
 
-const checkActivation = document.querySelector("#pages_is_homepage");
+const checkActivation = document.querySelector("#pages_isPageAccueil");
 let etatActivation;
 
+let is_homepage;
 checkActivation.addEventListener("change", (e) => {
   if (e.target.checked) {
-    etatActivation = true;
+    is_homepage = true;
   } else {
-    etatActivation = false;
+    is_homepage = false;
   }
   activerHomepage();
 });
 const activerHomepage = async () => {
-  const formData = new FormData();
-  formData.append("etatActivation", etatActivation);
+
   try {
     const response = await fetch("/admin/pages/choisir-page-d-accueil", {
       method: "POST",
@@ -21,7 +21,7 @@ const activerHomepage = async () => {
         "content-type": "application/json ;charset=UTF-8",
         "X-Requested-with": "XMLHttpRequest",
       },
-      body: formData,
+      body: is_homepage,
     });
     const data = await response.json();
     console.log(data);

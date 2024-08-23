@@ -51,7 +51,7 @@ items.forEach((item) => {
     //Actualiser la numérotation au bout d'un petit moment
     setTimeout(() => {
       actualiserNumerotation();
-    }, 1000);
+    }, 500);
   });
 });
 

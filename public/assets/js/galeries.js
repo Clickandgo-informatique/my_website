@@ -42,9 +42,11 @@ export const afficherGalerie = () => {
         linkjs.src = "/assets/js/carousel.js";
         linkjs.type = "module";
         linkjs.defer = true;
+
         document.body.appendChild(linkjs);
         inputsCarousel.style.display = "block";
         inputsGalerie.style.display = "none";
+        //
       } else {
         inputsCarousel.style.display = "none";
         inputsGalerie.style.display = "block";
@@ -52,7 +54,7 @@ export const afficherGalerie = () => {
       const imagesLinks = document.querySelectorAll(".imageLink");
       const btnSuppression = document.querySelectorAll(
         ".btn-suppression-image"
-      );   
+      );
 
       supprimerImage(btnSuppression);
       lightbox(imagesLinks);

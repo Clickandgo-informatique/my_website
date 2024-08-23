@@ -67,7 +67,7 @@ async function afficherMiniatures(galerieId, containerMiniatures) {
     {
       methods: "get",
       headers: {
-        // "X-Requested-With": "XMLHttpRequest",
+        "X-Requested-With": "XMLHttpRequest",
         "Content-type": "Application/Json",
       },
     }

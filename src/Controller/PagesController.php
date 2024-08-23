@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 #[Route('admin/pages/', 'pages_')]
 class PagesController extends AbstractController
@@ -89,25 +88,45 @@ class PagesController extends AbstractController
     #[Route('choisir-page-d-accueil', 'choisir_page_accueil')]
     public function choisirPageAccueil(PagesRepository $pagesRepo, SessionInterface $session, Request $request, EntityManagerInterface $em): Response
     {
-        if ($request->isXmlHttpRequest()) {
-            // dd($request->getContent());
-            //On efface la condition "page d'accueil" de toutes les pages
-            $pages = $pagesRepo->findAll();
-            foreach ($pages as $page) {
-                $page->setHomepage(false);
-            }
-            //On attribue la condition "page d'accueil" à la page en cours
-            $pageId = $session->get('pageId');
-            $page = $pagesRepo->find($pageId);
-            $page->setHomepage(true);
-            $em->persist($page);
-            $em->flush();
 
-            $this->addFlash('success', "La page active est devenue la page d'accueil");
+        if ($request->isXmlHttpRequest()) {
+
+            //On récupère l'état d'activation
+            $is_homepage = $request->getContent();
+            if ($is_homepage === "true") {
+                //On efface la condition "page d'accueil" de toutes les pages
+                $pages = $pagesRepo->findAll();
+
+                foreach ($pages as $page) {
+                    $page->setPageAccueil(false);
+                }
+                //On attribue la condition "page d'accueil" à la page en cours
+                //On récupère l'id de la page active de nouveau
+                $pageId = $session->get('pageId');
+                $page = $pagesRepo->find($pageId);
+                $page->setPageAccueil(true);
+                $em->persist($page);
+                $em->flush();
+
+                $this->addFlash('success', "La page active est devenue la page d'accueil");
+                return new JsonResponse("La page " . $page->getTitre() . " est devenue la page d'accueil");
+            } else {
+
+                //On retire la condition "page d'accueil" à la page en cours
+                //On récupère l'id de la page active de nouveau
+                $pageId = $session->get('pageId');
+                $page = $pagesRepo->find($pageId);
+                $page->setPageAccueil(false);
+                $em->persist($page);
+                $em->flush();
+
+                $this->addFlash('success', "La page active n'est plus la page d'accueil");
+                return new JsonResponse("La page " . $page->getTitre() . "  n'est plus la page d'accueil");
+            }
         } else {
             return new JsonResponse('Cette requête doit être effectuée en Ajax.', 404);
         }
-        return new JsonResponse("La page active est devenue la page d'accueil", 200);
+        return new JsonResponse("Update effectué", 200);
     }
 
     #[Route('previsualiser-page', 'previsualiser_page')]

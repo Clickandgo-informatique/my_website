@@ -17,11 +17,11 @@ class PagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
-            ->add('is_homepage', CheckboxType::class, ['label' => "Est la page d'accueil",'required'=>false])
+            // ->add('id', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
+            ->add('isPageAccueil', CheckboxType::class, ['required'=>false,'label' => "Est la page d'accueil", 'label_attr' => ['class' =>'switch']])
             ->add('titre', TextType::class)
             ->add('sous_titre', TextType::class)
-            ->add('ordre', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
+            ->add('ordre', IntegerType::class, ['required' => false])
             ->add('etat', ChoiceType::class, ['choices' => ['Publiée' => 'Publiée', 'Brouillon' => 'Brouillon', 'Archivée' => 'Archivée']])
             // ->add('created_at', DateTimeType::class, [
             //     'widget' => 'single_text', 'label' => 'Créée le','required'=>false,

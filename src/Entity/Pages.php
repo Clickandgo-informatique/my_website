@@ -61,7 +61,7 @@ class Pages
     private Collection $sectionsPages;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_homepage = null;
+    private ?bool $page_accueil = null;
 
     public function __construct()
     {
@@ -153,14 +153,14 @@ class Pages
         return $this;
     }
 
-    public function isHomepage(): ?bool
+    public function isPageAccueil(): ?bool
     {
-        return $this->is_homepage;
+        return $this->page_accueil;
     }
 
-    public function setHomepage(?bool $is_homepage): static
+    public function setPageAccueil(?bool $page_accueil): static
     {
-        $this->is_homepage = $is_homepage;
+        $this->page_accueil = $page_accueil;
 
         return $this;
     }

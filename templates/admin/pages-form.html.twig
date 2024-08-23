@@ -13,7 +13,7 @@
 
 				{# Ckeditor5 #}
 				{# <p>Contenu :</p>
-												<div id="editor[]"></div> #}
+																																				<div id="editor[]"></div> #}
 				{# Ckeditor5 #}
 				{{form_row(form.contenu)}}
 
@@ -43,8 +43,8 @@
 		<i class="fa-regular fa-file-lines"></i>Prévisualiser la page</a>
 	<h1 class="titre">{{titre}}</h1>
 	{{ form_start(form) }}
-	{{ form_row(form.id) }}
-	{{ form_row(form.is_homepage) }}
+	{# {{ form_row(form.id) }} #}
+	{{ form_row(form.isPageAccueil)}}
 	{{form_row(form.titre)}}
 	{{form_row(form.sous_titre)}}
 	{{form_row(form.etat)}}
@@ -78,6 +78,6 @@
 		<script type="module" src="{{asset('assets/js/sections-pages.js')}}" defer></script>
 		<script type="module" src="{{asset('assets/js/pages.js')}}" defer></script>
 		{# <script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}"></script>
-						<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}"></script> #}
+																		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}"></script> #}
 	{% endblock %}
 {% endblock %}
