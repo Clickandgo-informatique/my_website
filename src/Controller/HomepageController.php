@@ -8,11 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
-
-    #[Route('/admin', 'index')]
+    #[Route('/', name:'index')]
     public function homepage(): Response
     {
-        $message = "Bienvenue sur l'interface d'administration de My_Website";
-        return $this->render('/admin/homepage.html.twig', ['message' => $message]);
+        $message = "Bienvenue sur le site My_Website";
+        return $this->render('admin/homepage.html.twig', ['message' => $message]);
     }
 }

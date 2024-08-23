@@ -1,4 +1,3 @@
-  console.log("Mode carousel");
   let compteur = 0;
   let timer, elements, slides, slideWidth, speed, transition;
 

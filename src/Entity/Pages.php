@@ -60,6 +60,9 @@ class Pages
     #[ORM\OneToMany(targetEntity: SectionsPages::class, mappedBy: 'page',cascade:['persist'])]
     private Collection $sectionsPages;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $is_homepage = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -146,6 +149,18 @@ class Pages
                 $sectionsPage->setPage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isHomepage(): ?bool
+    {
+        return $this->is_homepage;
+    }
+
+    public function setHomepage(?bool $is_homepage): static
+    {
+        $this->is_homepage = $is_homepage;
 
         return $this;
     }

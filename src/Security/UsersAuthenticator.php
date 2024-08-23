@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator,private Security $security)
     {
     }
 
@@ -44,12 +45,18 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+ 
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_main'));
+        if($this->security->isGranted('ROLE_ADMIN')){
+            return new RedirectResponse($this->urlGenerator->generate('accueil_admin'));
+
+        }else{
+            return new RedirectResponse($this->urlGenerator->generate('accueil_index'));
+        }
+       
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

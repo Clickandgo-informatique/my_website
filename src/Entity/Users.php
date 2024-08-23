@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -15,6 +17,14 @@ use symfony\component\Validator\Constraints as Assert;
 
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use CreatedAtTrait, UpdatedAtTrait;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -22,7 +32,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Assert\Email(
-        message:'L\'adresse email {{value}} semble incorrecte'
+        message: 'L\'adresse email {{value}} semble incorrecte'
     )]
     private ?string $email = null;
 
@@ -43,10 +53,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(
-        min:3,
-        max:25,
-        minMessage:'Minimum {{limit}} caractères',
-        maxMessage:'Maximum {{limit}} caractères'
+        min: 3,
+        max: 25,
+        minMessage: 'Minimum {{limit}} caractères',
+        maxMessage: 'Maximum {{limit}} caractères'
     )]
     private ?string $nickname = null;
 

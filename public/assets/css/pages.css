@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 10px;
 }
 .sectionsPages div {
   display: flex;
@@ -19,11 +20,19 @@ section {
   text-align: left;
   padding: 5px;
 }
+.section-page {
+  /* border: 1px solid lightgray; */
+  margin-bottom: 15px;
+  width: 98%;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 10px 10px 14px lightgray;
+}
 .section-page:hover {
-  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.5);
-  transition: 0.3s;
+  transition: all 0.5s;
   transform: scale(105%);
-  border: 2px solid blue;
   z-index: 10;
 }
 .section-page label {
@@ -57,8 +66,18 @@ textarea {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 50px;
-  background-color: rgb(240, 240, 240);
+  padding: 5px;
+  background-color: rgb(202, 202, 202);
+  color: white;
+  font-weight: 500;
+}
+.section-page .entete-section {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.section-page .pied-section {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .sectionNum {
@@ -69,13 +88,15 @@ textarea {
   margin: 5px;
   font-size: 0.9rem;
   width: 100%;
+  font-weight: 600;
+  color:var(--primary-background-color)
 }
 .section-page .boutons-galerie {
   display: flex;
   flex-direction: row;
   width: 98%;
   justify-content: center;
-  align-items: start;
+  align-items: last baseline;
 }
 .etat-page {
   padding: 5px 12px;
@@ -85,15 +106,7 @@ textarea {
   margin: 5px;
   font-size: 0.6rem;
 }
-.section-page {
-  border: 1px solid lightgray;
-  margin-bottom: 15px;
-  width: 98%;
-  border-radius: 5px;
-  position: relative;
-  display: flex;
-  background-color: #fff;
-}
+
 .titre-section,
 .contenu-section {
   margin: 10px;
@@ -114,4 +127,14 @@ textarea {
 .titre-galerie,
 .description-galerie {
   margin-bottom: 5px;
+}
+@media screen and (max-width: 650px) {
+  .section-page .boutons-galerie {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-page .boutons-galerie .btn {
+    width: 95%;
+  }
 }

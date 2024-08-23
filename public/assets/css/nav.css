@@ -1,4 +1,4 @@
-.nav {
+nav {
   height: 40px;
   width: 100%;
   display: flex;
@@ -51,10 +51,15 @@
   margin-right: 1px;
   box-shadow: 1px 1px 3px darkgray;
 }
-.links-pages-publiees:hover{
+.links-pages-publiees:hover {
   transform: scale(103%);
   transition: all 0.3s;
-  background-color:var(--primary-background-color);
-  color:white;
+  background-color: var(--primary-background-color);
+  color: white;
   font-weight: 500;
+}
+@media screen and (max-width: 650px) {
+  nav {
+    display: none;
+  }
 }

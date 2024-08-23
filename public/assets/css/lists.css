@@ -4,12 +4,15 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  width: 1000px;
+  margin: 10px auto;
 }
+
 .item {
   display: flex;
   flex-direction: row;
   justify-content: start;
-  background-color: var(--primary-background-color);
+  background-color: white;
   border: 1px solid rgb(251, 251, 251);
   padding: 5px 10px;
   margin-bottom: 10px;
@@ -17,27 +20,29 @@
   box-shadow: 3px 2px 4px darkgray;
   align-items: center;
   font-size: 0.9rem;
-  /* flex-wrap: wrap; */
-  color: white;
-  min-width: 400px; 
-  width:700px;
+  width:95%;
+  flex-wrap: wrap;
 }
-.item:hover {
-  transform: scale(103%) translateY(5%);
-  z-index: 10;
-  transition: all 0.3s;
-  margin-bottom: 25px;
-  margin-top: 5px;
-  border: 1px solid blue;
-  background-color: var(--secondary-background-color);
+.item .btn {
+  background-color: transparent;
   color: blue;
 }
-.miniature-image img{
+.item:hover {
+  transform: scale(103%) translateY(2%);
+  z-index: 10;
+  transition: all 0.3s;
+  /* margin-bottom: 25px; */
+  margin-top: 5px;
+  border: 1px solid blue;
+  background-color: lightgray;
+  color: blue;
+}
+.miniature-image img {
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgb(37, 37, 37);
   border: 2px solid white;
 }
-.nom-image{
+.nom-image {
   font-size: 0.7rem;
 }
 .sortable-item {
@@ -71,13 +76,16 @@
   justify-content: center;
   align-items: center;
 }
-.numerotation-item{
+.numerotation-item {
   margin-right: 10px;
-  width:20px; 
+  width: 20px;
   text-align: Center;
 }
 @media screen and (max-width: 450px) {
-  .item {  
+  .list {
+    width: 95%;
+  }
+  .item {
     flex-direction: column;
     margin: 5px 7px;
   }

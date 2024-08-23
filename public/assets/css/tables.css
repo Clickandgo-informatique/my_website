@@ -52,7 +52,7 @@ th {
   display: flex;
   justify-content: center;
   align-content: center;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
 }
 
 .btn-supprimer {

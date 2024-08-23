@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 #[Route('admin/pages/', 'pages_')]
 class PagesController extends AbstractController
@@ -23,7 +24,7 @@ class PagesController extends AbstractController
     #[Route('liste-pages', 'liste_pages')]
     public function listePages(PagesRepository $pagesRepo): Response
     {
-        $listePages = $pagesRepo->findBy([], ['created_at' => 'desc']);
+        $listePages = $pagesRepo->findBy([], ['ordre' => 'ASC']);
 
         return $this->render('admin/liste-pages.html.twig', ['listePages' => $listePages]);
     }
@@ -35,6 +36,7 @@ class PagesController extends AbstractController
         foreach ($pages->getSectionsPages() as $section) {
             $sections->add($section);
         }
+
         $currentpage = $pagesRepo->find($id);
         $pageId = $id;
         $session->set('pageId', $pageId);
@@ -59,8 +61,9 @@ class PagesController extends AbstractController
 
         return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre, 'pageId' => $pageId, 'page' => $currentpage]);
     }
+
     #[Route('creer-page', 'creer_page')]
-    public function creer(Request $request, EntityManagerInterface $em, SessionInterface $session): Response
+    public function creer(Request $request, EntityManagerInterface $em, SessionInterface $session, PagesRepository $pagesRepo): Response
     {
         $page = new Pages();
         $titre = "Créer une page";
@@ -69,16 +72,42 @@ class PagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $position = $pagesRepo->getLastPagePosition();
+            $page->setOrdre($position + 1);
             $em->persist($page);
             $em->flush();
             $pageId = $page->getId();
             $session->set('pageId', $pageId);
 
             $this->addFlash('message', "La nouvelle page a été créée avec succès.");
-            return $this->redirectToRoute('pages_liste');
+            return $this->redirectToRoute('pages_modifier_page', ['id' => $pageId]);
         }
 
         return $this->render('admin/pages-form.html.twig', ['form' => $form, 'titre' => $titre]);
+    }
+
+    #[Route('choisir-page-d-accueil', 'choisir_page_accueil')]
+    public function choisirPageAccueil(PagesRepository $pagesRepo, SessionInterface $session, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            // dd($request->getContent());
+            //On efface la condition "page d'accueil" de toutes les pages
+            $pages = $pagesRepo->findAll();
+            foreach ($pages as $page) {
+                $page->setHomepage(false);
+            }
+            //On attribue la condition "page d'accueil" à la page en cours
+            $pageId = $session->get('pageId');
+            $page = $pagesRepo->find($pageId);
+            $page->setHomepage(true);
+            $em->persist($page);
+            $em->flush();
+
+            $this->addFlash('success', "La page active est devenue la page d'accueil");
+        } else {
+            return new JsonResponse('Cette requête doit être effectuée en Ajax.', 404);
+        }
+        return new JsonResponse("La page active est devenue la page d'accueil", 200);
     }
 
     #[Route('previsualiser-page', 'previsualiser_page')]
@@ -106,6 +135,29 @@ class PagesController extends AbstractController
     {
         $links = $linksRepo->findBy(['parent' => 'footer']);
         $groupesLinks = $groupesLinksRepo->findBy([], ['titre' => 'ASC']);
-        return $this->render('_partials/_footer.html.twig', ['links' => $links,'groupesLinks'=>$groupesLinks]);
+        return $this->render('_partials/_footer.html.twig', ['links' => $links, 'groupesLinks' => $groupesLinks]);
+    }
+
+    #[Route('repositionnement-pages', 'repositionnement_pages')]
+    public function repositionnerPages(Request $request, PagesRepository $pagesRepo, EntityManagerInterface $em): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+
+            $tblPositions = json_decode($request->getContent(), false);
+
+            foreach ($tblPositions as $page) {
+
+                $pageActive = $pagesRepo->findOneBy(['id' => $page->id]);
+                $pageActive->setOrdre($page->position);
+
+                $em->persist($pageActive);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Le repositionnement de pages a été enregistré avec succès dans la base.');
+        } else {
+            return new JsonResponse('Erreur : Cette page doit être accédée en Ajax');
+        }
+        return new JsonResponse('Le nouvel ordre des pages a été enregistré avec succès dans la base', 200);
     }
 }

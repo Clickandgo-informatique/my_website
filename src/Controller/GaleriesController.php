@@ -81,10 +81,6 @@ class GaleriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dump($request->getContent());
-            // dump($request->request->get('listeImages'));
-            // dump($request->query->get('listeImages'));
-            // die();
 
             //Traitement des images    
 
@@ -93,7 +89,7 @@ class GaleriesController extends AbstractController
             foreach ($images as $img) {
 
                 $picture_infos = getimagesize($img);
-               
+
                 $folder = 'images';
                 $fichier = $pictureService->add($img, $folder, 300, 300);
 
@@ -127,15 +123,19 @@ class GaleriesController extends AbstractController
     }
 
     #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
-    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em): Response
+    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em,PictureService $pictureService): Response
     {
 
         $request->enableHttpMethodParameterOverride();
         $data = json_decode($request->getContent(), true);
 
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
-            $nom = $image->getName();
-            unlink($this->getParameter('images_directory') . '/' . $nom);
+            $fichier = $image->getName();
+            $folder='images';
+
+            $pictureService->delete($fichier,$folder,300,300);
+
+            // unlink($this->getParameter('images_directory') . $nom);
             $em->remove($image);
             $em->flush();
 
@@ -217,29 +217,33 @@ class GaleriesController extends AbstractController
     }
 
     #[Route('importer-images', 'importer_images', methods: ['POST'])]
-    public function importerImages(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
+    public function importerImages(Request $request, EntityManagerInterface $em, PictureService $pictureService, GaleriesRepository $galeriesRepo): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $postData = json_decode($request->getContent(),false);
-            dd($postData);
-            $galerie = $postData->galerieId;
-            // dd($galerie);
-            $listeImages = $postData->listeImages;
-            dd($listeImages);
-            foreach ($listeImages as $image) {
-                $image = new UploadedFile("", $image, $image->name, $image->type);
+
+            $postData = $request->getContent();
+            //dd($postData);
+            $galerieId = $request->get('galerieId');
+            //dd($galerieId);
+            $galerie = $galeriesRepo->find($galerieId);
+            //dd($galerie);
+            $listeImages = $request->files->get('listeImages');
+
+            foreach ($listeImages as $uploadedImage) {
+
+                $image = $uploadedImage;
                 $folder = 'images';
                 $fichier = $pictureService->add($image, $folder, 300, 300);
 
                 $img = new Images();
                 $img->setName($fichier);
                 $galerie->addImage($img);
+                $em->persist($galerie);
             }
-            $em->persist($galerie);
             $em->flush();
 
             $this->addFlash('success', 'La nouvelle galerie d\'images a été actualisée dans la base.');
-            return new JsonResponse('Réponse en json');
+            return new JsonResponse(true);
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
     }

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Liste des utilisateurs
+{% endblock %}
+{% block body %}
+
+	{% if users|length>0 %}
+		<ul class="list liste-utilisateurs">
+			{% for user in users %}
+				<li class="item utilisateur">
+					<a href="#" class="btn bt-ouvrir-utilisateur">
+						<i class="fa-regular fa-pen-to-square"></i>
+					</a>
+					<a href="#" class="btn bt-supprimer-utilisateur">
+						<i class="fa-regular fa-trash-can"></i>
+					</a>
+					<div class="col pseudo-utilisateur">{{user.nickname}}
+					</div>
+					<div class="col email-utilisateur">{{user.email}}</div>
+					<div class="col isVerified-utilisateur">{{user.isverified}}</div>
+					<div class="col created-at right">{{user.createdat|date("d-m-Y H:i:s")}}</div>
+						
+				
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>Aucun utilisateur n'a encore été créé dans la base</p>
+	{% endif %}
+{% endblock %}

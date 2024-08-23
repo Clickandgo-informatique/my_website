@@ -15,14 +15,14 @@ class PictureService
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250) {
-        
+    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    {
         //On donne un nouveau nom à l'image
         $fichier = md5(uniqid(rand(), true)) . '.webp';
-
+        // dd($picture);
         //On récupère les infos de l'image
         $picture_infos = getimagesize($picture);
-     
+
         if ($picture_infos === false) {
             throw new Exception('Format d\'image incorrect.');
         }
@@ -100,7 +100,7 @@ class PictureService
             }
             $original = $path . '/' . $fichier;
             if (file_exists($original)) {
-                unlink($mini);
+                unlink($original);
                 $success = true;
             }
             return $success;

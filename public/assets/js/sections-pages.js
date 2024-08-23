@@ -1,23 +1,23 @@
 const btnAddItem = document.querySelector(".btnAddItem");
 const btnRemoveItem = document.querySelectorAll(".btnRemoveItem");
 const listeSections = document.querySelectorAll(".section-page");
-console.log(listeSections);
 const enteteSection = document.querySelector(".entete-section");
 const sectionNum = document.querySelectorAll(".sectionNum");
 const piedSection = document.querySelectorAll(".pied-section");
 const btnOuvrirGalerie = document.querySelectorAll(".btn-ouvrir-galerie");
 const selectGaleries = document.querySelectorAll(".select-galeries");
+const pageId = document.querySelector("#pages_id");
 
 let galerieId = "";
 
 let compteur = 1;
 
-const compterSections = () => {
-  sectionNum.forEach((el) => {
-    let index = Array.from(sectionNum).indexOf(el) + 1;
-    el.insertAdjacentHTML("afterbegin", `Section ${index}`);
-  });
-};
+// const compterSections = () => {
+//   sectionNum.forEach((el) => {
+//     let index = Array.from(sectionNum).indexOf(el) + 1;
+//     el.insertAdjacentHTML("afterbegin", `Section ${index}`);
+//   });
+// };
 
 const addFormToCollection = (e) => {
   const collectionHolder = document.querySelector(
@@ -36,15 +36,28 @@ const addFormToCollection = (e) => {
   collectionHolder.dataset.index++;
   // compterSections();
 };
-btnAddItem.addEventListener("click", addFormToCollection);
+btnAddItem.addEventListener("click", (e) => {
+  //On vérifie que la page a été enregistrée
+  console.log("pageId = ", pageId);
+  if (pageId.value === "") {
+    alert("Veuillez completer puis enregistrer la page avant de créer des sections.");
+  } else {
+    addFormToCollection(e);
+  }
+});
 
 //Bouton suppression d'une section de page (item)
-btnRemoveItem.forEach((el) => {
-  el.addEventListener("click", (e) => {
+btnRemoveItem.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
-    const sectionPage = document.querySelector(".section-page");
-    sectionPage.remove();
-    compterSections();
+
+    if (
+      confirm("Etes vous sûr.e de vouloir effacer cette section de page ?.")
+    ) {
+      // const sectionPage = document.querySelector(".section-page");
+      btn.closest(".section-page").remove();
+      // compterSections();
+    }
   });
 });
 //Affichage horizontal des miniatures de la galerie au changement du select
@@ -69,7 +82,7 @@ btnOuvrirGalerie.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     // //Selection du champ select des galeries actif
     let selectGalerie = document.querySelector(".select-galeries");
-    console.log("valeur select galerie : ", selectGalerie.value);
+
     if (selectGalerie.value !== "") {
       //Création du href du bouton pour ouvrir la page de galerie
       btn.setAttribute(
@@ -86,6 +99,8 @@ btnOuvrirGalerie.forEach((btn) => {
 //Afficher miniatures après choix du select de galeries dans la section active
 selectGaleries.forEach((el) => {
   el.addEventListener("change", (e) => {
+    console.log(e.currentTarget.value);
+
     if (e.currentTarget.value !== "") {
       galerieId = e.currentTarget.value;
       //Recherche de la div de galerie correspondant à la section active
@@ -94,12 +109,17 @@ selectGaleries.forEach((el) => {
         .querySelector(".container-miniatures");
       afficherMiniatures(galerieId, containerMiniatures);
       return { galerieId: galerieId, containerMiniatures: containerMiniatures };
+    } else {
+      const containerMiniatures = e.currentTarget
+        .closest(".section-page")
+        .querySelector(".container-miniatures");
+      containerMiniatures.innerHTML = "";
     }
   });
 });
 
 //Ouverture de la page
-compterSections();
+// compterSections();
 //Affichage de toutes les galeries appartenant aux sections de page
 const getMiniatures = () => {
   listeSections.forEach((el) => {

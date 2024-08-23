@@ -10,6 +10,7 @@
 @import "tags.css";
 @import "multi-select-tags.css";
 @import "footer.css";
+@import "ckeditor5.css";
 
 :root {
   --primary-background-color: rgb(0, 138, 117);
@@ -43,6 +44,7 @@ main {
   padding: 0;
   flex-direction: column;
   transition: margin-left 0.5s;
+  min-height: 50vh;
 }
 a,
 link {
@@ -52,26 +54,28 @@ link {
 ul {
   list-style: none;
 }
+button {
+  outline: none;
+  border: none;
+}
 .btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 8px;
+  padding: 8px 12px;
   border-radius: 10px;
   color: white;
-  border: 1px solid darkgray;
   background-color: var(--primary-background-color);
-  margin: 10px;
+  margin: 5px;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   width: fit-content;
   font-size: 0.8rem;
+  box-shadow: 1px 1px 4px darkgray;
 }
 .btn:hover {
   transform: scale(105%);
   box-shadow: 2px 2px 5px darkgray;
+  border: 1px solid darkgray;
   transition: all 0.3s;
 }
 .btn a {
@@ -113,12 +117,55 @@ ul {
 .text-align-right {
   text-align: right;
 }
+.text-green {
+  color: green;
+}
+.text-red {
+  color: red;
+}
 .boutons-horizontale {
   display: flex;
   flex-direction: row;
   width: fit-content;
   align-items: center;
   justify-content: center;
+}
+.flashbag {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: white;
+  background-color: green;
+  opacity: 0.5;
+  padding: 5px;
+}
+.btn-fermer-flashbag {
+  padding: 0;
+  box-shadow: unset;
+  border: unset;
+  font-size: 1rem;
+  background-color: transparent;
+  margin-right: 10px;
+}
+#editor {
+  min-height: 100px;
+  border: 1px solid lightgray;
+}
+.wrapper-ckeditor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.badge-success {
+  padding: 5px 12px;
+  border-radius: 10px;
+  background-color: green;
+  opacity: 0.6;
+  color: white;
+  border:1px solid darkgray;
+  font-size: 0.6rem;
 }
 @media screen and (max-height: 450px) {
   .sidebar {

@@ -10,9 +10,14 @@
 					<p class="sectionNum"></p>
 				</div>
 				{{form_row(form.titre)}}
-				<div id="editor">{{form_row(form.contenu)}}</div>
-				<div class="boutons-galerie">
-					{{form_row(form.galerie)}}
+
+				{# Ckeditor5 #}
+				{# <p>Contenu :</p>
+												<div id="editor[]"></div> #}
+				{# Ckeditor5 #}
+				{{form_row(form.contenu)}}
+
+					<div class="boutons-galerie"> {{form_row(form.galerie)}}
 					<a href="{{path('galeries_creer_galerie')}}" class="btn">
 						<i class="fa-solid fa-square-plus"></i>Créer galerie</a>
 					<a href="" class="btn btn-ouvrir-galerie">
@@ -31,19 +36,21 @@
 	{% import _self as formMacros %}
 
 
-	<button type="button" class="btn centered">
-		<i class="fa-solid fa-arrow-left"></i>
-		<a href="{{path('pages_liste_pages')}}">Revenir à la liste des pages</a>
-	</button>
-	<h1 class="titre">{{titre}}</h1>
+	<a class="btn centered" href="{{path('pages_liste_pages')}}">
+		<i class="fa-solid fa-arrow-left"></i>Revenir à la liste des pages</a>
+
 	<a href="{{path('pages_previsualiser_page')}}" class="btn btn-previsualiser-page centered">
 		<i class="fa-regular fa-file-lines"></i>Prévisualiser la page</a>
+	<h1 class="titre">{{titre}}</h1>
 	{{ form_start(form) }}
+	{{ form_row(form.id) }}
+	{{ form_row(form.is_homepage) }}
 	{{form_row(form.titre)}}
 	{{form_row(form.sous_titre)}}
 	{{form_row(form.etat)}}
 	{{form_row(form.slug)}}
 	{{form_row(form.ordre)}}
+
 	{# Sections de la page #}
 	<button type="submit" class="btn btn-enregistrer centered">
 		<i class="fa-solid fa-download"></i>Enregistrer</button>
@@ -57,7 +64,7 @@
 			{{formMacros.niceForm(section)}}
 		{% endfor %}
 	</div>
-	<button type="submit" class="btn btn-enregistrer">
+	<button type="submit" class="btn btn-enregistrer centered">
 		<i class="fa-solid fa-download"></i>Enregistrer</button>
 	<button type="button" class="btnAddItem btn centered" data-collection-holder-class="sectionsPages">
 		<i class="fa-solid fa-plus"></i>Ajouter section</button>
@@ -69,7 +76,8 @@
 	</button>
 	{% block javascripts %}
 		<script type="module" src="{{asset('assets/js/sections-pages.js')}}" defer></script>
-		<script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}" defer></script>
-		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}" defer></script>
+		<script type="module" src="{{asset('assets/js/pages.js')}}" defer></script>
+		{# <script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}"></script>
+						<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}"></script> #}
 	{% endblock %}
 {% endblock %}

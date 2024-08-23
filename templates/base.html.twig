@@ -14,15 +14,21 @@
 	</head>
 	<body>
 		{{include('_partials/_nav.html.twig')}}
+		{% for messages in app.flashes %}
+			{% for message in messages %}
+				<div class="flashbag">
+					<p class="flashbag-text">{{message|raw}}</p>
+					<div class="btn btn-fermer-flashbag">X</div>
+				</div>
+			{% endfor %}
+		{% endfor %}
 		<main>
 			{{ include('_partials/_sidebar.html.twig') }}
-			{% for messages in app.flashes %}
-				{% for message in messages %}
-					<p>{{message|raw}}</p>
-				{% endfor %}
-			{% endfor %}
 			{% block body %}{% endblock %}
-			{{ render(path('pages_afficher_links_footer')) }}
 		</main>
+		{{ render(path('pages_afficher_links_footer')) }}
 	</body>
+
+	<script type="module" src="{{asset('assets/js/main.js')}}" defer></script>
+
 </html>

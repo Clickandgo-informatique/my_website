@@ -4,26 +4,21 @@
 {% endblock %}
 
 {% block body %}
-	<h1>S'inscrire</h1>
+	<h1 class="titre centered">S'inscrire</h1>
 
-
-	{{ form_start(registrationForm) }}
-	<div>
-		{{ form_row(registrationForm.nickname) }}
-	</div>
-	<div>
-		{{ form_row(registrationForm.email) }}
-		{{ form_errors(registrationForm.email) }}
-	</div>
-	<div>
-		{{ form_row(registrationForm.plainPassword) }}
-	</div>
-	<div>
-		{{ form_row(registrationForm.agreeTerms) }}
-	</div>
-	<button type="submit" class="btn">S'inscrire</button>
-	{{ form_end(registrationForm) }}
-	<p>Déjà inscrit(e) ?
-		<a href="{{path('app_login')}}">Me connecter</a>
-	</p>
+	<form method="POST">
+	<section>
+		{{ form_start(registrationForm) }}		
+			{{ form_row(registrationForm.nickname) }}	
+			{{ form_row(registrationForm.email) }}
+			{{ form_errors(registrationForm.email) }}		
+			{{ form_row(registrationForm.plainPassword) }}
+			{{ form_row(registrationForm.agreeTerms) }}
+	
+		<button type="submit" class="btn centered">S'inscrire</button>
+		<p>Déjà inscrit(e) ?
+			<a href="{{path('app_login')}}">Me connecter</a>
+		</p>
+		{{ form_end(registrationForm) }}</section>
+	</form>
 {% endblock %}

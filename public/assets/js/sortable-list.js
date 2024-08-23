@@ -1,7 +1,5 @@
 const sortableList = document.querySelector(".sortable-list");
 let items = document.querySelectorAll(".item");
-let listItems = Array.from(items);
-const numerotationListe = document.querySelectorAll(".numerotation-item");
 
 items.forEach((item) => {
   item.addEventListener("dragstart", () => {
@@ -12,16 +10,48 @@ items.forEach((item) => {
     //Annulation de la classe "dragging"
     item.classList.remove("dragging");
 
-    //Actualiser la numérotation
-    actualiserNumerotation();
+    //Création du tableau de positions actualisées des items dans la liste
+    let listItems = document.querySelectorAll(".item");
+    let arrayItems = [...listItems];
+    let arrayPositions = [];
+    for (let i = 0; i < arrayItems.length; i++) {
+      arrayItems[i].setAttribute(
+        "data-position",
+        arrayItems.indexOf(arrayItems[i]) + 1
+      );
 
-    //Création du tableau de positions des items dans la liste
-    listItems.forEach((item) => {
-      let itemId = item.dataset.id;
-      let position = listItems.indexOf(item);
+      //Création du tableau json pour envoi au controller symfony
+      arrayPositions.push({
+        id: arrayItems[i].getAttribute("data-id"),
+        position: arrayItems[i].getAttribute("data-position"),
+      });
+    }
 
-      // console.log("Position : ", position, "id : ", itemId);
-    });
+    const actualiserRepositionnement = async () => {
+      try {
+        const response = await fetch("/admin/pages/repositionnement-pages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json ;charset=UTF-8",
+            "X-Requested-with": "XMLHttpRequest",
+          },
+          body: JSON.stringify(arrayPositions),
+        });
+        const data = await response.json();
+
+        if (data === 200) {
+          console.log("Repositionnement de page réussi.");
+        }
+      } catch (error) {
+        console.log("Erreur : ", error);
+      }
+    };
+    actualiserRepositionnement();
+
+    //Actualiser la numérotation au bout d'un petit moment
+    setTimeout(() => {
+      actualiserNumerotation();
+    }, 1000);
   });
 });
 
@@ -43,10 +73,12 @@ const initSortableList = (e) => {
 sortableList.addEventListener("dragover", initSortableList);
 sortableList.addEventListener("dragenter", (e) => e.preventDefault());
 
-//actualiser numérotation de liste
+//Actualiser numérotation de la liste de pages
 const actualiserNumerotation = () => {
+  //Liste actualisée pour numérotation
+  const numerotationListe = document.querySelectorAll(".numerotation-item");
+
   for (let i = 0; i < numerotationListe.length; i++) {
     numerotationListe[i].textContent = i + 1;
   }
-  console.log("succès numérotation");
 };

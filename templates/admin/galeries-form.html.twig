@@ -4,19 +4,26 @@
 {% endblock %}
 {% block body %}
 
-	<h1 class="titre">{{titre}}</h1>
+	<h1 class="titre">
+		<i class="fa-regular fa-images"></i>
+		{{titre}}</h1>
 	{{ form_start(form) }}
-	<h1>{{ form_row(form.titre) }}</h1>
+	<p class="titre-galerie">{{ form_row(form.titre) }}</p>
 	{{ form_errors(form.titre) }}
 	{{ form_row(form.type) }}
 	{{ form_row(form.description) }}
+	{# <div class="wrapper-ckeditor">
+		<label for="editor">Description :</label>
+		<div id="editor"></div>
+	</div> #}
 	{{ form_row(form.is_active) }}
 	{{ form_row(form.images) }}
 	{{ form_row(form.tags) }}
 	{# {{ form_row(form.created_at)}} #}
 
 	{# paramètres galerie d'images #}
-		<button class="btn btn-enregistrer" type="submit"><i class="fa-solid fa-download"></i> Enregistrer</button>
+		<button class="btn btn-enregistrer centered" type="submit"> <i class="fa-solid fa-download"></i>
+		Enregistrer</button>
 
 	<h2 class="titre centered">Galerie d'images</h2>
 	<span class="images-count">
@@ -61,5 +68,7 @@
 		<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/galeries-parameters.js')}}" type="module" defer></script>
+		{# <script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}"defer></script>
+		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}"defer></script> #}
 	{% endblock %}
 {% endblock %}

@@ -4,48 +4,10 @@
 {% endblock %}
 {% block body %}
 
-	<h1 class="titre">Liste des pages</h1>
-	{# {% if listePages is defined and listePages is not null %}
-																	{# {% set counter =1 %} #}
-	{#<table>
-																		<thead>
-																			<tr>
-																				<th></th>
-																				<th></th>
-																				<th>Ordre</th>
-																				<th>Titre</th>
-																				<th>Sous titre</th>
-																				<th>Etat</th>
-																				<th>Créée le</th>
-																				<th>Modifiée le</th>
-																				<th>Id</th>
-																			</tr>
-																		</thead>
-																		<tbody>
-																			{% for page in listePages %}
-																				<tr draggable="true">
-																					<td>
-																						<i class="fa-solid fa-grip-vertical grabber"></i>
-																					</td>
-																					<td>
-																						<a class="btn btn-modifier" href="{{path('pages_modifier_page',{'id':page.id})}}">
-																							<i class="fa-regular fa-pen-to-square"></i>Modifier</a>
-																					</td>
-																					<td></td>
-																					<td data-cell="Titre : ">{{page.titre}}</td>
-																					<td data-cell="Sous-titre : ">{{page.soustitre}}</td>
-																					<td data-cell="Etat : ">{{page.etat}}</td>
-																					<td class="text-align-right" data-cell="Créée le : ">{{page.createdat|date('d-m-Y à H:i')}}</td>
-																					<td class="text-align-right" data-cell="Modifiée le : ">{{page.updatedat|date('d-m-Y à H:i')}}</td>
-																					<td class="text-align-right" data-cell="Id page : ">{{page.id}}</td>
-																				</tr>
-																				{% set counter=counter +1 %}
-																			{% endfor %}
-																		{% else %}
-																			<p>Aucune donnée à afficher.</p>
-																		{% endif %}
-																	</tbody>
-																</table> #}
+	<h1 class="titre">
+		<i class="fa-regular fa-file-lines"></i>Liste des pages</h1>
+	<a href="{{path('pages_creer_page')}}" class="btn btn-creer-page centered"><i class="fa-solid fa-file-circle-plus"></i>Créer une page</a>
+
 	{% if listePages is defined and listePages is not null %}
 
 		<ul class="list sortable-list">
@@ -63,6 +25,10 @@
 						{{page.sectionsPages|length}}</div>
 					<div class="col etat-page">état :
 						{{page.etat}}</div>
+						{% if page.ishomepage %}
+					<div class="col isHomepage badge-success">
+						<span>Page d'accueil</span></div>							
+						{% endif %}
 				</li>
 
 

@@ -32,6 +32,22 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+    public function findAllUser(?string $roles)
+    {
+        if (!$roles) {
+            $query = $this->createQueryBuilder('u')
+                ->orderBy('u.created_at', 'DESC')
+            ;
+            return $query->getQuery()->getResult();
+        }else {
+            $query = $this->createQueryBuilder('u')
+                ->where('u.roles LIKE :val')
+                ->setParameter('val', $roles)
+                ->orderBy('u.created_at', 'DESC')
+            ;
+            return $query->getQuery()->getResult();
+        }
+    }
 
     //    /**
     //     * @return Users[] Returns an array of Users objects

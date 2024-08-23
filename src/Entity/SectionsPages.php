@@ -30,7 +30,7 @@ class SectionsPages
     #[ORM\JoinColumn(nullable: false)]
     private ?Pages $page = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?Galeries $galerie = null;
 
     public function __construct()

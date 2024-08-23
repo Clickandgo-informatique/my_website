@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Pages;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -16,9 +17,11 @@ class PagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('id', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
+            ->add('is_homepage', CheckboxType::class, ['label' => "Est la page d'accueil",'required'=>false])
             ->add('titre', TextType::class)
             ->add('sous_titre', TextType::class)
-            ->add('ordre', IntegerType::class)
+            ->add('ordre', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
             ->add('etat', ChoiceType::class, ['choices' => ['Publiée' => 'Publiée', 'Brouillon' => 'Brouillon', 'Archivée' => 'Archivée']])
             // ->add('created_at', DateTimeType::class, [
             //     'widget' => 'single_text', 'label' => 'Créée le','required'=>false,
@@ -34,7 +37,8 @@ class PagesType extends AbstractType
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false, 'attr' => ['name' => 'section-page[]']
+                'by_reference' => false,
+                'attr' => ['name' => 'section-page[]']
             ]);
     }
 

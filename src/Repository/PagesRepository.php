@@ -16,6 +16,14 @@ class PagesRepository extends ServiceEntityRepository
         parent::__construct($registry, Pages::class);
     }
 
+    public function getLastPagePosition(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('MAX(p.ordre)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Pages[] Returns an array of Pages objects
     //     */

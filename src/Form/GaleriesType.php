@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,6 +39,7 @@ class GaleriesType extends AbstractType
                 'multiple' => true,
             ])
             ->add('description', TextareaType::class, ['attr' => ['rows' => 7]])
+            
             ->add('primary_background_color', ColorType::class, ['label' => "Couleur primaire de fond", 'attr' => ['class' => 'input-galerie']])
             ->add('gallery_width', NumberType::class, ['mapped' => false, 'html5' => true, 'label' => "Largeur galerie", 'attr' => ["min" => 0, "max" => 100, "step" => 10, "default" => 100, "value" => 100, 'class' => 'input-galerie']])
             ->add('gallery_height', NumberType::class, ['mapped' => false, 'label' => "Hauteur galerie", 'html5' => true, 'attr' => ["min" => 250, "max" => 2000, "step" => 10, "default" => 250, "value" => 250, 'class' => 'input-galerie']])

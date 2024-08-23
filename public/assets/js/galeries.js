@@ -1,6 +1,6 @@
 import { lightbox } from "./lightbox.js";
+import { supprimerImage } from "./images.js";
 
-console.log("Mode galerie");
 //Afficher les images dans la galerie active
 const galerie = document.querySelector(".container-galerie");
 const selectTypeGalerie = document.querySelector("#galeries_type");
@@ -8,10 +8,9 @@ const inputsGalerie = document.querySelector(".inputs-galerie");
 const inputsCarousel = document.querySelector(".inputs-carousel");
 
 //Mode d'affichage de la galerie (carousel ou simple)
-const afficherGalerie = () => {
+export const afficherGalerie = () => {
   let url = "";
-  if (selectTypeGalerie !==null) {
-    
+  if (selectTypeGalerie !== null) {
     switch (selectTypeGalerie.value) {
       case "galerie":
         url = "/admin/galeries/afficher-galerie-images";
@@ -32,6 +31,7 @@ const afficherGalerie = () => {
       },
     });
     const data = await response.json();
+
     if (response.ok) {
       galerie.innerHTML = "";
       galerie.insertAdjacentHTML("afterbegin", data.content);
@@ -45,13 +45,16 @@ const afficherGalerie = () => {
         document.body.appendChild(linkjs);
         inputsCarousel.style.display = "block";
         inputsGalerie.style.display = "none";
-
       } else {
-        
         inputsCarousel.style.display = "none";
         inputsGalerie.style.display = "block";
       }
       const imagesLinks = document.querySelectorAll(".imageLink");
+      const btnSuppression = document.querySelectorAll(
+        ".btn-suppression-image"
+      );   
+
+      supprimerImage(btnSuppression);
       lightbox(imagesLinks);
     } else {
       alert("Erreur: la requête au serveur n'a rien retourné.");
@@ -60,5 +63,3 @@ const afficherGalerie = () => {
   afficherImages();
 };
 afficherGalerie();
-
-

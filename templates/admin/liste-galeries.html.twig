@@ -8,27 +8,27 @@
 		<ul class="list liste-galeries">
 			{% for gal in liste %}
 				{% set counter = ( counter | default(0) ) + 1 %}
-				<div class="ordered-list-row">
+
+				<li class="item">
 					<span class="ordre-liste">{{counter}}</span>
-					<li class="item">
 
-						<div class="btn-actions-horizontale">
-							<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
-								<i class="fa-regular fa-pen-to-square"></i>
-							</a>
-							<a class="btn btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
-								<i class="fa-regular fa-trash-can"></i>
-							</a>
-						</div>
-						<div class="col">
-							<i class="fa-regular fa-images"></i>
-							{{gal.images|length}}</div>
-						<div class="col">{{gal.titre}}</div>
-						<div class="col">{{gal.type}}</div>
-						<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div>
+					<div class="btn-actions-horizontale">
+						<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
+							<i class="fa-regular fa-pen-to-square"></i>
+						</a>
+						<a class="btn btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
+							<i class="fa-regular fa-trash-can"></i>
+						</a>
+					</div>
+					<div class="col">
+						<i class="fa-regular fa-images"></i>
+						{{gal.images|length}}</div>
+					<div class="col">{{gal.titre}}</div>
+					<div class="col">{{gal.type}}</div>
+					<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div>
 
-					</li>
-				</div>
+				</li>
+
 			{% endfor %}
 		</ul>
 	{% else %}

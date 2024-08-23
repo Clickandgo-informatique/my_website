@@ -1,6 +1,6 @@
 form {
-  width: 80%;
-  /* max-width: 1000px; */
+  width:80%;  
+  max-width: 1000px;
   margin: 10px auto;
 }
 
@@ -16,6 +16,10 @@ form div {
   flex-direction: column;
   background-color: blue;
 } */
+ textarea{
+  min-height: 100px;
+  width:100%;
+ }
 input,
 select,
 textarea {
@@ -49,8 +53,13 @@ textarea:focus {
 label {
   font-size: 0.8rem;
   word-break: normal;
-  min-width: 150px;
+  min-width: 80px;
 }
 legend {
   font-size: 0.8rem;
+}
+@media screen and (max-width: 650px) {
+  form {
+    width: 95%;
+  }
 }
