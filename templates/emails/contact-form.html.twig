@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Formulaire de contact
+{% endblock %}
+{% block body %}
+<h1 class="titre centered"><i class="fa-regular fa-envelope-open"></i>Formulaire de contact</h1>
+	{{ form_start(form) }}
+	{{ form_row(form.sujet) }}
+	{{ form_row(form.email) }}
+	{{ form_row(form.message) }}
+    <button class="btn btn-envoyer centered"type="submit"><i class="fa-regular fa-paper-plane"></i>Envoyer</button>
+	{{ form_end(form) }}
+{% endblock %}

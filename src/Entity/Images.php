@@ -29,6 +29,12 @@ class Images
     #[ORM\Column(nullable: true)]
     private ?int $size = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $original_name = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $ordre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +96,30 @@ class Images
     public function setSize(?int $size): static
     {
         $this->size = $size;
+
+        return $this;
+    }
+
+    public function getOriginalName(): ?string
+    {
+        return $this->original_name;
+    }
+
+    public function setOriginalName(?string $original_name): static
+    {
+        $this->original_name = $original_name;
+
+        return $this;
+    }
+
+    public function getOrdre(): ?int
+    {
+        return $this->ordre;
+    }
+
+    public function setOrdre(?int $ordre): static
+    {
+        $this->ordre = $ordre;
 
         return $this;
     }

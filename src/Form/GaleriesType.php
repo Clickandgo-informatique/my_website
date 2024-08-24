@@ -30,7 +30,7 @@ class GaleriesType extends AbstractType
                     'Carousel' => 'carousel'
                 ]
             ])
-            ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée"])
+            ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée",'attr' => ['class' => 'toggle-switch']])
             // ->add('created_at', DateTimeType::class, ['required'=>false,'label' => 'Créée le','attr'=>['class'=>'muted',"disabled"=>true]])
             ->add('images', FileType::class, [
                 'mapped' => false,

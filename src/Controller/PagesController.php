@@ -108,7 +108,7 @@ class PagesController extends AbstractController
                 $em->persist($page);
                 $em->flush();
 
-                $this->addFlash('success', "La page active est devenue la page d'accueil");
+                $this->addFlash('success', "La page " . $page->getTitre() . " est devenue la page d'accueil");
                 return new JsonResponse("La page " . $page->getTitre() . " est devenue la page d'accueil");
             } else {
 
@@ -120,7 +120,7 @@ class PagesController extends AbstractController
                 $em->persist($page);
                 $em->flush();
 
-                $this->addFlash('success', "La page active n'est plus la page d'accueil");
+                $this->addFlash('success', "La page " . $page->getTitre() . "  n'est plus la page d'accueil");
                 return new JsonResponse("La page " . $page->getTitre() . "  n'est plus la page d'accueil");
             }
         } else {

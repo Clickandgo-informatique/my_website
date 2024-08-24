@@ -40,6 +40,7 @@ const handleDrop = (e) => {
     "image/png",
     "image/gif",
     "image/bmp",
+    "image/webp"
   ];
 
   let i = 1;

@@ -18,7 +18,7 @@ class PagesType extends AbstractType
     {
         $builder
             // ->add('id', IntegerType::class, ['required' => false, 'attr' => ['disabled' => true]])
-            ->add('isPageAccueil', CheckboxType::class, ['required'=>false,'label' => "Est la page d'accueil", 'label_attr' => ['class' =>'switch']])
+            ->add('isPageAccueil', CheckboxType::class, ['required' => false, 'label' => "Est la page d'accueil", 'label_attr' => ['class' => 'switch'], 'attr' => ['class' => 'toggle-switch']])
             ->add('titre', TextType::class)
             ->add('sous_titre', TextType::class)
             ->add('ordre', IntegerType::class, ['required' => false])

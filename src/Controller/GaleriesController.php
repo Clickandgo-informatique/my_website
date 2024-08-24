@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Length;
 
 #[Route('admin/galeries/', 'galeries_')]
 class GaleriesController extends AbstractController
@@ -123,7 +122,7 @@ class GaleriesController extends AbstractController
     }
 
     #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
-    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em,PictureService $pictureService): Response
+    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
 
         $request->enableHttpMethodParameterOverride();
@@ -131,9 +130,9 @@ class GaleriesController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
             $fichier = $image->getName();
-            $folder='images';
+            $folder = 'images';
 
-            $pictureService->delete($fichier,$folder,300,300);
+            $pictureService->delete($fichier, $folder, 300, 300);
 
             // unlink($this->getParameter('images_directory') . $nom);
             $em->remove($image);
@@ -232,10 +231,13 @@ class GaleriesController extends AbstractController
             foreach ($listeImages as $uploadedImage) {
 
                 $image = $uploadedImage;
+                dump($image);
                 $folder = 'images';
                 $fichier = $pictureService->add($image, $folder, 300, 300);
 
                 $img = new Images();
+                $img->setOriginalName($image->getClientOriginalName());
+                // $img->setSize($image->getSize());
                 $img->setName($fichier);
                 $galerie->addImage($img);
                 $em->persist($galerie);
