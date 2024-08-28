@@ -13,7 +13,7 @@
 		<ul class="list sortable-list">
 			{% for page in listePages %}
 				{% set counter = ( counter | default(0) ) + 1 %}
-				<li class="item sortable-item" draggable="true" data-id="{{page.id}}" data-position={{page.ordre}}>
+				<li class="item sortable-item" draggable="true" data-id="{{page.id}}" data-position="{{page.ordre}}">
 					<span class="numerotation-item">{{counter}}</span>
 					<i class="fa-solid fa-grip-vertical grabber"></i>
 					<a class="btn btn-action btn-modifier" href="{{path('pages_modifier_page',{'id':page.id})}}">

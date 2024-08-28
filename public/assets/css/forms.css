@@ -1,47 +1,32 @@
 form {
-  width:80%;  
+  display: flex;
+  flex-direction: column;
+  width: 80%;
   max-width: 1000px;
   margin: 10px auto;
 }
-
-form div {
+form .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
-
-/* .card{
-  display:flex;
-  flex-direction: column;
-  background-color: blue;
-} */
- textarea{
+textarea {
   min-height: 100px;
-  width:100%;
- }
-input,
+  width: 100%;
+}
+input[type="text"],
 select,
 textarea {
   border: 1px solid lightgray;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
-  width: 98%;
+  width: 100%;
   background-color: #fff;
 }
 input[type="datetime-local"] {
   text-align: right;
 }
-/* input[type="text"] {
-  outline: none;
-  border: none;
-  border-radius: unset;
-} */
-input[type="text"]:hover,
-input[type="text"]:focus {
-  border-bottom: 1px solid lightgray;
-}
+
 input[type="file"] {
   border: none;
 }
@@ -54,6 +39,7 @@ label {
   font-size: 0.8rem;
   word-break: normal;
   min-width: 80px;
+  margin-left: 5px;
 }
 legend {
   font-size: 0.8rem;

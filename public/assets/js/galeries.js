@@ -36,6 +36,13 @@ export const afficherGalerie = () => {
       galerie.innerHTML = "";
       galerie.insertAdjacentHTML("afterbegin", data.content);
 
+      //création du link js pour repositionnement des images
+      const js = document.createElement("script");
+      js.src = "/assets/js/sortable-images.js";
+      js.type = "module";
+      js.defer = true;
+      document.body.appendChild(js);
+
       //création du link js carousel
       if (selectTypeGalerie.value == "carousel") {
         const linkjs = document.createElement("script");
@@ -52,10 +59,11 @@ export const afficherGalerie = () => {
         inputsGalerie.style.display = "block";
       }
       const imagesLinks = document.querySelectorAll(".imageLink");
+    
       const btnSuppression = document.querySelectorAll(
         ".btn-suppression-image"
       );
-
+   
       supprimerImage(btnSuppression);
       lightbox(imagesLinks);
     } else {

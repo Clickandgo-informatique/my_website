@@ -63,6 +63,9 @@ class Pages
     #[ORM\Column(nullable: true)]
     private ?bool $page_accueil = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $icone_onglet = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -161,6 +164,18 @@ class Pages
     public function setPageAccueil(?bool $page_accueil): static
     {
         $this->page_accueil = $page_accueil;
+
+        return $this;
+    }
+
+    public function getIconeOnglet(): ?string
+    {
+        return $this->icone_onglet;
+    }
+
+    public function setIconeOnglet(?string $icone_onglet): static
+    {
+        $this->icone_onglet = $icone_onglet;
 
         return $this;
     }

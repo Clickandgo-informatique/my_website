@@ -44,9 +44,9 @@
   margin-right: 5px;
   height: 100%;
   padding: 5px;
+  transition: 1s ease-in-out;
 }
 .miniature img {
-  transition: 1s ease-in-out;
   box-shadow: 1px 1px 1px darkgray;
   border-radius: var(--images-border-radius);
   border: var(--images-border-width);
@@ -54,8 +54,16 @@
   z-index: 1;
   cursor: zoom-in;
   position: relative;
+  transition: all 0.3s;
+}
+.miniature.over {
+  border: 3px dotted #666;
 }
 .miniature img:hover {
+  border: 3px solid white;
+  box-shadow: -4px 4px 4px darkgray;
+}
+.miniature:hover {
   transform: scale(120%);
   z-index: 2;
 }
@@ -63,18 +71,27 @@
 .miniature img:hover .infos-image {
   display: block;
 }
-
-.btn-suppression-image {
-  display: block;
+.miniature .btn-suppression-image {
+  display: none;
+}
+.miniature:hover .btn-suppression-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  font-size: 2.5rem;
+  font-size: 20px;
   font-weight: bold;
   text-decoration: none;
-  top: 20px;
-  right: 10px;
+  top: -5px;
+  right: -5px;
   z-index: 3;
-  opacity: 0.5;
-  color: lightgray;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  box-shadow: 1px 1px 3px darkgray;
 }
 .btn-suppression-image:hover {
   color: white;

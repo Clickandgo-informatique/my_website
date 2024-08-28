@@ -122,8 +122,8 @@ class GaleriesController extends AbstractController
     }
 
     #[Route('supprimer-image/{id}', 'supprimer_image', methods: ['GET', 'DELETE'])]
-    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
-    {
+    public function supprimerImage(Images $image, Request $request, EntityManagerInterface $em, PictureService $pictureService, SessionInterface $session): Response
+    {      
 
         $request->enableHttpMethodParameterOverride();
         $data = json_decode($request->getContent(), true);
@@ -153,7 +153,7 @@ class GaleriesController extends AbstractController
         $galerie = $galeriesRepo->find($galerieId);
 
         // if ($request->isXmlHttpRequest()) {
-        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+        $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
 
         return new JsonResponse(['content' => $this->renderView('_partials/_galerie.html.twig', ['images' => $images])]);
         // }
@@ -167,7 +167,7 @@ class GaleriesController extends AbstractController
         $galerie = $galeriesRepo->find($galerieId);
 
         // if ($request->isXmlHttpRequest()) {
-        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+        $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
 
         return new JsonResponse(['content' => $this->renderView('_partials/_carousel.html.twig', ['images' => $images])]);
         // }
@@ -180,7 +180,7 @@ class GaleriesController extends AbstractController
         $galerie = $galeriesRepo->find($galerieId);
 
         // if ($request->isXmlHttpRequest()) {
-        $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+        $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
 
         return new JsonResponse(['content' => $this->renderView('_partials/_miniatures-horizontale.html.twig', ['images' => $images])]);
         // }
@@ -203,7 +203,7 @@ class GaleriesController extends AbstractController
         $typeGalerie = $galerie->getType();
 
         if ($request->isXmlHttpRequest()) {
-            $images = $ImagesRepo->findBy(['galerie' => $galerie]);
+            $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
 
             if ($typeGalerie === "galerie") {
                 return new JsonResponse(['content' => $this->renderView('_partials/_galerie.html.twig', ['images' => $images])]);
@@ -221,23 +221,26 @@ class GaleriesController extends AbstractController
         if ($request->isXmlHttpRequest()) {
 
             $postData = $request->getContent();
-            //dd($postData);
+            // dd($postData);
             $galerieId = $request->get('galerieId');
             //dd($galerieId);
             $galerie = $galeriesRepo->find($galerieId);
             //dd($galerie);
             $listeImages = $request->files->get('listeImages');
 
+
             foreach ($listeImages as $uploadedImage) {
 
                 $image = $uploadedImage;
-                dump($image);
+
                 $folder = 'images';
                 $fichier = $pictureService->add($image, $folder, 300, 300);
 
                 $img = new Images();
-                $img->setOriginalName($image->getClientOriginalName());
-                // $img->setSize($image->getSize());
+                // $img->setOriginalName($image->getClientOriginalName());
+
+                // $img->setMimeType($image->getMimeType());
+                // $img->setMimeType($image->get('mimeType'));
                 $img->setName($fichier);
                 $galerie->addImage($img);
                 $em->persist($galerie);

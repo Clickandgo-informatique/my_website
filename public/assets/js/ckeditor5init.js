@@ -5,7 +5,16 @@ import {
   Italic,
   Font,
   Paragraph,
-} from "../../ckeditor5/ckeditor5.js";
+  Autoformat,
+  Strikethrough,
+  Heading,
+  Link,
+  List,
+  Highlight,
+  CKFinder,
+  Table,
+} from "/ckeditor5/ckeditor5.js";
+console.log("coucou depuis ckeditor 5");
 
 ClassicEditor.create(document.querySelector("#editor"), {
   plugins: [Essentials, Bold, Italic, Font, Paragraph],
@@ -24,5 +33,13 @@ ClassicEditor.create(document.querySelector("#editor"), {
     ],
   },
 })
-  .then(/* ... */)
-  .catch(/* ... */);
+  .then((editor) => {
+    editor.sourceElement.parentElement.addEventListener("submit", function (e) {
+      e.preventDefault();
+      editor.updateSourceElement();
+      this.submit();
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });

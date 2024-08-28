@@ -35,6 +35,9 @@ class Images
     #[ORM\Column(nullable: true)]
     private ?int $ordre = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mimeType = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Images
     public function setOrdre(?int $ordre): static
     {
         $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+
+    public function setMimeType(?string $mimeType): static
+    {
+        $this->mimeType = $mimeType;
 
         return $this;
     }

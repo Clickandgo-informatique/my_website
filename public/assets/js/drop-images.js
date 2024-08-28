@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 const tableauDetails = document.querySelector(".tableau-details-images");
 
 const handleDrop = (e) => {
+  e.stopPropagation();
   const dataTransfer = e.dataTransfer;
   const files = dataTransfer.files;
   const droppedFiles = [...files];
@@ -40,7 +41,7 @@ const handleDrop = (e) => {
     "image/png",
     "image/gif",
     "image/bmp",
-    "image/webp"
+    "image/webp",
   ];
 
   let i = 1;
@@ -96,9 +97,12 @@ const handleDrop = (e) => {
       //Traitement du tableau d'images
       listeImages.forEach((file) => {
         formData.append("listeImages[]", file);
+        // formData.append("imageWidth", file.width);
+        // formData.append("imageHeight", file.height);
+        formData.append("imageSize", readableFileSize(file.size));
       });
       formData.append("galerieId", galerieId);
-
+      console.log(formData);
       try {
         const response = await fetch(`/admin/galeries/importer-images`, {
           method: "POST",

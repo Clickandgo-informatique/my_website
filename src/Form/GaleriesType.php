@@ -24,13 +24,13 @@ class GaleriesType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, ['constraints' => [new Assert\NotBlank(message: "Le titre de la galerie d'images est obligatoire")]])
+            ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée", 'attr' => ['class' => 'toggle-switch']])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Galerie' => 'galerie',
                     'Carousel' => 'carousel'
                 ]
             ])
-            ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée",'attr' => ['class' => 'toggle-switch']])
             // ->add('created_at', DateTimeType::class, ['required'=>false,'label' => 'Créée le','attr'=>['class'=>'muted',"disabled"=>true]])
             ->add('images', FileType::class, [
                 'mapped' => false,
@@ -38,8 +38,8 @@ class GaleriesType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('description', TextareaType::class, ['attr' => ['rows' => 7]])
-            
+            ->add('description', TextareaType::class,['required'=>false,'mapped'=>true])
+
             ->add('primary_background_color', ColorType::class, ['label' => "Couleur primaire de fond", 'attr' => ['class' => 'input-galerie']])
             ->add('gallery_width', NumberType::class, ['mapped' => false, 'html5' => true, 'label' => "Largeur galerie", 'attr' => ["min" => 0, "max" => 100, "step" => 10, "default" => 100, "value" => 100, 'class' => 'input-galerie']])
             ->add('gallery_height', NumberType::class, ['mapped' => false, 'label' => "Hauteur galerie", 'html5' => true, 'attr' => ["min" => 250, "max" => 2000, "step" => 10, "default" => 250, "value" => 250, 'class' => 'input-galerie']])
@@ -50,7 +50,7 @@ class GaleriesType extends AbstractType
             ->add('images_shadow', NumberType::class, ['mapped' => false, 'label' => "Epaisseur ombre", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']])
             ->add('carousel_speed', NumberType::class, ['mapped' => false, 'label' => "Vitesse défilement", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
             ->add('carousel_transition', NumberType::class, ['mapped' => false, 'label' => "Vitesse transition", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
-            ->add('tags', EntityType::class, ['by_reference' => false, 'mapped' => true, 'choice_label' => 'titre', 'class' => Tags::class, 'expanded' => true, 'multiple' => true, 'attr' => ['class' => 'select-tags','rows'=>6,'cols'=>6]]);
+            ->add('tags', EntityType::class, ['by_reference' => false, 'mapped' => true, 'choice_label' => 'titre', 'class' => Tags::class, 'expanded' => true, 'multiple' => true, 'attr' => ['class' => 'select-tags', 'rows' => 6, 'cols' => 6]]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

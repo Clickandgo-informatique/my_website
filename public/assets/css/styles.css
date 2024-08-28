@@ -10,10 +10,10 @@
 @import "tags.css";
 @import "multi-select-tags.css";
 @import "footer.css";
-@import "ckeditor5.css";
 @import "toggle-switch.css";
 
-:root  {
+
+:root {
   --primary-background-color: rgb(0, 138, 117);
   --secondary-background-color: rgb(0, 165, 141);
 }
@@ -46,7 +46,7 @@ main {
   flex-direction: column;
   transition: margin-left 0.5s;
   min-height: 100vh;
-background-color: #fffdfd;
+  background-color: #fffdfd;
 }
 a,
 link {
@@ -151,15 +151,7 @@ button {
   background-color: transparent;
   margin-right: 10px;
 }
-#editor {
-  min-height: 100px;
-  border: 1px solid lightgray;
-}
-.wrapper-ckeditor {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+
 .badge-success {
   padding: 5px 12px;
   border-radius: 10px;
@@ -169,6 +161,10 @@ button {
   border: 1px solid darkgray;
   font-size: 0.6rem;
 }
+.ck-editor__editable_inline {
+  min-height: 200px;
+}
+
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;
