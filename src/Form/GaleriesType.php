@@ -24,11 +24,12 @@ class GaleriesType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, ['constraints' => [new Assert\NotBlank(message: "Le titre de la galerie d'images est obligatoire")]])
-            ->add('is_active', CheckboxType::class, ['required' => false, 'mapped' => false, 'label' => "Est activée", 'attr' => ['class' => 'toggle-switch']])
+            ->add('is_active', CheckboxType::class, ['required' => false, 'label' => "Est visible", 'attr' => ['class' => 'toggle-switch']])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Galerie' => 'galerie',
-                    'Carousel' => 'carousel'
+                    'Carousel' => 'carousel',
+                    'Jeu de photos' => 'jeu de photos'
                 ]
             ])
             // ->add('created_at', DateTimeType::class, ['required'=>false,'label' => 'Créée le','attr'=>['class'=>'muted',"disabled"=>true]])
@@ -38,7 +39,7 @@ class GaleriesType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('description', TextareaType::class,['required'=>false,'mapped'=>true])
+            ->add('description', TextareaType::class, ['required' => false])
 
             ->add('primary_background_color', ColorType::class, ['label' => "Couleur primaire de fond", 'attr' => ['class' => 'input-galerie']])
             ->add('gallery_width', NumberType::class, ['mapped' => false, 'html5' => true, 'label' => "Largeur galerie", 'attr' => ["min" => 0, "max" => 100, "step" => 10, "default" => 100, "value" => 100, 'class' => 'input-galerie']])

@@ -98,13 +98,13 @@ class PagesController extends AbstractController
                 $pages = $pagesRepo->findAll();
 
                 foreach ($pages as $page) {
-                    $page->setPageAccueil(false);
+                    $page->setIsPageAccueil(false);
                 }
                 //On attribue la condition "page d'accueil" à la page en cours
                 //On récupère l'id de la page active de nouveau
                 $pageId = $session->get('pageId');
                 $page = $pagesRepo->find($pageId);
-                $page->setPageAccueil(true);
+                $page->setIsPageAccueil(true);
                 $em->persist($page);
                 $em->flush();
 
@@ -116,7 +116,7 @@ class PagesController extends AbstractController
                 //On récupère l'id de la page active de nouveau
                 $pageId = $session->get('pageId');
                 $page = $pagesRepo->find($pageId);
-                $page->setPageAccueil(false);
+                $page->setIsPageAccueil(false);
                 $em->persist($page);
                 $em->flush();
 

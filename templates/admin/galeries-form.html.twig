@@ -4,30 +4,50 @@
 {% endblock %}
 {% block body %}
 
+
 	<h1 class="titre">
 		<i class="fa-regular fa-images"></i>
 		{{titre}}</h1>
 
-
 	<form id="form-galerie" method="POST">
+		<div class="speed-dial">
+			<div class="speed-dial__options">
+
+				<div class="speed-dial-button">
+					<button class="btn-enregistrer" type="submit">
+						<i class="fa-solid fa-download"></i>
+					</button>
+					<span class="button-label">Enregistrer</span>
+				</div>
+
+				<div class="speed-dial-button btn-visionneuse-galeries">
+					<a href="{{path('galeries_visionneuse_galeries')}}" class="speed-dial__link">
+						<i class="fa-regular fa-eye"></i>
+					</a>
+					<span class="button-label">Visionneuse galeries</span>
+				</div>
+				<div class="speed-dial-button btn-revenir-liste-galeries">
+					<a href="{{path('galeries_liste_galeries')}}" class="speed-dial__link">
+						<i class="fa-solid fa-file-lines"></i>
+					</a>
+					<span class="button-label">Revenir à la liste de galeries</span>
+				</div>
+			</div>
+		</div>
 
 		{{ form_start(form) }}
 		<div class="container-switch">{{ form_row(form.is_active) }}</div>
 		<p class="titre-galerie">{{ form_row(form.titre) }}</p>
-		{{ form_errors(form.titre) }}
-		{{ form_row(form.type) }}
-
-		<div id="editor">
-			{{ form_row(form.description) }}
-		</div>
-
-		{{ form_row(form.tags) }}
+		{{ form_errors(form.titre) }}		
+			{{ form_row(form.type) }}
+			<div id="editor">
+				{{ form_row(form.description|raw) }}
+			</div>
+			{{ form_row(form.tags) }}
+	
 		{# {{ form_row(form.created_at)}} #}
 
 		{# paramètres galerie d'images #}
-			<button class="btn btn-enregistrer centered" type="submit"> <i class="fa-solid fa-download"></i>
-			Enregistrer</button>
-
 		<h2 class="titre centered">Galerie d'images</h2>
 		<span class="images-count">
 			{% if galerie.images|length ==0 %}
@@ -61,6 +81,7 @@
 		{{ include('admin/importer-images-form.html.twig') }}
 		{{ form_row(form.images) }}
 
+		{# Container images rempli en JS #}
 		<div class="container-galerie" data-id={{galerie.id}}></div>
 		{{ form_end(form) }}
 	</form>
@@ -72,7 +93,7 @@
 		<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/galeries-parameters.js')}}" type="module" defer></script>
-		<script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}" defer></script>
 		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}" defer></script>
+		<script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}" defer></script>
 	{% endblock %}
 {% endblock %}

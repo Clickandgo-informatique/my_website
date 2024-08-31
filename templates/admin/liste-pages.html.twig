@@ -6,13 +6,15 @@
 
 	<h1 class="titre">
 		<i class="fa-regular fa-file-lines"></i>Liste des pages</h1>
-	<a href="{{path('pages_creer_page')}}" class="btn btn-creer-page centered"><i class="fa-solid fa-file-circle-plus"></i>Créer une page</a>
+	<a href="{{path('pages_creer_page')}}" class="btn btn-creer-page centered">
+		<i class="fa-solid fa-file-circle-plus"></i>Créer une page</a>
 
 	{% if listePages is defined and listePages is not null %}
 
 		<ul class="list sortable-list">
 			{% for page in listePages %}
 				{% set counter = ( counter | default(0) ) + 1 %}
+
 				<li class="item sortable-item" draggable="true" data-id="{{page.id}}" data-position="{{page.ordre}}">
 					<span class="numerotation-item">{{counter}}</span>
 					<i class="fa-solid fa-grip-vertical grabber"></i>
@@ -23,14 +25,34 @@
 					<div class="col sous-titre-page">{{page.soustitre}}</div>
 					<div class="col nombre-sections-page">Sections :
 						{{page.sectionsPages|length}}</div>
-					<div class="col etat-page">état :
-						{{page.etat}}</div>
-						{% if page.isPageAccueil %}
-					<div class="col isHomepage badge-success">
-						<span>Page d'accueil</span></div>							
-						{% endif %}
-				</li>
+					<div class="col etat-page">
 
+						{% if page.etat=="Publiée" %}
+							<span class="badge badge-success">Publiée</span>
+						{% elseif page.etat=="Brouillon"%}
+							<span class="badge badge-warning">Brouillon</span>
+						{% elseif page.etat=="Archivée"%}
+							<span class="badge">Archivée</span>
+
+						{% endif %}
+						{# {% switch page.etat %}
+													{% case "Publiée" %}
+														<span class="badge badge-success">Publiée</span>
+													{% case "Brouillon" %}
+														<span class="badge badge-warning">Brouillon</span>
+													{% case "Archivée" %}
+														<span class="badge">Archivée</span>
+													{% default %}
+														<span class="badge">N.C</span>
+												{% endswitch %} #}
+					</div>
+
+					{% if page.isPageAccueil %}
+						<div class="col isHomepage badge badge-success">
+							<span>Page d'accueil</span>
+						</div>
+					{% endif %}
+				</li>
 
 			{% endfor %}
 		</ul>

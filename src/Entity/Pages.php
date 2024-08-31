@@ -61,10 +61,16 @@ class Pages
     private Collection $sectionsPages;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $page_accueil = null;
+    private ?bool $is_page_accueil = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $icone_onglet = null;
+
+    
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function __construct()
     {
@@ -73,10 +79,6 @@ class Pages
         $this->sectionsPages = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getTitre(): ?string
     {
@@ -158,12 +160,12 @@ class Pages
 
     public function isPageAccueil(): ?bool
     {
-        return $this->page_accueil;
+        return $this->is_page_accueil;
     }
 
-    public function setPageAccueil(?bool $page_accueil): static
+    public function setIsPageAccueil(?bool $is_page_accueil): static
     {
-        $this->page_accueil = $page_accueil;
+        $this->is_page_accueil = $is_page_accueil;
 
         return $this;
     }

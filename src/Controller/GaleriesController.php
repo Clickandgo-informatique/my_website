@@ -11,7 +11,6 @@ use App\Repository\TagsRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,7 +50,7 @@ class GaleriesController extends AbstractController
                 $img->setName($fichier);
                 $galerie->addImage($img);
             }
-            $galerie->setActive(true);
+            $galerie->setIsActive(true);
             $em->persist($galerie);
             $em->flush();
 
@@ -160,17 +159,35 @@ class GaleriesController extends AbstractController
     }
     //Affichage ajax des images dans la galerie en création (carousel)
     #[Route('afficher-carousel-images', 'afficher_carousel_images')]
-    public function afficherCarousel(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session): Response
+    public function afficherCarousel(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session,Request $request): Response
     {
         //Récupération de l'Id de la galerie en cours      
         $galerieId = $session->get('galerieId');
         $galerie = $galeriesRepo->find($galerieId);
 
-        // if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
         $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
 
         return new JsonResponse(['content' => $this->renderView('_partials/_carousel.html.twig', ['images' => $images])]);
-        // }
+         }else{
+            return new JsonResponse('Cette requête doit étre effectuée en Ajax',404);
+         }
+    }
+    //Affichage Ajax des images en mode jeu de photos
+    #[Route('afficher-jeu-de-photos','afficher_jeu_de_photos')]
+    public function afficherJeuDePhotos(ImagesRepository $ImagesRepo, GaleriesRepository $galeriesRepo, SessionInterface $session,Request $request):Response
+    {
+        //Récupération de l'Id de la galerie en cours      
+        $galerieId = $session->get('galerieId');
+        $galerie = $galeriesRepo->find($galerieId);
+
+        if ($request->isXmlHttpRequest()) {
+        $images = $ImagesRepo->findBy(['galerie' => $galerie], ['ordre' => 'ASC']);
+
+        return new JsonResponse(['content' => $this->renderView('_partials/_jeu-de-photos.html.twig', ['images' => $images])]);
+         }else{
+            return new JsonResponse('Cette requête doit étre effectuée en Ajax',404);
+         }
     }
     //Affichage ajax des miniatures d'images en horizontal)
     #[Route('afficher-miniatures-horizontale/{galerieId}', 'afficher_miniatures_horizontale')]

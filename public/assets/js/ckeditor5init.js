@@ -33,13 +33,13 @@ ClassicEditor.create(document.querySelector("#editor"), {
     ],
   },
 })
-  .then((editor) => {
-    editor.sourceElement.parentElement.addEventListener("submit", function (e) {
-      e.preventDefault();
-      editor.updateSourceElement();
-      this.submit();
-    });
-  })
+  // .then((editor) => {
+  //   editor.sourceElement.parentElement.addEventListener("submit", function (e) {
+  //     e.preventDefault();
+  //     editor.updateSourceElement();
+  //     this.submit();
+  //   });
+  // })
   .catch((error) => {
     console.error(error);
   });

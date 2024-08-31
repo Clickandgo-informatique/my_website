@@ -3,15 +3,34 @@
 	Liste des galeries d'images
 {% endblock %}
 {% block body %}
-	<h1 class="titre">Liste des galeries</h1>
+	<h1 class="titre"><i class="fa-regular fa-images"></i>Liste des galeries</h1>
 	{% if (liste is defined) and (liste is not null)%}
 		<ul class="list liste-galeries">
 			{% for gal in liste %}
 				{% set counter = ( counter | default(0) ) + 1 %}
 
-				<li class="item">
-					<span class="ordre-liste">{{counter}}</span>
-
+				<li
+					class="item">
+					{# <span class="ordre-liste">{{counter}}</span>
+																														
+																																			<div class="btn-actions-horizontale">
+																																				<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
+																																					<i class="fa-regular fa-pen-to-square"></i>
+																																				</a>
+																																				<a class="btn btn-action btn-supprimer" href="{{path('galeries_supprimer_galerie',{id:gal.id})}}">
+																																					<i class="fa-regular fa-trash-can"></i>
+																																				</a>
+																																			</div>
+																																			<div class="col">
+																																				<i class="fa-regular fa-images"></i>
+																																				{{gal.images|length}}</div>
+																																			<div class="col">{{gal.titre}}</div>
+																																			<div class="col">{{gal.type}}</div>
+																																			<div class="col">{{gal.description|u.truncate(25)}}
+																																				...</div>
+																																			<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div> #}
+					<span class="ordre-liste">
+						{{counter}}</span>
 					<div class="btn-actions-horizontale">
 						<a class="btn btn-action btn-modifier" href="{{path('galeries_modifier_galerie',{id:gal.id})}}">
 							<i class="fa-regular fa-pen-to-square"></i>
@@ -20,13 +39,39 @@
 							<i class="fa-regular fa-trash-can"></i>
 						</a>
 					</div>
-					<div class="col">
-						<i class="fa-regular fa-images"></i>
-						{{gal.images|length}}</div>
-					<div class="col">{{gal.titre}}</div>
-					<div class="col">{{gal.type}}</div>
-					<div class="col etat-galerie">{{gal.isactive (gal.isactive) ? "Active":"Privée" }}</div>
-
+					<table class="table-galeries list-table">
+						<thead>
+							<tr>
+								<th class="col-50">
+									Photos
+								</th>
+								<th class="col-150">
+									Titre
+								</th>
+								<th class="col-75">
+									Type
+								</th>
+								<th class="col-150">
+									Description
+								</th>
+								<th class="col-50">
+									Etat
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-align-center" data-label="photos">
+									<i class="fa-regular fa-images"></i>
+									{{gal.images|length}}</td>
+								<td data-label="Titre">{{gal.titre}}</td>
+								<td data-label="Type" class="text-align-center">{{gal.type}}</td>
+								<td data-label="Description">{{gal.description|u.truncate(25)}}</td>
+								<td class="text-align-center etat-galerie" data-label="Etat">{{(gal.isactive) ? '<span class="badge badge-success centered">Publique</span>':'<span class="badge badge-danger centered">Privée</span>'}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</li>
 
 			{% endfor %}

@@ -2,6 +2,7 @@ import { lightbox } from "./lightbox.js";
 import { supprimerImage } from "./images.js";
 
 //Afficher les images dans la galerie active
+const formGalerie = document.querySelector("#form-galerie");
 const galerie = document.querySelector(".container-galerie");
 const selectTypeGalerie = document.querySelector("#galeries_type");
 const inputsGalerie = document.querySelector(".inputs-galerie");
@@ -17,6 +18,9 @@ export const afficherGalerie = () => {
         break;
       case "carousel":
         url = "/admin/galeries/afficher-carousel-images";
+        break;
+      case "jeu de photos":
+        url = "/admin/galeries/afficher-jeu-de-photos";
         break;
       default:
         return false;
@@ -51,19 +55,28 @@ export const afficherGalerie = () => {
         linkjs.defer = true;
 
         document.body.appendChild(linkjs);
+
         inputsCarousel.style.display = "block";
         inputsGalerie.style.display = "none";
-        //
       } else {
         inputsCarousel.style.display = "none";
         inputsGalerie.style.display = "block";
       }
+      //Création du link pour jeu de photos
+      if (selectTypeGalerie.value == "jeu de photos") {
+        const linkMouseSlider = document.createElement("script");
+        linkMouseSlider.src = "/assets/js/mouse-slider.js";
+        linkMouseSlider.type = "module";
+        linkMouseSlider.defer = true;
+
+        document.body.appendChild(linkMouseSlider);
+      }
       const imagesLinks = document.querySelectorAll(".imageLink");
-    
+
       const btnSuppression = document.querySelectorAll(
         ".btn-suppression-image"
       );
-   
+
       supprimerImage(btnSuppression);
       lightbox(imagesLinks);
     } else {
@@ -73,3 +86,8 @@ export const afficherGalerie = () => {
   afficherImages();
 };
 afficherGalerie();
+
+selectTypeGalerie.addEventListener("change", () => {
+  afficherGalerie();
+  formGalerie.submit();
+});

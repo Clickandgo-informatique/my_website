@@ -1,11 +1,6 @@
 let galerie = document.querySelector(".galerie");
+console.log("coucou depuis mouse-slider")
 
-for (let i = 1; i <= 50; i++) {
-  let div = document.createElement("div");
-  div.className = "item";
-  div.textContent = i;
-  galerie.appendChild(div);
-}
 function moveNext() {
   let items = document.querySelectorAll(".item");
   galerie.appendChild(items[0]);
@@ -14,7 +9,9 @@ function movePrev() {
   let items = document.querySelectorAll(".item");
   galerie.prepend(items[items.length - 1]);
 }
-window.addEventListener("wheel", function (event) {
+galerie.addEventListener("wheel", function (event) {
+  event.preventDefault();
+  event.stopPropagation();
   if (event.deltaY > 0) {
     moveNext();
   } else {

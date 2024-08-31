@@ -9,9 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Query\AST\Functions\LengthFunction;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\Length;
 
 #[ORM\Entity(repositoryClass: GaleriesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -56,6 +54,9 @@ class Galeries
      */
     #[ORM\ManyToMany(targetEntity: Tags::class, mappedBy: 'galerie')]
     private Collection $tags;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -103,7 +104,7 @@ class Galeries
         return $this->is_active;
     }
 
-    public function setActive(bool $is_active): static
+    public function setIsActive(bool $is_active): static
     {
         $this->is_active = $is_active;
 
@@ -211,6 +212,18 @@ class Galeries
         if ($this->tags->removeElement($tag)) {
             $tag->removeGalerie($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

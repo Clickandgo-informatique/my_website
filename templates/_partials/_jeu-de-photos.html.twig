@@ -1,0 +1,9 @@
+<div class="galerie">
+	{% for image in images %}
+		<div class="item" data-id={{image.id}}>
+			<a class="btn-suppression-image" href="{{path('galeries_supprimer_image',{'id':image.id})}}" data-delete data-token="{{csrf_token('delete' ~ image.id)}}">&times;</a>
+			<a class="imageLink" href="{{asset('uploads/images/'~image.name)}}" alt="">
+				<img src="{{asset('/uploads/images/mini/300x300-' ~ image.name)}}" alt="{{image.name}}" width="150" draggable="true" data-position="{{image.ordre}}" data-id="{{image.id}}">
+			</a>
+		{% endfor %}
+	</div>

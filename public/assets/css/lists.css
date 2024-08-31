@@ -34,8 +34,7 @@
   /* margin-bottom: 25px; */
   margin-top: 5px;
   border: 1px solid blue;
-  background-color: lightgray;
-  color: blue;
+  background-color: rgb(244, 244, 244);
 }
 .miniature-image img {
   border-radius: 10px;

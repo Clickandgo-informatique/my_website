@@ -26,16 +26,6 @@
   height: var(--gallery-height);
   margin: 10px auto;
 }
-.etat-galerie {
-  padding: 5px 12px;
-  border: 1px solid darkgray;
-  background-color: var(--secondary-background-color);
-  border-radius: 50px;
-  width: fit-content;
-  margin: 5px;
-  font-size: 0.6rem;
-}
-
 .miniature {
   position: relative;
   display: flex;
@@ -256,6 +246,7 @@
   overflow-y: scroll;
   margin: 5px auto;
   position: relative;
+  width: 100%;
 }
 .details-image {
   padding: 3px;

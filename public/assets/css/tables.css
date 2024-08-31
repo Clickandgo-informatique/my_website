@@ -22,7 +22,7 @@ td {
   padding: 5px;
 }
 table tr {
-  background-color: #fff;  
+  background-color: #fff;
   border: 1px solid rgb(63, 63, 63);
   border-radius: 10px;
 }
@@ -70,6 +70,51 @@ td .grabber {
   color: darkgray;
   cursor: grabbing;
 }
+/* tables incluses dans les listes */
+.list-table {
+  margin: 5px auto;
+  padding: 0;
+  border: unset;
+  border-spacing: unset;
+}
+.list-table th {
+  background-color: rgb(244, 244, 244);
+  color: black;
+  font-weight: normal;
+  padding: 3px;
+  margin: 0;
+}
+.list-table thead {
+  box-shadow: unset;
+  padding: 0;
+  margin: 0;
+}
+.list-table tr {
+  padding: 0;
+  margin: 0;
+}
+.list-table tr td {
+  margin: 2px;
+  padding: 2px;
+}
+.ordre-liste {
+  margin-left: 10px;
+}
+.col-50 {
+  width: 50px;
+}
+.col-75 {
+  width: 75px;
+}
+.col-100 {
+  width: 100px;
+}
+.col-150 {
+  width: 150px;
+}
+.col-200 {
+  width: 200px;
+}
 @media (max-width: 650px) {
   th {
     display: none;
@@ -99,9 +144,37 @@ td .grabber {
     border: none;
   }
 
-  td::before {
-    color: darkblue;
+  td::before {   
     content: attr(data-cell);
     text-transform: capitalize;
+  }
+  td::before {
+    content: attr(data-label) ": ";
+    width: 200px;
+    padding-left: 25px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: left;
+    margin-right: 25px;
+  }
+  .list-table thead {
+    display: none;
+    box-shadow: unset;
+  }
+  .list-table tr {
+    border: none;
+    box-shadow: none;
+  }
+  .list-table tr td
+{
+    text-align: left;
+  }
+  .list-table tr td i {
+    display: none;
+  }
+  .list-table .etat-galerie .badge{
+    display:block;
+    margin-left: 5px;   
+   
   }
 }

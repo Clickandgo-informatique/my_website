@@ -1,5 +1,4 @@
 const btnAddItem = document.querySelector(".btnAddItem");
-const btnRemoveItem = document.querySelectorAll(".btnRemoveItem");
 const listeSections = document.querySelectorAll(".section-page");
 const enteteSection = document.querySelector(".entete-section");
 const sectionNum = document.querySelectorAll(".sectionNum");
@@ -31,35 +30,44 @@ const addFormToCollection = (e) => {
     collectionHolder.dataset.index
   );
   collectionHolder.appendChild(item);
+  ajoutBoutonSuppressionSection();
 
   //Incrémentation
   collectionHolder.dataset.index++;
   // compterSections();
 };
+
+//Ajouter une section de page
 btnAddItem.addEventListener("click", (e) => {
   //On vérifie que la page a été enregistrée
   console.log("pageId = ", pageId);
   if (pageId.value === "") {
-    alert("Veuillez completer puis enregistrer la page avant de créer des sections.");
+    alert(
+      "Veuillez completer puis enregistrer la page avant de créer des sections."
+    );
   } else {
     addFormToCollection(e);
   }
 });
+const ajoutBoutonSuppressionSection = () => {
+  const btnRemoveItem = document.querySelectorAll(".btnRemoveItem");
+  //Bouton suppression d'une section de page (item)
+  btnRemoveItem.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-//Bouton suppression d'une section de page (item)
-btnRemoveItem.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    if (
-      confirm("Etes vous sûr.e de vouloir effacer cette section de page ?.")
-    ) {
-      // const sectionPage = document.querySelector(".section-page");
-      btn.closest(".section-page").remove();
-      // compterSections();
-    }
+      if (
+        confirm("Etes vous sûr.e de vouloir effacer cette section de page ?.")
+      ) {
+        // const sectionPage = document.querySelector(".section-page");
+        btn.closest(".section-page").remove();
+        // compterSections();
+      }
+    });
   });
-});
+};
+ajoutBoutonSuppressionSection();
+
 //Affichage horizontal des miniatures de la galerie au changement du select
 async function afficherMiniatures(galerieId, containerMiniatures) {
   const response = await fetch(
@@ -80,9 +88,11 @@ async function afficherMiniatures(galerieId, containerMiniatures) {
 //Bouton pour ouvrir la galerie selectionnée
 btnOuvrirGalerie.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    // //Selection du champ select des galeries actif
-    let selectGalerie = document.querySelector(".select-galeries");
-
+   
+    //Selection du champ select des galeries actif
+    let selectGalerie = e.currentTarget
+      .closest(".section-page")
+      .querySelector(".select-galeries");
     if (selectGalerie.value !== "") {
       //Création du href du bouton pour ouvrir la page de galerie
       btn.setAttribute(
@@ -103,7 +113,7 @@ selectGaleries.forEach((el) => {
 
     if (e.currentTarget.value !== "") {
       galerieId = e.currentTarget.value;
-      //Recherche de la div de galerie correspondant à la section active
+      //Recherche de la div de galerie correspondant à la section de page active
       const containerMiniatures = e.currentTarget
         .closest(".section-page")
         .querySelector(".container-miniatures");

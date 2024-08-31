@@ -1,5 +1,5 @@
-.container-switch div{
-  display:flex;
+.container-switch div {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -36,4 +36,80 @@
 .toggle-switch:checked::after {
   left: 70%;
   background-color: #fff;
+}
+/* toggler sur plusieurs options (radio buttons) */
+.toggle-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  inline-size: fit-content;
+  padding: 5px 8px;
+}
+.toggle-group label {
+  border-radius: 21px;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0.5em 1em;
+  text-align: center;
+  user-select: none;
+}
+.toggle-group label:has(input:checked) {
+  background-color: #de2d2d;
+  color: #333;
+}
+/* .toggle-group input[type="radio"] {
+  display: none;
+} */
+/*switch pour thèmes */
+.theme-switch {
+  position: absolute;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  right: 45px;
+  top: 45px;
+  display: flex;
+  width: 50px;
+}
+.theme-switch label {
+  background-color: rgb(212, 212, 212);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 50px;
+  height: 28px;
+  padding: 5px;
+  min-width: 60px;
+  max-width: 60px;
+  position: relative; 
+  box-shadow: 1px 1px 1px darkgray;
+}
+.theme-switch-checkbox {
+  display: none;
+}
+.theme-switch-checkbox:checked + .theme-switch-label .ball {
+  transform: translateX(25px);
+}
+.theme-switch-checkbox:checked + .theme-switch-label {
+  background: #333;
+}
+.fa-moon {
+  color: #f1c40f;
+}
+.fa-sun {
+  color: #f39c12;
+}
+.ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  cursor: pointer;
+  border-radius: 50%;
+  top: 3px;
+  left: 4px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+  border:1px solid lightgray;
+  transition: transform 0.3s linear;
 }

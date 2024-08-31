@@ -5,15 +5,16 @@
   align-items: center;
   flex-direction: column;
   margin-top: 10px;
+  background-color: #fff;
 }
 .sectionsPages div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 98%;
+  width: 100%;
 }
 section {
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
 }
 .sectionsPages div label {
@@ -23,12 +24,12 @@ section {
 .section-page {
   /* border: 1px solid lightgray; */
   margin-bottom: 15px;
-  width: 98%;
+  width: 100%;
   border-radius: 10px;
   position: relative;
   display: flex;
   background-color: #fff;
-  box-shadow: 10px 10px 14px lightgray;
+  
 }
 .section-page:hover {
   transition: all 0.5s;
@@ -67,7 +68,7 @@ textarea {
   flex-direction: row;
   width: 100%;
   padding: 5px;
-  background-color: rgb(202, 202, 202);
+  /* background-color: rgb(202, 202, 202); */
   color: white;
   font-weight: 500;
 }
@@ -89,7 +90,7 @@ textarea {
   font-size: 0.9rem;
   width: 100%;
   font-weight: 600;
-  color:var(--primary-background-color)
+  color: var(--primary-background-color);
 }
 .section-page .boutons-galerie {
   display: flex;
@@ -98,15 +99,6 @@ textarea {
   justify-content: center;
   align-items: last baseline;
 }
-.etat-page {
-  padding: 5px 12px;
-  border: 1px solid darkgray;
-  border-radius: 50px;
-  width: fit-content;
-  margin: 5px;
-  font-size: 0.6rem;
-}
-
 .titre-section,
 .contenu-section {
   margin: 10px;
@@ -127,6 +119,16 @@ textarea {
 .titre-galerie,
 .description-galerie {
   margin-bottom: 5px;
+}
+.barre-horizontale-options-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#pages_ordre {
+  width: 75px;
 }
 @media screen and (max-width: 650px) {
   .section-page .boutons-galerie {
