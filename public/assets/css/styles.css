@@ -18,6 +18,50 @@
   --secondary-background-color: rgb(0, 165, 141);
 }
 
+/* Light (default) */
+html,
+html:has(input[name="theme"][value="light"]:checked) {
+  color-scheme: light;
+  --color-surface-0: #f3f3f3;
+  body,
+  main {
+    background-color: var(--color-surface-0);
+    color: #333;
+  }
+}
+/* Dark (override) */
+html:has(input[name="theme"][value="dark"]:checked) {
+  color-scheme: dark;
+  --color-surface-0: #333;
+  body,
+  main {
+    background-color: var(--color-surface-0);
+    color: #f2f2f2;
+  }
+  nav,
+  footer,
+  .list .item,
+  .sidebar,.sidebar-menu {
+    background-color: #404040;
+  }
+  a,i,
+  a:visited {
+    color: #f2f2f2;
+  }
+}
+/* Dark system preference (light is treated as implicit default) */
+@media (prefers-color-scheme: dark) {
+  html:has(input[name="theme"][value="auto"]:checked) {
+    color-scheme: dark;
+    --color-surface-0: #333;
+    body,
+    main {
+      background-color: var(--color-surface-0);
+      color: #f3f3f3;
+    }
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +76,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  transition: background-color 1s linear;
 }
 html {
   color: #636363;
@@ -48,6 +93,7 @@ main {
   min-height: 100vh;
   background-color: #fffdfd;
   scroll-behavior: smooth;
+  transition: background-color 1s linear;
 }
 a,
 link {
@@ -83,6 +129,9 @@ button {
 }
 .btn a {
   text-decoration: none;
+}
+.btn i {
+  margin: 0;
 }
 .alert {
   color: red;
@@ -187,7 +236,8 @@ button {
   left: 90%;
   z-index: 15;
 }
-.speed-dial-button,.speed-dial-button button {
+.speed-dial-button,
+.speed-dial-button button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -234,7 +284,8 @@ button {
   /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25); */
   transition: all 0.5s;
 }
-.speed-dial__link i,.speed-dial-button button i {
+.speed-dial__link i,
+.speed-dial-button button i {
   margin: 0;
 }
 

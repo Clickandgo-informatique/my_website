@@ -14,7 +14,6 @@
 		{% endblock %}
 	</head>
 	<body>
-		{{include('_partials/_nav.html.twig')}}		
 		{% for messages in app.flashes %}
 			{% for message in messages %}
 				<div class="flashbag">
@@ -24,6 +23,7 @@
 			{% endfor %}
 		{% endfor %}
 		<main>
+		{{include('_partials/_nav.html.twig')}}		
 		{{ include("_partials/_theme-switch.html.twig") }}
 			{{ include('_partials/_sidebar.html.twig') }}
 			{% block body %}{% endblock %}

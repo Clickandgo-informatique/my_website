@@ -63,53 +63,27 @@
   display: none;
 } */
 /*switch pour thèmes */
-.theme-switch {
-  position: absolute;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  right: 45px;
-  top: 45px;
-  display: flex;
-  width: 50px;
-}
-.theme-switch label {
-  background-color: rgb(212, 212, 212);
-  display: flex;
+.theme-switcher {
+  display: inline-flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: 50px;
-  height: 28px;
-  padding: 5px;
-  min-width: 60px;
-  max-width: 60px;
-  position: relative; 
-  box-shadow: 1px 1px 1px darkgray;
-}
-.theme-switch-checkbox {
-  display: none;
-}
-.theme-switch-checkbox:checked + .theme-switch-label .ball {
-  transform: translateX(25px);
-}
-.theme-switch-checkbox:checked + .theme-switch-label {
-  background: #333;
-}
-.fa-moon {
-  color: #f1c40f;
-}
-.fa-sun {
-  color: #f39c12;
-}
-.ball {
-  background-color: #fff;
-  width: 22px;
-  height: 22px;
+  font-size: 0.6rem;
   position: absolute;
-  cursor: pointer;
-  border-radius: 50%;
-  top: 3px;
-  left: 4px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.35);
-  border:1px solid lightgray;
-  transition: transform 0.3s linear;
+  top: 45px;
+  right: 15px;
+  border-radius: 50px;
+  border: 1px solid lightgray;
+}
+.theme-switcher label {
+  display: flex;
+  align-items: center;
+  max-width: 20px;
+  padding: 0;
+  margin: 0;
+}
+.theme-switcher input[type="radio"] {
+  margin: 3px;
+  padding: 3px;
+  width: fit-content;
 }
