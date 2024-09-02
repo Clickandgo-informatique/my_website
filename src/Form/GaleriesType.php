@@ -39,7 +39,7 @@ class GaleriesType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('description', TextareaType::class, ['required' => false])
+            ->add('description', TextareaType::class, ['label'=>'Description','attr'=>['class'=>'ckeditor']])
 
             ->add('primary_background_color', ColorType::class, ['label' => "Couleur primaire de fond", 'attr' => ['class' => 'input-galerie']])
             ->add('gallery_width', NumberType::class, ['mapped' => false, 'html5' => true, 'label' => "Largeur galerie", 'attr' => ["min" => 0, "max" => 100, "step" => 10, "default" => 100, "value" => 100, 'class' => 'input-galerie']])

@@ -1,6 +1,27 @@
 import { lightbox } from "./lightbox.js";
 import { supprimerImage } from "./images.js";
 
+//Ouvre la div de drop d'images
+const dropArea = document.querySelector(".container-drop-area");
+const btnDropArea = document.querySelector(".btn-ouvrir-importation-images");
+btnDropArea.addEventListener("click", () => {
+  dropArea.style.display = "flex";
+});
+//ferme la div de drop d'images
+const btnFermerDropArea = document.querySelector(".btn-fermer-drop-area");
+btnFermerDropArea.addEventListener("click", () => {
+  dropArea.style.display = "none";
+});
+
+//Ouvre la div des paramètres de galerie
+const divParametres = document.querySelector(".parametres-galerie");
+const btnOuvrirParametres = document.querySelector(
+  ".btn-ouvrir-parametres-galerie"
+);
+btnOuvrirParametres.addEventListener("click", () => {
+  divParametres.style.display = "flex";
+});
+
 //Afficher les images dans la galerie active
 const formGalerie = document.querySelector("#form-galerie");
 const galerie = document.querySelector(".container-galerie");
@@ -8,7 +29,7 @@ const selectTypeGalerie = document.querySelector("#galeries_type");
 const inputsGalerie = document.querySelector(".inputs-galerie");
 const inputsCarousel = document.querySelector(".inputs-carousel");
 
-//Mode d'affichage de la galerie (carousel ou simple)
+//Mode d'affichage de la galerie
 export const afficherGalerie = () => {
   let url = "";
   if (selectTypeGalerie !== null) {

@@ -1,3 +1,11 @@
+//Fermer la div des paramètres de la galerie
+const btnFermerParametres = document.querySelector(
+  ".btn-fermer-parametres-galerie"
+);
+btnFermerParametres.addEventListener("click", (e) => {
+  e.currentTarget.parentElement.style.display="none";
+});
+
 //Changer la largeur de la galerie
 const inputGalleryWidth = document.querySelector("#galeries_gallery_width");
 inputGalleryWidth.addEventListener("change", () => {
@@ -73,11 +81,4 @@ inputImageShadow.addEventListener("change", () => {
     "--images-shadow",
     `${imgShadow}px ${imgShadow}px ${imgShadow}px darkgray`
   );
-});
-
-//Slide-up paramètres galeries
-const toggler = document.querySelector(".toggler-slide-up-down");
-const containerParametres = document.querySelector(".parametres-galerie");
-toggler.addEventListener("click", () => {
-  containerParametres.classList.toggle("slide-up-down");
 });

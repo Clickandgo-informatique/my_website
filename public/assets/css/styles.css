@@ -41,10 +41,12 @@ html:has(input[name="theme"][value="dark"]:checked) {
   nav,
   footer,
   .list .item,
-  .sidebar,.sidebar-menu {
+  .sidebar,
+  .sidebar-menu {
     background-color: #404040;
   }
-  a,i,
+  a,
+  i,
   a:visited {
     color: #f2f2f2;
   }
@@ -287,6 +289,25 @@ button {
 .speed-dial__link i,
 .speed-dial-button button i {
   margin: 0;
+}
+.expandable {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease-in-out;
+  border: none;
+  padding: 0;
+}
+.expandable.expandable-show {
+  max-height: 1000px;
+  border: initial;
+  padding: initial;
+}
+.boutons-horizontale {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-height: 450px) {

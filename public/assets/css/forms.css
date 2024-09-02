@@ -4,6 +4,11 @@ form {
   width: 80%;
   max-width: 1000px;
   margin: 10px auto;
+  justify-content: center;
+  align-items: center;
+}
+form div {
+  width: 100%;
 }
 form .row {
   display: flex;
@@ -11,17 +16,18 @@ form .row {
 }
 textarea {
   min-height: 100px;
-  width: 100%;
 }
+
 input,
 select,
 textarea {
+  display: flex;
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 7px;
   margin: 5px;
-  width: 100%;
   background-color: #fff;
+  width: 100%;
 }
 input[type="datetime-local"] {
   text-align: right;
@@ -43,6 +49,13 @@ label {
 }
 legend {
   font-size: 0.8rem;
+}
+.ck-editor{
+  display:flex;
+  flex-direction: column;
+  min-width: 100%;max-width: 100%;
+  min-height: 75px;
+
 }
 @media screen and (max-width: 650px) {
   form {

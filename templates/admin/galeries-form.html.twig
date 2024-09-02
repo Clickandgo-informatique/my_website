@@ -4,7 +4,6 @@
 {% endblock %}
 {% block body %}
 
-
 	<h1 class="titre">
 		<i class="fa-regular fa-images"></i>
 		{{titre}}</h1>
@@ -38,17 +37,14 @@
 		{{ form_start(form) }}
 		<div class="container-switch">{{ form_row(form.is_active) }}</div>
 		<p class="titre-galerie">{{ form_row(form.titre) }}</p>
-		{{ form_errors(form.titre) }}		
-			{{ form_row(form.type) }}
-			<div id="editor">
-				{{ form_row(form.description|raw) }}
-			</div>
-			{{ form_row(form.tags) }}
-	
+		{{ form_errors(form.titre) }}
+		{{ form_row(form.type) }}		
+		{{ form_row(form.description) }} 
+		{{ form_row(form.tags) }}
 		{# {{ form_row(form.created_at)}} #}
 
-		{# paramètres galerie d'images #}
-		<h2 class="titre centered">Galerie d'images</h2>
+		<h2 class="titre centered">
+			Galerie d'images</h2>
 		<span class="images-count">
 			{% if galerie.images|length ==0 %}
 				<span class="centered alert">Il n'existe encore aucune image dans cette galerie (pensez à sauvegarder pour rafraichir la galerie.)</span>
@@ -57,9 +53,10 @@
 					images enregistrées.</span>
 			{% endif %}
 		</span>
-		<div class="toggler-slide-up-down centered">
-			<i class="fa-solid fa-sliders"></i>Options galerie</div>
-		<div class="parametres-galerie">
+
+		{# paramètres galerie d'images #}
+		<div class="parametres-galerie draggable">
+			<div class="btn btn-fermer-parametres-galerie">&times;</div>
 			<div class="inputs-galerie">
 				{{ form_row(form.primary_background_color) }}
 				{{form_row(form.gallery_width)}}
@@ -79,7 +76,15 @@
 		{# {{ form_rest(form) }} #}
 		{# {{include('_partials/_multi-select-tags.html.twig')}} #}
 		{{ include('admin/importer-images-form.html.twig') }}
-		{{ form_row(form.images) }}
+		{# {{ form_row(form.images) }} #}
+		{# Boutons horizontale #}
+			<div class="boutons-horizontale"> <div class="btn btn-ouvrir-parametres-galerie">
+				<i class="fa-solid fa-sliders"></i>Options galerie
+			</div>
+			<div class="btn btn-ouvrir-importation-images">
+				<i class="fa-solid fa-sliders"></i>Importer des images
+			</div>
+		</div>
 
 		{# Container images rempli en JS #}
 		<div class="container-galerie" data-id={{galerie.id}}></div>
@@ -93,6 +98,7 @@
 		<script src="{{asset('assets/js/galeries.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/galeries-parameters.js')}}" type="module" defer></script>
+		<script src="{{asset('assets/js/main.js')}}" type="module" defer></script>
 		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}" defer></script>
 		<script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}" defer></script>
 	{% endblock %}

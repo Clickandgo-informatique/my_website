@@ -66,7 +66,7 @@
 									{{gal.images|length}}</td>
 								<td data-label="Titre">{{gal.titre}}</td>
 								<td data-label="Type" class="text-align-center">{{gal.type}}</td>
-								<td data-label="Description">{{gal.description|u.truncate(25)}}</td>
+								<td data-label="Description">{{gal.description|u.truncate(125)|raw}}</td>
 								<td class="text-align-center etat-galerie" data-label="Etat">{{(gal.isactive) ? '<span class="badge badge-success centered">Publique</span>':'<span class="badge badge-danger centered">Privée</span>'}}
 								</td>
 							</tr>

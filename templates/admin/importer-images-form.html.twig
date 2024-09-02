@@ -1,16 +1,14 @@
-{% block body %}
-	<h1 class="titre">Importer des fichiers images</h1>
-
+<div class="container-drop-area draggable">
+<div class="btn btn-fermer-drop-area">&times;</div>
 	<section class="images-drop-area" accept=".png,.jpg,.jpeg,.gif,.bmp,.webp">
 		<div class="centre-drop-area">
 			<i class="fa-regular fa-images"></i>
 			<p>Glissez ici vos fichiers images</p>
 		</div>
 	</section>
-	<div class="tableau-details-images">		
-	</div>
-
-	{% block javascripts %}
-		<script type="module" src="{{asset('assets/js/drop-images.js')}}"></script>
-	{% endblock %}
+	<div class="tableau-details-images"></div>
+</div>
+{% block javascripts %}
+	<script type="module" src="{{asset('assets/js/main.js')}}" defer></script>
+	<script type="module" src="{{asset('assets/js/drop-images.js')}}" defer></script>
 {% endblock %}
