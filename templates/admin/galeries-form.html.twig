@@ -38,10 +38,14 @@
 		<div class="container-switch">{{ form_row(form.is_active) }}</div>
 		<p class="titre-galerie">{{ form_row(form.titre) }}</p>
 		{{ form_errors(form.titre) }}
-		{{ form_row(form.type) }}		
-		{{ form_row(form.description) }} 
-		{{ form_row(form.tags) }}
-		{# {{ form_row(form.created_at)}} #}
+		{{ form_row(form.type) }}
+		<div class="wrapper-ckeditor">
+			{{ form_row(form.description) }}
+		</div>
+	<div class="multi-select-tags">
+	
+	</div>
+	
 
 		<h2 class="titre centered">
 			Galerie d'images</h2>
@@ -57,6 +61,7 @@
 		{# paramètres galerie d'images #}
 		<div class="parametres-galerie draggable">
 			<div class="btn btn-fermer-parametres-galerie">&times;</div>
+
 			<div class="inputs-galerie">
 				{{ form_row(form.primary_background_color) }}
 				{{form_row(form.gallery_width)}}
@@ -76,13 +81,13 @@
 		{# {{ form_rest(form) }} #}
 		{# {{include('_partials/_multi-select-tags.html.twig')}} #}
 		{{ include('admin/importer-images-form.html.twig') }}
-		{# {{ form_row(form.images) }} #}
 		{# Boutons horizontale #}
-			<div class="boutons-horizontale"> <div class="btn btn-ouvrir-parametres-galerie">
+		<div class="boutons-horizontale">
+			<div class="btn btn-ouvrir-parametres-galerie">
 				<i class="fa-solid fa-sliders"></i>Options galerie
 			</div>
 			<div class="btn btn-ouvrir-importation-images">
-				<i class="fa-solid fa-sliders"></i>Importer des images
+				<i class="fa-solid fa-file-import"></i>Importer des images
 			</div>
 		</div>
 
@@ -99,6 +104,7 @@
 		<script src="{{asset('assets/js/lightbox.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/galeries-parameters.js')}}" type="module" defer></script>
 		<script src="{{asset('assets/js/main.js')}}" type="module" defer></script>
+		<script src="{{asset('assets/js/multi-select-tags.js')}}" type="module" defer></script>
 		<script type="module" src="{{asset('assets/js/ckeditor5init.js')}}" defer></script>
 		<script type="module" src="{{asset('ckeditor5/ckeditor5.js')}}" defer></script>
 	{% endblock %}

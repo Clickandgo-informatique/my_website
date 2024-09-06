@@ -50,12 +50,9 @@ label {
 legend {
   font-size: 0.8rem;
 }
-.ck-editor{
+.wrapper-ckeditor{
   display:flex;
-  flex-direction: column;
-  min-width: 100%;max-width: 100%;
-  min-height: 75px;
-
+  align-items: center;
 }
 @media screen and (max-width: 650px) {
   form {

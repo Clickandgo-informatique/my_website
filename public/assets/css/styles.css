@@ -33,16 +33,19 @@ html:has(input[name="theme"][value="light"]:checked) {
 html:has(input[name="theme"][value="dark"]:checked) {
   color-scheme: dark;
   --color-surface-0: #333;
+  * {
+    color: #333;
+  }
   body,
   main {
     background-color: var(--color-surface-0);
-    color: #f2f2f2;
+    color: #333;
   }
   nav,
   footer,
   .list .item,
   .sidebar,
-  .sidebar-menu {
+  .sidebar-menu,.parametres-galerie {
     background-color: #404040;
   }
   a,
@@ -50,6 +53,27 @@ html:has(input[name="theme"][value="dark"]:checked) {
   a:visited {
     color: #f2f2f2;
   }
+  .titre,
+  .titre-groupe,
+  label {
+    color: #f4f4f4;
+  }
+  .btn,
+  .speed-dial-button a,
+  .speed-dial-button button {
+    background-color: var(--primary-background-color);
+  }
+  .btn {
+    color: white;
+  }
+  .button-label {
+    color: white;
+  }
+  .flashbag{background-color: var(--secondary-background-color);}
+  .flashbag-text{
+    color: white;
+  }
+
 }
 /* Dark system preference (light is treated as implicit default) */
 @media (prefers-color-scheme: dark) {
@@ -125,9 +149,9 @@ button {
 }
 .btn:hover {
   transform: scale(105%);
-  box-shadow: 2px 2px 5px darkgray;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.25);
   border: 1px solid darkgray;
-  transition: all 0.3s;
+  transition: all 0.3s; 
 }
 .btn a {
   text-decoration: none;
@@ -228,7 +252,7 @@ button {
   background-color: red;
 }
 .ck-editor__editable_inline {
-  min-height: 150px;
+  min-height: 75px;
 }
 .speed-dial {
   display: flex;

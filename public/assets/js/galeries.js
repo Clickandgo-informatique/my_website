@@ -21,6 +21,13 @@ const btnOuvrirParametres = document.querySelector(
 btnOuvrirParametres.addEventListener("click", () => {
   divParametres.style.display = "flex";
 });
+//Fermer la div des paramètres de la galerie
+const btnFermerParametres = document.querySelector(
+  ".btn-fermer-parametres-galerie"
+);
+btnFermerParametres.addEventListener("click", (e) => {
+  e.currentTarget.parentElement.style.display="none";
+});
 
 //Afficher les images dans la galerie active
 const formGalerie = document.querySelector("#form-galerie");

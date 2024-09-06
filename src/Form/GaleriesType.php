@@ -50,8 +50,7 @@ class GaleriesType extends AbstractType
             ->add('images_border_width', NumberType::class, ['mapped' => false, 'label' => "Epaisseur bordure", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']])
             ->add('images_shadow', NumberType::class, ['mapped' => false, 'label' => "Epaisseur ombre", 'html5' => true, 'attr' => ["min" => 0, "max" => 10, "step" => 1, "default" => 2, "value" => 2, 'class' => 'input-galerie']])
             ->add('carousel_speed', NumberType::class, ['mapped' => false, 'label' => "Vitesse défilement", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
-            ->add('carousel_transition', NumberType::class, ['mapped' => false, 'label' => "Vitesse transition", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
-            ->add('tags', EntityType::class, ['by_reference' => false, 'mapped' => true, 'choice_label' => 'titre', 'class' => Tags::class, 'expanded' => true, 'multiple' => true, 'attr' => ['class' => 'select-tags', 'rows' => 6, 'cols' => 6]]);
+            ->add('carousel_transition', NumberType::class, ['mapped' => false, 'label' => "Vitesse transition", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

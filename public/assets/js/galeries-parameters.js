@@ -1,11 +1,3 @@
-//Fermer la div des paramètres de la galerie
-const btnFermerParametres = document.querySelector(
-  ".btn-fermer-parametres-galerie"
-);
-btnFermerParametres.addEventListener("click", (e) => {
-  e.currentTarget.parentElement.style.display="none";
-});
-
 //Changer la largeur de la galerie
 const inputGalleryWidth = document.querySelector("#galeries_gallery_width");
 inputGalleryWidth.addEventListener("change", () => {
