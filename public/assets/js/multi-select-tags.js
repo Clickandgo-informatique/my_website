@@ -61,8 +61,8 @@ const initApp = (e) => {
     const selectedTagsContainer = document.createElement("div");
     selectedTagsContainer.className = "selected-tags-container";
     tagsContainer.appendChild(ajoutTag);
-    multiSelectTags.appendChild(labelMultiSelect);
     selectedTagsContainer.appendChild(dropdownCheckbox);
+    multiSelectTags.appendChild(labelMultiSelect);
     multiSelectTags.appendChild(selectedTagsContainer);
     multiSelectTags.appendChild(tagsContainer);
 
@@ -91,6 +91,43 @@ const initApp = (e) => {
     const tagsList = document.querySelectorAll(".tag");
     const arraySelectedTags = [];
 
+    //Obtenir la liste des tags sélectionnés pour cette entité au démarrage
+    const getSelectedTagsList = async () => {
+      try {
+        const response = await fetch("/admin/tags/tags-galeries/selection", {
+          methods: "GET",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "Content-type": "Application/Json",
+          },
+        });
+        const selectedTagsList = await response.json();
+        //afficher les tags déjà sélectionnés
+        selectedTagsList.forEach((tag) => {
+          //Création de la div pour chaque objet
+          //Création de la div du tag
+          const divTag = document.createElement("div");
+          divTag.className = "tag draggable";
+          divTag.setAttribute("draggable", true);
+          divTag.setAttribute("id", tag.id);
+
+          //Création de l'icône du tag
+          const icon = document.createElement("i");
+          icon.className = tag.icone.toString();
+
+          //traitement pour affichage
+          divTag.style.backgroundColor = tag.couleur;
+          divTag.style.color = "white";
+          divTag.appendChild(icon);
+          divTag.appendChild(document.createTextNode(tag.titre));
+          selectedTagsContainer.appendChild(divTag);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getSelectedTagsList();
+
     for (let tag of tagsList) {
       tag.addEventListener("dragstart", function (e) {
         let selectedTag = e.target;
@@ -100,7 +137,7 @@ const initApp = (e) => {
           e.preventDefault();
         });
 
-        divSelectedTags.addEventListener("drop", function () {          
+        divSelectedTags.addEventListener("drop", function () {
           divSelectedTags.appendChild(selectedTag);
           arraySelectedTags.push({ id: selectedTag.id });
           selectedTag = null;
@@ -116,7 +153,7 @@ const initApp = (e) => {
           //effacement du tag dans le tableau de tags en sélection
           deletedTag = selectedTag.id;
           arraySelectedTags.splice(arraySelectedTags.indexOf(deletedTag), 1);
-          selectedTag = null;        
+          selectedTag = null;
           effacerTags();
         });
       });

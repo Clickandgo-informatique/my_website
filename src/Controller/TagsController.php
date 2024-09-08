@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Galeries;
 use App\Entity\Tags;
 use App\Repository\GaleriesRepository;
 use App\Repository\TagsRepository;
@@ -25,9 +26,32 @@ class TagsController extends AbstractController
         return $this->render('_partials/liste-tags.html.twig', ['listeTags' => $listeTags]);
     }
     #[Route('tags-galeries', name: 'tags_galeries')]
-    public function tagsGaleries(TagsRepository $tagsRepo, Request $request): Response
+    public function tagsGaleries(SessionInterface $session,TagsRepository $tagsRepo, Request $request,GaleriesRepository $galeriesRepo): Response
     {
+        $galerieId=$session->get('galerieId');
         $listeTags = $tagsRepo->findBy(['parent' => 'galeries'], ['titre' => 'ASC']);
+
+        $tags = [];
+
+        foreach ($listeTags as $key => $tag) {
+            $tags[$key]['id'] = $tag->getId();
+            $tags[$key]['titre'] = $tag->getTitre();
+            $tags[$key]['icone'] = $tag->getIcone();
+            $tags[$key]['couleur'] = $tag->getCouleur();
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse($tags);
+        } else {
+            return new JsonResponse('La requête doit être effectuée en Ajax', 201);
+        }
+    }
+    #[Route('tags-galeries/selection', name: 'tags_galeries_selection')]
+    public function tagsGaleriesSelection(GaleriesRepository $galeriesRepo, Request $request, SessionInterface $session): Response
+    {
+        $galerieId = $session->get('galerieId');
+        $galerie=$galeriesRepo->find($galerieId);
+        $listeTags = $galerie->getTags();     
 
         $tags = [];
 

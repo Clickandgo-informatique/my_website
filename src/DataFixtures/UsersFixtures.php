@@ -20,6 +20,7 @@ class UsersFixtures extends Fixture
             ->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->hashPassword($user, 'SuperAdmin2024!'))
             ->isVerified(true);
+        $this->setReference('Emmanuel', $user);
 
         $manager->persist($user);
 

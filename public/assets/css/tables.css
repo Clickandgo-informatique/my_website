@@ -116,7 +116,7 @@ td .grabber {
   width: 200px;
 }
 @media (max-width: 650px) {
-  th {
+  th ,thead{
     display: none;
   }
   tr {

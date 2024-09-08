@@ -44,3 +44,25 @@ if (expandableControl != undefined) {
     expandable.classList.toggle("expandable-show");
   });
 }
+
+//Confirmation de suppression d'un élément pour CRUD
+const deleteBtn = document.querySelectorAll("[data-delete-url]");
+deleteBtn.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    let url = item.dataset.deleteUrl;
+    if (confirm("Etes vous sûr.e de vouloir effacer cet élément ?.")) {
+      supprimerItem(url);
+    }
+  });
+});
+const supprimerItem = async (url) => {
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Requested-with": "XMLHttpRequest",
+    },
+  });
+  window.location.reload();
+};

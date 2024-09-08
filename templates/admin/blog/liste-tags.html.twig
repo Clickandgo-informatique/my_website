@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Blog : Liste des tags
+{% endblock %}
+{% block body %}
+	<a class="btn btn-ajout centered" href="{{path('blog_tags_ajouter')}}">
+		<i class="fa-solid fa-circle-plus"></i>Ajouter un tag</a>
+	<table>
+		<thead>
+			<th></th>
+			<th></th>
+			<th>Titre</th>
+		</thead>
+		<tbody>
+			{% for tag in tags %}
+				<tr>
+					<td><a class="btn btn-action centered"href="{{path('blog_tags_modifier',{id:tag.id})}}"><i class="fa-regular fa-pen-to-square"></i></a></td>
+					<td><a class="btn btn-action centered"href="{{path('blog_tags_supprimer',{id:tag.id})}}"data-delete-url='/admin/blog/tags/supprimer/{{tag.id}}'><i class="fa-regular fa-trash-can"></i></a></td>
+					
+					<td data-label="Titre"><strong>{{tag.titre}}</strong></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
