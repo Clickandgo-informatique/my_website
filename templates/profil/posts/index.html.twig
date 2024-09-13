@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Blog
+{% endblock %}
+{% block body %}
+	{{ include('_partials/_blog-navbar.html.twig') }}
+	<h1 class="titre centered">Bienvenue sur le blog</h1>
+	<section>
+		<h2 class="centered">Derniers articles</h2>
+	</section>
+	{% if posts|length>0 %}
+		<ul class="container-posts">
+			{% for post in posts %}
+				<li class="post-item item">
+					<img
+					src="{{asset('uploads/articles/mini/300x300-')~ post.featuredImage}}" alt="">
+					{# Affichage des mots clés#}
+					<div class="container-tags">
+						{% if post.tags|length>0 %}
+							{% for tag in post.tags %}
+								<div class="titre-tag">{{tag.titre}}</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<p>{{post.titre}}</p>
+					{# Affichage des catégories#}
+					<div class="container-categories">
+						{% if post.categories|length>0 %}
+							{% for cat in post.categories %}
+								<div class="titre-categorie">{{cat.titre}}</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<p>Auteur : {{post.getUsers().getNickname()}}</p>
+					<p>Créé le :
+						{{post.createdat|date("d-M-Y à H:i")}}</p>
+				</li>
+
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p class="centered">Il n'existe encore aucun article dans ce blog</p>
+	{% endif %}
+
+{% endblock %}

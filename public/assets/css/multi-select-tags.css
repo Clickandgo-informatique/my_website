@@ -19,6 +19,8 @@
   height: 150px;
   position: relative;
   flex-wrap: wrap;
+  box-shadow: var(--box-shadow);
+  border-radius: 15px;
 }
 .tags-container .tag,
 .selected-tags-container .tag {
@@ -46,6 +48,7 @@
   background-color: #fff;
   flex-wrap: wrap;
   position: relative;
+  border-radius: 10px;
 }
 .checkbox-dropdown-multi-select {
   width: 20px;

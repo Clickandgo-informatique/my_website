@@ -6,8 +6,11 @@ use App\Repository\TagsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TagsRepository::class)]
+#[UniqueEntity(fields: ['titre','parent'], message: "Il existe déjà un élément avec ce nom dans la base de données, veuillez en choisir un autre")]
+
 class Tags
 {
     #[ORM\Id]
@@ -32,6 +35,12 @@ class Tags
      */
     #[ORM\ManyToMany(targetEntity: Galeries::class, inversedBy: 'tags')]
     private Collection $galerie;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\ManyToMany(targetEntity: Posts::class, mappedBy: 'tags')]
+    private Collection $posts;
 
     public function __construct()
     {
@@ -114,4 +123,43 @@ class Tags
 
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Posts>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Posts $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Posts $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            $post->removeTag($this);
+        }
+
+        return $this;
+    }
 }
+

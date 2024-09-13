@@ -1,0 +1,22 @@
+{% if listeTags|length>0 %}
+	<ul class="container-tags">
+		{% for tag in listeTags %}
+			<li class="item card-item">
+				<div class="btn-actions-horizontale">
+					<a class="btn btn-action" href="{{path('tags_modifier',{id:tag.id})}}">
+						<i class="fa-regular fa-pen-to-square"></i>
+					</a>
+					<a class="btn btn-action" href="{{path('tags_supprimer',{id:tag.id})}}" data-delete-url='/admin/blog/tags/supprimer/{{tag.id}}'>
+						<i class="fa-regular fa-trash-can"></i>
+					</a>
+				</div>
+				<div class="miniature-tag" style="background-color:{{tag.couleur}}">
+					<i class="{{tag.icone}}"></i>
+					<span class="titre-tag">{{tag.titre}}</span>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	Aucun tag (étiquette) n'a encore été enregistré dans la base
+{% endif %}

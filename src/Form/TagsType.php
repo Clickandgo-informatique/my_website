@@ -18,7 +18,7 @@ class TagsType extends AbstractType
             ->add('icone', TextType::class)
             ->add('couleur', ColorType::class)
             ->add('titre', TextType::class)
-            ->add('parent', ChoiceType::class, ['choices' => ['Galeries' => 'Galeries', 'Images' => 'Images']])
+            ->add('parent', ChoiceType::class, ['choices' => ['Galeries' => 'Galeries', 'Images' => 'Images','Blog'=>'Blog']])
         ;
     }
 

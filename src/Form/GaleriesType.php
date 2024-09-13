@@ -3,14 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Galeries;
-use App\Entity\Tags;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class GaleriesType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options):void
     {
         $builder
             ->add('titre', TextType::class, ['constraints' => [new Assert\NotBlank(message: "Le titre de la galerie d'images est obligatoire")]])
@@ -52,7 +49,7 @@ class GaleriesType extends AbstractType
             ->add('carousel_speed', NumberType::class, ['mapped' => false, 'label' => "Vitesse défilement", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']])
             ->add('carousel_transition', NumberType::class, ['mapped' => false, 'label' => "Vitesse transition", 'html5' => true, 'attr' => ["min" => 1000, "max" => 5000, "step" => 1000, "default" => 1000, "value" => 1000, 'class' => 'input-carousel']]);
     }
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
             'data_class' => Galeries::class

@@ -10,18 +10,20 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PostsFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function __construct(private readonly SluggerInterface $slugger){}
+    public function __construct(private readonly SluggerInterface $slugger) {}
 
     public function load(ObjectManager $manager): void
     {
-        $newPost = new Posts();
-        $newPost->setUsers($this->getReference('Emmanuel'));
-        $newPost->setTitre('Ceci est un titre');
-        $newPost->setSlug(strtolower($this->slugger->slug($newPost->getTitre())));
-        $newPost->setContenu('Ceci est le contenu');
-        $newPost->setFeaturedImage('default.webp');
-        
-        $manager->persist($newPost);
+        for ($i = 1; $i < 100; $i++) {
+            $newPost = new Posts();
+            $newPost->setUsers($this->getReference('Emmanuel'));
+            $newPost->setTitre('Ceci est un titre pour le post n° '.$i);
+            $newPost->setSlug(strtolower($this->slugger->slug($newPost->getTitre())));
+            $newPost->setContenu('Ceci est le contenu du post n° '.$i);
+            $newPost->setFeaturedImage('default.webp');
+
+            $manager->persist($newPost);
+        }
 
         $manager->flush();
     }

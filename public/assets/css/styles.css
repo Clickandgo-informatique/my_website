@@ -12,10 +12,12 @@
 @import "footer.css";
 @import "toggle-switch.css";
 @import "mouse-slider.css";
+@import "posts.css";
 
 :root {
   --primary-background-color: rgb(0, 138, 117);
   --secondary-background-color: rgb(0, 165, 141);
+  --box-shadow:0 5px 10px rgba(0,0,0,0.1)
 }
 
 /* Light (default) */
@@ -157,7 +159,7 @@ button {
   text-decoration: none;
 }
 .btn i {
-  margin: 0;
+  margin-right: 5px;
 }
 .alert {
   color: red;
@@ -333,7 +335,7 @@ button {
   justify-content: center;
   align-items: center;
 }
-
+.image-preview{display:none;}
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;

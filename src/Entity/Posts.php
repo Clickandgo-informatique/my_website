@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\PostsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PostsRepository::class)]
 class Posts
 {
+    use CreatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,29 +34,21 @@ class Posts
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $users = null;
 
-    /**
-     * @var Collection<int, BlogCategories>
-     */
-    #[ORM\ManyToMany(targetEntity: BlogCategories::class, inversedBy: 'posts')]
-    private Collection $blog_categories;
+    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'posts')]
+    private Collection $categories;
 
-    /**
-     * @var Collection<int, BlogTags>
-     */
-    #[ORM\ManyToMany(targetEntity: BlogTags::class, inversedBy: 'posts')]
-    private Collection $tags;
+    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'posts')]
+    private Collection $Tags;
 
-    /**
-     * @var Collection<int, Comments>
-     */
-    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'posts', orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'posts', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
     public function __construct()
     {
-        $this->blog_categories = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->Tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -123,49 +117,49 @@ class Posts
     }
 
     /**
-     * @return Collection<int, BlogCategories>
+     * @return Collection<int, Categories>
      */
-    public function getBlogCategories(): Collection
+    public function getCategories(): Collection
     {
-        return $this->blog_categories;
+        return $this->categories;
     }
 
-    public function addBlogCategory(BlogCategories $blogCategory): static
+    public function addCategory(Categories $category): static
     {
-        if (!$this->blog_categories->contains($blogCategory)) {
-            $this->blog_categories->add($blogCategory);
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
         }
 
         return $this;
     }
 
-    public function removeBlogCategory(BlogCategories $blogCategory): static
+    public function removeCategory(Categories $category): static
     {
-        $this->blog_categories->removeElement($blogCategory);
+        $this->categories->removeElement($category);
 
         return $this;
     }
 
     /**
-     * @return Collection<int, BlogTags>
+     * @return Collection<int, Tags>
      */
     public function getTags(): Collection
     {
-        return $this->tags;
+        return $this->Tags;
     }
 
-    public function addTag(BlogTags $tag): static
+    public function addTag(Tags $tag): static
     {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
+        if (!$this->Tags->contains($tag)) {
+            $this->Tags->add($tag);
         }
 
         return $this;
     }
 
-    public function removeTag(BlogTags $tag): static
+    public function removeTag(Tags $tag): static
     {
-        $this->tags->removeElement($tag);
+        $this->Tags->removeElement($tag);
 
         return $this;
     }

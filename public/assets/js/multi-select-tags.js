@@ -1,7 +1,9 @@
 const initApp = (e) => {
   const multiSelectTags = document.querySelector(".multi-select-tags");
-  let tags, deletedTag;
-  //Obtenir la liste des tags
+  let tags, selectedTag, deletedTag;
+
+  //Obtenir la liste de tous les tags de galeries en bdd
+  //Excéptés ceux déjà sélectionnés
   const getTags = async () => {
     try {
       const response = await fetch("/admin/tags/tags-galeries/", {
@@ -12,7 +14,7 @@ const initApp = (e) => {
         },
       });
       const tags = await response.json();
-      //filtrer les tags déjà sélectionnés
+      console.log('liste de tags =',tags)
       afficherMultiSelect(tags);
     } catch (error) {
       console.error(error);
@@ -20,6 +22,7 @@ const initApp = (e) => {
   };
   getTags(tags);
 
+  //Créer et afficher le multiselect
   const afficherMultiSelect = (tags) => {
     const ajoutTag = document.createElement("a");
     ajoutTag.className = "btn btn-ajout-tag";
@@ -104,6 +107,8 @@ const initApp = (e) => {
         const selectedTagsList = await response.json();
         //afficher les tags déjà sélectionnés
         selectedTagsList.forEach((tag) => {
+          //Remplissage du tableau de tags sélectionnés
+          arraySelectedTags.push({ id: tag.id });
           //Création de la div pour chaque objet
           //Création de la div du tag
           const divTag = document.createElement("div");
@@ -125,12 +130,15 @@ const initApp = (e) => {
       } catch (error) {
         console.error(error);
       }
+      console.log(arraySelectedTags);
+      return arraySelectedTags;
     };
     getSelectedTagsList();
 
+    //Gestion du drag and drop
     for (let tag of tagsList) {
       tag.addEventListener("dragstart", function (e) {
-        let selectedTag = e.target;
+        selectedTag = e.target;
         console.log(selectedTag);
 
         divSelectedTags.addEventListener("dragover", function (e) {
@@ -142,6 +150,7 @@ const initApp = (e) => {
           arraySelectedTags.push({ id: selectedTag.id });
           selectedTag = null;
           sauvegardeTags();
+          console.log(arraySelectedTags);
         });
 
         divTags.addEventListener("dragover", function (e) {
@@ -155,6 +164,7 @@ const initApp = (e) => {
           arraySelectedTags.splice(arraySelectedTags.indexOf(deletedTag), 1);
           selectedTag = null;
           effacerTags();
+          console.log(arraySelectedTags);
         });
       });
     }
@@ -173,6 +183,7 @@ const initApp = (e) => {
       const data = await response.json();
       console.log(data);
     };
+
     //effacement des tags
     const effacerTags = async () => {
       const response = await fetch("/admin/tags/effacer-tags", {
@@ -187,6 +198,7 @@ const initApp = (e) => {
       console.log(data);
     };
   };
+
 };
 
 window.addEventListener("DOMContentLoaded", initApp);

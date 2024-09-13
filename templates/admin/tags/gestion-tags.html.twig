@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Liste des tags (étiquettes)
+{% endblock %}
+{% block body %}
+	<h1 class="titre">Liste des tags (étiquettes)</h1>
+	<div class="filtre-tags">
+		<form action="POST" name="parent-tags-form" id="parent-tags-form">
+			<input class="parent-option" type="radio" name="parent" id="galeries" value="galeries" data-parent-galeries checked>
+			<label for="galeries">Galeries</label>
+			<input class="parent-option" type="radio" name="parent" id="images" value="images" data-parent-images>
+			<label for="images">Images</label>
+			<input class="parent-option" type="radio" name="parent" id="blog" value="blog" data-parent-blog>
+			<label for="blog">Blog</label>
+		</form>
+	</div>
+	<a href="{{path('tags_creer')}}" class="btn btn-action btn-creer-tag centered">
+		<i class="fa-solid fa-circle-plus"></i>Créer un tag</a>
+	<div class="liste-tags"></div>
+	{% block javascripts %}
+		<script type="module" src="{{asset('assets/js/tags.js')}}" defer></script>
+	{% endblock %}
+{% endblock %}

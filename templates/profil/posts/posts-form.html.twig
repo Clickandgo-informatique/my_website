@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{titre}}
+{% endblock %}
+{% block body %}
+    <h1 class="titre centered">{{titre}}</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.titre) }}
+    {{ form_row(form.contenu) }}
+    {{ form_row(form.featuredImage) }}
+    <div class="image-preview">
+    <img src="" alt="" width="300">
+    </div>
+    {{ form_row(form.categories) }}
+    {{ form_row(form.tags) }}
+    <button class="btn centered"><i class="fa-solid fa-download"></i>Enregistrer</button>
+    {{ form_end(form) }}
+    {% block javascripts %}
+        <script type="module" src="{{asset('assets/js/posts.js')}}"defer></script>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,17 @@
+.container-posts {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+.post-item img {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.titre-tag,
+.titre-categorie {
+  margin-right: 5px;
+  color: blue;
+}

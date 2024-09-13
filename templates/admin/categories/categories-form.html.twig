@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<h1 class="titre centered">Catégories</h1>
+	{{ form_start(form) }}
+	{{ form_row(form.titre) }}
+	{{ form_row(form.parent) }}
+	<button class="btn btn-enregistrer centered"><i class="fa-solid fa-download"></i>Enregistrer</button>
+	{{ form_end(form) }}
+{% endblock %}
