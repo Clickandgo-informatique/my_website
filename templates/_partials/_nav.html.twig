@@ -1,33 +1,12 @@
 <nav>
-	<div class="links-pages">
-		<a href="#">Accueil</a>
-		<ul
-			class="user-pages-links">
-			{# Links de pages user #}
-			<li>
-				<a href="#" class="user-page-link">Page n° 1</a>
-			</li>
-			<li>
-				<a href="#" class="user-page-link">Page n° 2</a>
-			</li>
-			<li>
-				<a href="#" class="user-page-link">Page n° 3</a>
-			</li>
-			<li>
-				<a href="#" class="user-page-link">Page n° 4</a>
-			</li>
-			<li>
-				<a href="#" class="user-page-link">Page n° 5</a>
-			</li>
-
-		</ul>
-		<a href="#">
-			Contact</a>
-	</div>
-
 	<div class="links-login">
-		<a href="{{path('app_register')}}">S'inscrire</a>
-		<a href="{{path('app_login')}}">Se connecter</a>
-		<a href="{{path('app_logout')}}">Se déconnecter</a>
+		{% if is_granted('ROLE_USER') %}
+			<a href="{{path('app_logout')}}">Se déconnecter</a>
+			<p class="logged-as text-right">Connecté en tant que
+				{{app.user.nickname}}</p>
+		{% else %}
+			<a href="{{path('app_register')}}">S'inscrire</a>
+			<a href="{{path('app_login')}}">Se connecter</a>
+		{% endif %}
 	</div>
 </nav>

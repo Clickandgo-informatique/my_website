@@ -1,0 +1,40 @@
+<nav>
+	<div class="links-pages">
+		<a href="#">Accueil</a>
+		<ul
+			class="user-pages-links">
+			{# Links de pages user #}
+			<li>
+				<a href="#" class="user-page-link">Page n° 1</a>
+			</li>
+			<li>
+				<a href="#" class="user-page-link">Page n° 2</a>
+			</li>
+			<li>
+				<a href="#" class="user-page-link">Page n° 3</a>
+			</li>
+			<li>
+				<a href="#" class="user-page-link">Page n° 4</a>
+			</li>
+			<li>
+				<a href="#" class="user-page-link">Page n° 5</a>
+			</li>
+		</ul>
+		<ul class="blog-menu">
+			<a href="{{path('posts_index')}}" class="nav-link">
+				<i class="fa-solid fa-images"></i>Blog</a>
+			<li>
+				<a href="{{path('posts_creer')}}" class="nav-link">
+					<i class="fa-solid fa-images"></i>Créer un article</a>
+			</li>
+		</ul>
+		<a href="#">
+			Contact</a>
+	</div>
+
+	<div class="links-login">
+		<a href="{{path('app_register')}}">S'inscrire</a>
+		<a href="{{path('app_login')}}">Se connecter</a>
+		<a href="{{path('app_logout')}}">Se déconnecter</a>
+	</div>
+</nav>

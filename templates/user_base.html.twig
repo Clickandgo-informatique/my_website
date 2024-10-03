@@ -25,11 +25,10 @@
 				{% endfor %}
 			{% endfor %}
 			{{ include("_partials/_theme-switch.html.twig") }}
-			{% if is_granted('ROLE_ADMIN') %}
-				{{ include('_partials/_sidebar.html.twig') }}
-			{% endif %}
+			{{ include('_partials/_sidebar.html.twig') }}
 			{% block body %}{% endblock %}
 		</main>
+		{{ render(path('pages_afficher_links_footer')) }}
 	</body>
 
 	<script type="module" src="{{asset('assets/js/main.js')}}" defer></script>

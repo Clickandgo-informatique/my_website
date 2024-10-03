@@ -34,21 +34,25 @@
   height: 25px;
   padding: 7px 10px;
   margin: 3px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
-  border: 1px solid white;
+  /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25); */
+  /* border: 1px solid white; */
   font-size: 0.7rem;
   cursor: move;
   opacity: 0.7;
 }
 .selected-tags-container {
   width: 100%;
-  display: flex;
-  border: 1px solid lightgray;
+  display: flex;  
   min-height: 35px;
-  background-color: #fff;
   flex-wrap: wrap;
   position: relative;
   border-radius: 10px;
+  background-color: white;
+}
+.dragging{
+  border:1px dashed blue;
+  transform:scale(105%);
+  background-color: white;
 }
 .checkbox-dropdown-multi-select {
   width: 20px;

@@ -20,7 +20,7 @@ class PostController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(PostsRepository $postsRepo): Response
     {
-        $posts = $postsRepo->findBy([],['created_at'=>'DESC']);
+        $posts = $postsRepo->findBy([],['created_at'=>'DESC'],10);
         return $this->render('profil/posts/index.html.twig', [
             'posts' => $posts
         ]);
@@ -47,6 +47,31 @@ class PostController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Le nouvel article a été posté avec succcès.');
+            return $this->redirectToRoute('posts_index');
+        }
+        return $this->render('profil/posts/posts-form.html.twig', compact('form', 'titre'));
+    }
+    #[Route('/modifier/{id}', 'modifier')]
+    public function modifierPost(PostsRepository $postsRepo,$id,PictureService $pictureService, EntityManagerInterface $em, Request $request, SluggerInterface $slugger, UsersRepository $usersRepo): Response
+    {
+        $post = $postsRepo->find($id);
+        $titre = "Modifier un article";
+        $form = $this->createForm(PostsType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setSlug(strtolower($slugger->slug($post->getTitre())));
+            $post->setUsers($this->getUser());
+
+            $featuredImage = $form->get('featuredImage')->getData();
+            $image = $pictureService->add($featuredImage, 'articles', 300,300);
+            $post->setFeaturedImage($image);
+
+            $em->persist($post);
+
+            $em->flush();
+
+            $this->addFlash('success', 'Le nouvel article a été modifié avec succcès.');
             return $this->redirectToRoute('posts_index');
         }
         return $this->render('profil/posts/posts-form.html.twig', compact('form', 'titre'));

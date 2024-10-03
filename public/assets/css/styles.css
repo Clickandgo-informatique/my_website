@@ -28,7 +28,7 @@ html:has(input[name="theme"][value="light"]:checked) {
   body,
   main {
     background-color: var(--color-surface-0);
-    color: #333;
+    color: darkgray;
   }
 }
 /* Dark (override) */

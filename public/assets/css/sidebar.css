@@ -73,4 +73,6 @@ i {
   cursor: pointer;
   font-size: 30px;
   width:fit-content;
+  position:fixed;
+  top:0;left:10px;  
 }

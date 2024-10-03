@@ -5,7 +5,7 @@
   align-items: center;
   flex-direction: column;
   margin-top: 10px;
-  background-color: #fff;
+  background-color:  var(--color-surface-0);
 }
 .sectionsPages div {
   display: flex;
@@ -22,13 +22,13 @@ section {
   padding: 5px;
 }
 .section-page {
-  /* border: 1px solid lightgray; */
+  border: 1px solid lightgray;
   margin-bottom: 15px;
   width: 100%;
   border-radius: 10px;
   position: relative;
   display: flex;
-  background-color: #fff;
+  background-color: var(--color-surface-0);
   
 }
 .section-page:hover {

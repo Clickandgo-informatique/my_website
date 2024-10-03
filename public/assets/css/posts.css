@@ -1,12 +1,26 @@
 .container-posts {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
   margin: 10px auto;
+  width: 100%; 
+}
+.post-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: white;
+  margin: 10px auto;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  
 }
 .post-item img {
-  width: 200px;
   height: 200px;
-  margin: 0 auto;
+  min-width: 200px;
   border-radius: 10px;
 }
 
@@ -14,4 +28,35 @@
 .titre-categorie {
   margin-right: 5px;
   color: blue;
+  padding: 3px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
 }
+.wrapper-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px 20px;
+}
+.container-tags,
+.container-categories {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px 0;
+}
+.date-publication {
+  font-size: 0.8rem;
+  color: darkgray;
+  margin-top: 5px;
+}
+@media screen and (max-width:650px){
+  .post-item{
+    flex-direction: column;
+  }
+  .post-item img{
+    width:200px;
+    margin: 10px auto;
+  }
+}
+  

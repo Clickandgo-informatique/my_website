@@ -8,6 +8,9 @@ nav {
   align-items: center;
   background-color: var(--primary-background-color);
 }
+.links-pages {
+  margin-left: 50px;
+}
 .links-pages,
 .links-login {
   display: flex;
@@ -60,6 +63,22 @@ nav {
 }
 @media screen and (max-width: 650px) {
   nav {
-    display: none;
+    height: 100%;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+  }
+  .links-login,
+  .links-pages {
+    flex-direction: column;
+    align-items: start;
+  }
+  .links-pages {
+    margin-left: 0;
+  }
+  .links-login a,
+  .links-pages a {
+    padding: 10px;
   }
 }
