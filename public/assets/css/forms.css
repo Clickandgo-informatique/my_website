@@ -23,7 +23,7 @@ select,
 textarea {
   display: flex;
   border: 1px solid lightgray;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 7px;
   margin: 5px;
   background-color: #fff;

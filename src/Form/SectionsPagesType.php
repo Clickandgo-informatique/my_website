@@ -6,6 +6,7 @@ use App\Entity\Galeries;
 use App\Entity\SectionsPages;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +19,7 @@ class SectionsPagesType extends AbstractType
 
         $builder
             ->add('titre', TextType::class, ['attr' => ['id' => 'inputTitre', 'class' => 'titre-section']])
-            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'contenu-section']])
+            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'ckeditor']])
             ->add('galerie', EntityType::class, ['class' => Galeries::class, 'required' => false, 'empty_data' => null, 'placeholder' => '-- Choisissez une galerie --', 'choice_label' => 'getDetailsGalerie', 'label' => 'Galerie', 'attr' => ['class' => 'select-galeries']])
 ;
         // ->add('created_at', DateTimeType::class, [
